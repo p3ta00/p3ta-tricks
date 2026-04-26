@@ -1,0 +1,1 @@
+{"title": "cut", "source": "gtfobins", "source_label": "GTFOBins", "path": "cut", "html": "<h1>cut</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">cut -d &#x27;&#x27; -f1 /path/to/input-file</code></pre>", "excerpt": "cut File Read cut -d &#x27;&#x27; -f1 /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

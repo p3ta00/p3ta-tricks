@@ -1,0 +1,1 @@
+{"title": "tail", "source": "gtfobins", "source_label": "GTFOBins", "path": "tail", "html": "<h1>tail</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">tail -c+0 /path/to/input-file</code></pre>", "excerpt": "tail File Read tail -c+0 /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

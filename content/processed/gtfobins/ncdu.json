@@ -1,0 +1,1 @@
+{"title": "ncdu", "source": "gtfobins", "source_label": "GTFOBins", "path": "ncdu", "html": "<h1>ncdu</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">ncdu\nb</code></pre>", "excerpt": "ncdu Shell ncdu b", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

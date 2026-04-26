@@ -1,0 +1,1 @@
+{"title": "zless", "source": "gtfobins", "source_label": "GTFOBins", "path": "zless", "html": "<h1>zless</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">zless /path/to/input-file</code></pre>", "excerpt": "zless Inherit zless /path/to/input-file", "tags": ["func:inherit", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

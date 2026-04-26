@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{% if q %}{{ q }} — {% endif %}Search — p3ta-tricks{% endblock %}
+{% block content %}
+<div class="search-page">
+  <div class="search-page-header">
+    <form action="/search" method="get" class="search-form">
+      <div class="search-form-row">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" name="q" value="{{ q }}" class="search-page-input" placeholder="Search all sources…" autofocus>
+        <select name="source" class="source-filter-select">
+          <option value="" {% if not source_filter %}selected{% endif %}>All sources</option>
+          {% for sid, smeta in source_meta.items() %}
+          <option value="{{ sid }}" {% if source_filter == sid %}selected{% endif %}>{{ smeta.label }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="search-submit-btn">Search</button>
+      </div>
+    </form>
+    {% if q %}
+    <div class="search-meta">{{ results|length }} result{% if results|length != 1 %}s{% endif %} for <strong>{{ q }}</strong>{% if source_filter %} in <strong>{{ source_meta[source_filter].label }}</strong>{% endif %}</div>
+    {% endif %}
+  </div>
+
+  {% if results %}
+  <div class="search-results">
+    {% for r in results %}
+    {% set smeta = source_meta.get(r.source, {}) %}
+    <a href="{{ r.url }}" class="search-result-item">
+      <div class="result-source-badge" style="color:{{ smeta.get('color','var(--fg)') }}">
+        {{ smeta.get('icon','') }} {{ smeta.get('label', r.source) }}
+      </div>
+      <div class="result-title">{{ r.title }}</div>
+      {% if r.excerpt %}
+      <div class="result-excerpt">{{ r.excerpt[:200] }}</div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% elif q %}
+  <div class="search-empty">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <p>No results found for <strong>{{ q }}</strong></p>
+    <p class="search-empty-hint">Try a shorter term or check the spelling</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

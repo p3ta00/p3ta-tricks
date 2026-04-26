@@ -1,0 +1,1 @@
+{"title": "Unquoted path", "source": "hacker-recipes", "source_label": "The Hacker Recipes", "path": "infra/privilege-escalation/windows/unquoted-service-paths", "html": "<h1 id=\"unquoted-path\">🛠️ Unquoted path</h1>\n<p>Services and scheduled tasks can be vulnerable</p>", "excerpt": "🛠️ Unquoted path Services and scheduled tasks can be vulnerable", "tags": []}

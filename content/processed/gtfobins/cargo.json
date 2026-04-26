@@ -1,0 +1,1 @@
+{"title": "cargo", "source": "gtfobins", "source_label": "GTFOBins", "path": "cargo", "html": "<h1>cargo</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">cargo help doc</code></pre>", "excerpt": "cargo Inherit cargo help doc", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

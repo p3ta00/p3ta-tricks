@@ -1,0 +1,1 @@
+{"title": "scanmem", "source": "gtfobins", "source_label": "GTFOBins", "path": "scanmem", "html": "<h1>scanmem</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">scanmem\nshell /bin/sh</code></pre>", "excerpt": "scanmem Shell scanmem shell /bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

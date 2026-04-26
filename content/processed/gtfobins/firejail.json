@@ -1,0 +1,1 @@
+{"title": "firejail", "source": "gtfobins", "source_label": "GTFOBins", "path": "firejail", "html": "<h1>firejail</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">firejail /bin/sh</code></pre>", "excerpt": "firejail Shell firejail /bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:unprivileged"]}

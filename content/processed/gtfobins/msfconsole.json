@@ -1,0 +1,1 @@
+{"title": "msfconsole", "source": "gtfobins", "source_label": "GTFOBins", "path": "msfconsole", "html": "<h1>msfconsole</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">msfconsole\nirb</code></pre>", "excerpt": "msfconsole Inherit msfconsole irb", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

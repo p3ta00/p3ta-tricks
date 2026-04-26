@@ -1,0 +1,1 @@
+{"title": "gzip", "source": "gtfobins", "source_label": "GTFOBins", "path": "gzip", "html": "<h1>gzip</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">gzip -c /path/to/input-file | gzip -d</code></pre>", "excerpt": "gzip File Read gzip -c /path/to/input-file | gzip -d", "tags": ["func:file-read", "ctx:capabilities", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

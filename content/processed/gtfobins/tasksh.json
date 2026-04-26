@@ -1,0 +1,1 @@
+{"title": "tasksh", "source": "gtfobins", "source_label": "GTFOBins", "path": "tasksh", "html": "<h1>tasksh</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">tasksh\n!/bin/sh</code></pre>", "excerpt": "tasksh Shell tasksh !/bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

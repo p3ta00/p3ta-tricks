@@ -1,0 +1,1 @@
+{"title": "lwp-request", "source": "gtfobins", "source_label": "GTFOBins", "path": "lwp-request", "html": "<h1>lwp-request</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">lwp-request file:///path/to/input-file</code></pre>", "excerpt": "lwp-request File Read lwp-request file:///path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:unprivileged"]}

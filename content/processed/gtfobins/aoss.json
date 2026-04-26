@@ -1,0 +1,1 @@
+{"title": "aoss", "source": "gtfobins", "source_label": "GTFOBins", "path": "aoss", "html": "<h1>aoss</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">aoss /bin/sh</code></pre>", "excerpt": "aoss Shell aoss /bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:unprivileged"]}

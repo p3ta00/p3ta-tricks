@@ -1,0 +1,1 @@
+{"title": "egrep", "source": "gtfobins", "source_label": "GTFOBins", "path": "egrep", "html": "<h1>egrep</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">grep &#x27;&#x27; /path/to/input-file</code></pre>", "excerpt": "egrep File Read grep &#x27;&#x27; /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

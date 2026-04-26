@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}BloodHound Edges — p3ta-tricks{% endblock %}
+
+{% block content %}
+<div class="gtfo-page bh-page">
+
+  <div class="gtfo-logo-row">
+    <span class="gtfo-logo-gtfo">Blood</span><span class="gtfo-logo-bins">Hound</span>
+  </div>
+
+  <p class="gtfo-desc">BloodHound CE edge abuse reference — {{ edge_count }} edges · {{ collector_count }} collectors.</p>
+
+  <div class="gtfo-filter-section">
+    <div class="gtfo-filter-head">View</div>
+    <div class="gtfo-pills" id="bh-mode-pills">
+      <button class="gtfo-pill" data-mode="edges">Edges</button>
+      <button class="gtfo-pill" data-mode="collectors">Collectors</button>
+    </div>
+  </div>
+
+  {# ── Edges search (shown in edges mode) ── #}
+  <div id="bh-edges-section" style="display:none">
+    <div class="gtfo-filter-section">
+      <div class="gtfo-filter-head">Search</div>
+      <input type="search" id="bh-search" class="gtfo-search-input"
+             placeholder="e.g. GenericAll / ADCSESC1 / AZOwns" autocomplete="off">
+      <div class="gtfo-count" id="bh-count"></div>
+    </div>
+
+    <div class="bh-cards" id="bh-cards">
+      {% for entry in entries|sort(attribute='title') if '/edges/' in entry.url %}
+      <div class="bh-card"
+           data-name="{{ entry.title|lower }}"
+           style="display:none">
+        <div class="bh-card-header">
+          <h2 class="bh-card-title"><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+        </div>
+        <div class="bh-card-body page-body">
+          {{ pages.get(entry.title, '') | safe }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="bh-empty" class="bh-empty" style="display:none">No edges match — try a shorter term.</div>
+    <div id="bh-edge-prompt" class="bh-empty">Type an edge name to see abuse commands.</div>
+  </div>
+
+  {# ── Collectors list (shown in collectors mode) ── #}
+  <div id="bh-collectors-section" style="display:none">
+    <div class="gtfo-filter-section">
+      <div class="gtfo-filter-head">Select a collector</div>
+      <div class="bh-collector-list" id="bh-collector-list">
+        {% for entry in entries|sort(attribute='title') if '/collectors/' in entry.url %}
+        <button class="bh-collector-btn" data-title="{{ entry.title }}">{{ entry.title }}</button>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% for entry in entries|sort(attribute='title') if '/collectors/' in entry.url %}
+    <div class="bh-collector-card page-body"
+         id="bh-col-{{ entry.title | replace(' ', '-') }}"
+         style="display:none">
+      {{ pages.get(entry.title, '') | safe }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div id="bh-prompt" class="bh-empty">Select Edges or Collectors above.</div>
+
+</div>
+
+<script>
+(function(){
+  const modePillsEl   = document.getElementById('bh-mode-pills');
+  const edgesSection  = document.getElementById('bh-edges-section');
+  const colSection    = document.getElementById('bh-collectors-section');
+  const promptEl      = document.getElementById('bh-prompt');
+  const searchEl      = document.getElementById('bh-search');
+  const countEl       = document.getElementById('bh-count');
+  const emptyEl       = document.getElementById('bh-empty');
+  const edgePromptEl  = document.getElementById('bh-edge-prompt');
+  const cards         = Array.from(document.querySelectorAll('#bh-cards .bh-card'));
+  const colBtns       = Array.from(document.querySelectorAll('.bh-collector-btn'));
+  let activeMode      = '';
+  let activeCollector = '';
+
+  // ── Edge search ──
+  function updateEdges() {
+    const q = searchEl.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach(el => {
+      const name = el.dataset.name;
+      const visible = q && (name === q || name.startsWith(q));
+      el.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    });
+    edgePromptEl.style.display = q ? 'none' : '';
+    emptyEl.style.display      = (q && shown === 0) ? '' : 'none';
+    countEl.textContent        = q ? shown + (shown === 1 ? ' edge' : ' edges') : '';
+  }
+
+  if (searchEl) searchEl.addEventListener('input', updateEdges);
+
+  // ── Collector selection ──
+  colBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const title = btn.dataset.title;
+      if (activeCollector === title) {
+        // deselect
+        activeCollector = '';
+        btn.classList.remove('bh-collector-btn-active');
+        document.querySelectorAll('.bh-collector-card').forEach(c => c.style.display = 'none');
+        return;
+      }
+      activeCollector = title;
+      colBtns.forEach(b => b.classList.toggle('bh-collector-btn-active', b.dataset.title === title));
+      document.querySelectorAll('.bh-collector-card').forEach(c => {
+        const id = 'bh-col-' + c.id.replace('bh-col-', '');
+        c.style.display = c.id === 'bh-col-' + title.replace(/ /g, '-') ? '' : 'none';
+      });
+    });
+  });
+
+  // ── Mode pills ──
+  function setMode(mode) {
+    activeMode = mode;
+    modePillsEl.querySelectorAll('.gtfo-pill').forEach(b =>
+      b.classList.toggle('active', b.dataset.mode === mode)
+    );
+    promptEl.style.display = 'none';
+    if (mode === 'edges') {
+      edgesSection.style.display = '';
+      colSection.style.display   = 'none';
+      searchEl.focus();
+    } else {
+      edgesSection.style.display = 'none';
+      colSection.style.display   = '';
+    }
+  }
+
+  modePillsEl.addEventListener('click', e => {
+    const btn = e.target.closest('.gtfo-pill');
+    if (!btn) return;
+    setMode(btn.dataset.mode);
+  });
+
+  // Default to edges on load
+  setMode('edges');
+})();
+</script>
+{% endblock %}

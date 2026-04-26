@@ -1,0 +1,1 @@
+{"title": "sudo", "source": "gtfobins", "source_label": "GTFOBins", "path": "sudo", "html": "<h1>sudo</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">sudo /bin/sh</code></pre>", "excerpt": "sudo Shell sudo /bin/sh", "tags": ["func:shell", "ctx:sudo"]}

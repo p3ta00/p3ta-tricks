@@ -1,0 +1,1 @@
+{"title": "aptitude", "source": "gtfobins", "source_label": "GTFOBins", "path": "aptitude", "html": "<h1>aptitude</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">aptitude changelog aptitude</code></pre>", "excerpt": "aptitude Inherit aptitude changelog aptitude", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}p3ta-tricks{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body data-source="{{ page.source if page is defined else (source_id if source_id is defined else '') }}"
+      data-page-url="{{ request.path }}">
+<div class="layout">
+
+  <header class="site-header">
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a class="site-logo" href="/">
+      <span class="logo-text">p3ta-tricks</span>
+    </a>
+    <div class="header-search" role="search">
+      <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" id="search-input" placeholder="Search across all sources…" autocomplete="off" aria-label="Search">
+      <kbd class="search-kbd">Ctrl+K</kbd>
+      <button class="search-help-btn" id="search-help-btn" aria-label="Search help" title="How to search">?</button>
+      <div id="search-dropdown" class="search-dropdown" role="listbox"></div>
+    </div>
+    <div class="header-sources">
+      <a href="/source/gtfobins"         class="source-badge badge-gtfobins"     data-source-id="gtfobins">🐚 GTFOBins</a>
+      <a href="/source/lolbas"           class="source-badge badge-lolbas"       data-source-id="lolbas">🪟 LOLBAS</a>
+      <a href="/source/bloodhound"       class="source-badge badge-bloodhound"   data-source-id="bloodhound">🩸 BloodHound</a>
+      <a href="/source/bloodyad"         class="source-badge badge-bloodyad"     data-source-id="bloodyad">🩸 bloodyAD</a>
+      <a href="/source/certipy"          class="source-badge badge-certipy"      data-source-id="certipy">📜 Certipy</a>
+      <a href="/source/hacktricks-cloud" class="source-badge badge-cloud"        data-source-id="hacktricks-cloud">☁️ Cloud</a>
+      <a href="/source/goexec"           class="source-badge badge-goexec"       data-source-id="goexec">⚡ goexec</a>
+      <a href="/source/hacktricks"       class="source-badge badge-hacktricks"   data-source-id="hacktricks">🤖 HackTricks</a>
+      <a href="/source/hardware-att"     class="source-badge badge-hardware-att" data-source-id="hardware-att">🔌 HardwareATT</a>
+      <a href="/source/impacket"         class="source-badge badge-impacket"     data-source-id="impacket">📦 Impacket</a>
+      <a href="/source/internal-att"     class="source-badge badge-internal-att" data-source-id="internal-att">🏰 InternalATT</a>
+      <a href="/source/ligolo-ng"        class="source-badge badge-ligolo"       data-source-id="ligolo-ng">🔀 Ligolo-ng</a>
+      <a href="/source/mimikatz"         class="source-badge badge-mimikatz"     data-source-id="mimikatz">🐱 Mimikatz</a>
+      <a href="/source/msfvenom"         class="source-badge badge-msfvenom"     data-source-id="msfvenom">💣 msfvenom</a>
+      <a href="/source/netexec"          class="source-badge badge-netexec"      data-source-id="netexec">🔧 NetExec</a>
+      <a href="/source/osai-research"    class="source-badge badge-osai"         data-source-id="osai-research">🤖 OSAI</a>
+      <a href="/source/patt"             class="source-badge badge-patt"         data-source-id="patt">💥 PATT</a>
+      <a href="/source/hacker-recipes"   class="source-badge badge-recipes"      data-source-id="hacker-recipes">🍳 Recipes</a>
+      <a href="/source/rubeus"           class="source-badge badge-rubeus"       data-source-id="rubeus">🎟️ Rubeus</a>
+      <a href="/source/sliver"           class="source-badge badge-sliver"       data-source-id="sliver">🐍 Sliver</a>
+    </div>
+  </header>
+
+  <div class="body-layout">
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+
+        <a class="sidebar-home-link {% if request.path == '/' %}active{% endif %}" href="/">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+
+        <div class="sidebar-var-row">
+          <button id="var-open-btn" class="sidebar-var-btn" title="Set variables for code blocks">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            Variables
+            <span id="var-badge" class="var-badge"></span>
+          </button>
+          <button id="var-edit-all-btn" class="sidebar-var-clear sidebar-var-editall" title="Edit all session variables">Edit All</button>
+          <button id="var-clear-btn" class="sidebar-var-clear" title="Clear all variables">Clear</button>
+        </div>
+
+        <div class="distro-toggle-row">
+          <span class="distro-label">Distro</span>
+          <div class="distro-toggle" id="distro-toggle">
+            <button class="distro-btn" data-distro="kali">Kali</button>
+            <button class="distro-btn distro-btn-active" data-distro="exegol">Exegol</button>
+            <button class="distro-btn" data-distro="script">Script</button>
+          </div>
+        </div>
+
+        <div class="distro-toggle-row">
+          <span class="distro-label">Tools</span>
+          <div class="distro-toggle" id="impl-toggle">
+            <button class="distro-btn distro-btn-active" data-impl="impacket">Impacket</button>
+            <button class="distro-btn" data-impl="gopacket">GoPacket</button>
+          </div>
+        </div>
+
+        <div id="all-sources-nav"></div>
+
+        {% block sidebar_extra %}{% endblock %}
+      </div>
+    </nav>
+
+    <main class="main-content" role="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+</div>
+
+<!-- Variable substitution modal -->
+<div id="var-modal" class="var-overlay" role="dialog" aria-modal="true" aria-label="Set Variables">
+  <div class="var-modal">
+    <div class="var-modal-header">
+      <h3 class="var-modal-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        <span id="var-modal-title-text">Set Variables</span>
+      </h3>
+      <p class="var-modal-hint" id="var-modal-hint">Values apply to all code blocks on this page and persist across pages in this session.</p>
+    </div>
+    <div id="var-form" class="var-form"></div>
+    <div class="var-modal-footer">
+      <button id="var-submit" class="var-btn-primary">Apply</button>
+      <button id="var-cancel" class="var-btn-secondary">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Search help modal -->
+<div id="search-help-overlay" class="var-overlay" role="dialog" aria-modal="true" aria-label="Search Help">
+  <div class="var-modal search-help-modal">
+    <div class="var-modal-header">
+      <h3 class="var-modal-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search &amp; Navigation Guide
+      </h3>
+    </div>
+    <div class="search-help-body">
+      <div class="sh-section">
+        <div class="sh-title">Search</div>
+        <div class="sh-row"><kbd>Ctrl+K</kbd><span>Open search from anywhere on the page</span></div>
+        <div class="sh-row"><kbd>↑ ↓</kbd><span>Move through results</span></div>
+        <div class="sh-row"><kbd>Enter</kbd><span>Open the highlighted result</span></div>
+        <div class="sh-row"><kbd>Esc</kbd><span>Close search</span></div>
+        <p class="sh-note">Searches all sources at once. The source name appears as a coloured tag on each result.</p>
+      </div>
+      <div class="sh-section">
+        <div class="sh-title">Filtering Search by Source</div>
+        <p class="sh-note">The coloured badges across the top bar (BloodHound, HackTricks, GTFOBins, etc.) are toggle buttons that narrow search to a single source.</p>
+        <div class="sh-row"><span>① Click a badge</span><span>— restricts all results to that source only</span></div>
+        <div class="sh-row"><span>② Click it again</span><span>— deselects it, search returns to all sources</span></div>
+        <p class="sh-note">Only one source filter is active at a time. The active badge glows in its source colour. The search box placeholder updates to reflect which source is active.</p>
+      </div>
+      <div class="sh-section">
+        <div class="sh-title">BloodHound Edge Search</div>
+        <p class="sh-note">On the <strong>BloodHound</strong> page the edge search uses <em>prefix matching</em> — type <code>Owns</code> to find the Owns edge only, not AZOwns. Type <code>AZ</code> to see all Azure edges.<br>
+        Switch to <strong>Collectors</strong> to pick SharpHound / BloodHound-Python / RustHound and see that collector's syntax inline.</p>
+      </div>
+      <div class="sh-section">
+        <div class="sh-title">Variables</div>
+        <p class="sh-note">Click <strong>Variables</strong> in the sidebar to fill placeholders like <code>&lt;domain&gt;</code>, <code>&lt;dc-ip&gt;</code>, <code>&lt;password&gt;</code> across every code block on the page. Values carry over between pages for the whole session. <strong>Edit All</strong> lets you update every saved value at once. <strong>Clear</strong> resets them all.</p>
+      </div>
+      <div class="sh-section">
+        <div class="sh-title">Distro Toggle</div>
+        <p class="sh-note">Controls the command style used in impacket code blocks.<br>
+        <strong>Kali</strong> — <code>impacket-secretsdump</code><br>
+        <strong>Exegol</strong> — <code>secretsdump.py</code><br>
+        <strong>Script</strong> — <code>python3 secretsdump.py</code></p>
+      </div>
+      <div class="sh-section">
+        <div class="sh-title">Tools Toggle (Impacket / GoPacket)</div>
+        <p class="sh-note">Switches between the Python impacket toolkit and its Go equivalent.<br>
+        <strong>Impacket</strong> — standard Python tools, sidebar shows the Impacket reference<br>
+        <strong>GoPacket</strong> — replaces every <code>impacket-</code> / <code>secretsdump.py</code> / <code>python3 …</code> with <code>gopacket-secretsdump</code> style, sidebar switches to the GoPacket reference. Distro selection is ignored when GoPacket is active.</p>
+      </div>
+    </div>
+    <div class="var-modal-footer">
+      <button id="search-help-close" class="var-btn-primary">Got it</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/prism.min.js"></script>
+<script src="/static/js/prism-bash.min.js"></script>
+<script src="/static/js/prism-powershell.min.js"></script>
+<script src="/static/js/prism-python.min.js"></script>
+<script src="/static/js/prism-sql.min.js"></script>
+<script src="/static/js/fuse.min.js"></script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

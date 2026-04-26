@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} — p3ta-tricks{% endblock %}
+{% block content %}
+<article class="page-article">
+  <div class="page-header">
+    <div class="page-breadcrumb">
+      <a href="/source/{{ page.source }}" class="breadcrumb-source" style="color:{{ meta.color }}">
+        {{ meta.icon }} {{ meta.label }}
+      </a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-title">{{ page.title }}</span>
+    </div>
+  </div>
+
+  <div class="page-body">
+    {{ page.html | safe }}
+  </div>
+</article>
+{% endblock %}

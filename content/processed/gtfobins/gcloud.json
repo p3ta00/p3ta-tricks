@@ -1,0 +1,1 @@
+{"title": "gcloud", "source": "gtfobins", "source_label": "GTFOBins", "path": "gcloud", "html": "<h1>gcloud</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">gcloud help</code></pre>", "excerpt": "gcloud Inherit gcloud help", "tags": ["func:inherit", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

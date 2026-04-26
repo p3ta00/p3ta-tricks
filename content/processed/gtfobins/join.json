@@ -1,0 +1,1 @@
+{"title": "join", "source": "gtfobins", "source_label": "GTFOBins", "path": "join", "html": "<h1>join</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">join -a 2 /dev/null /path/to/input-file</code></pre>", "excerpt": "join File Read join -a 2 /dev/null /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

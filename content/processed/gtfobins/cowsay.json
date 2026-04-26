@@ -1,0 +1,1 @@
+{"title": "cowsay", "source": "gtfobins", "source_label": "GTFOBins", "path": "cowsay", "html": "<h1>cowsay</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">cowsay -f /path/to/script.pl x</code></pre>", "excerpt": "cowsay Inherit cowsay -f /path/to/script.pl x", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

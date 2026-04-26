@@ -1,0 +1,1 @@
+{"title": "ansible-test", "source": "gtfobins", "source_label": "GTFOBins", "path": "ansible-test", "html": "<h1>ansible-test</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">ansible-test shell</code></pre>", "excerpt": "ansible-test Shell ansible-test shell", "tags": ["func:shell", "ctx:sudo", "ctx:unprivileged"]}

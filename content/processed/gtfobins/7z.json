@@ -1,0 +1,1 @@
+{"title": "7z", "source": "gtfobins", "source_label": "GTFOBins", "path": "7z", "html": "<h1>7z</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">7z a -ttar -an -so /path/to/input-file | 7z e -ttar -si -so</code></pre>", "excerpt": "7z File Read 7z a -ttar -an -so /path/to/input-file | 7z e -ttar -si -so", "tags": ["func:file-read", "ctx:sudo", "ctx:unprivileged"]}

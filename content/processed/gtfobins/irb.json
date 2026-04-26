@@ -1,0 +1,1 @@
+{"title": "irb", "source": "gtfobins", "source_label": "GTFOBins", "path": "irb", "html": "<h1>irb</h1>\n<h2>Inherit</h2>\n<p>This allows to run Ruby code (`...`).</p>\n<pre><code class=\"language-bash\">irb\n...</code></pre>", "excerpt": "irb Inherit This allows to run Ruby code (`...`). irb ...", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

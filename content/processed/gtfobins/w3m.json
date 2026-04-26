@@ -1,0 +1,1 @@
+{"title": "w3m", "source": "gtfobins", "source_label": "GTFOBins", "path": "w3m", "html": "<h1>w3m</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">w3m -dump /path/to/input-file</code></pre>", "excerpt": "w3m File Read w3m -dump /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

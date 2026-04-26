@@ -1,0 +1,1 @@
+{"title": "base64", "source": "gtfobins", "source_label": "GTFOBins", "path": "base64", "html": "<h1>base64</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">base64 /path/to/input-file | base64 --decode</code></pre>", "excerpt": "base64 File Read base64 /path/to/input-file | base64 --decode", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

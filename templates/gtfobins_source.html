@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}GTFOBins — p3ta-tricks{% endblock %}
+
+{% block content %}
+<div class="gtfo-page">
+
+  <div class="gtfo-logo-row">
+    <span class="gtfo-logo-gtfo">GTFO</span><span class="gtfo-logo-bins">Bins</span>
+  </div>
+
+  <p class="gtfo-desc">GTFOBins is a curated list of Unix binaries that can be used to bypass local security restrictions in misconfigured systems.</p>
+  <p class="gtfo-desc">The project collects legitimate functions of Unix binaries that can be abused to break out restricted shells, escalate or maintain elevated privileges, transfer files, spawn bind and reverse shells, and facilitate other post-exploitation tasks.</p>
+
+  {% set func_labels = {
+    'shell': 'Shell',
+    'command': 'Command',
+    'reverse-shell': 'Reverse shell',
+    'bind-shell': 'Bind shell',
+    'file-write': 'File write',
+    'file-read': 'File read',
+    'upload': 'Upload',
+    'download': 'Download',
+    'library-load': 'Library load',
+    'privilege-escalation': 'Privilege escalation',
+    'inherit': 'Inherit',
+  } %}
+  {% set ctx_labels = {
+    'unprivileged': 'Unprivileged',
+    'sudo': 'Sudo',
+    'suid': 'SUID',
+    'capabilities': 'Capabilities',
+    'limited-suid': 'Limited SUID',
+  } %}
+
+  {# Derive available func/ctx tags from entries #}
+  {% set func_tags = [] %}
+  {% set ctx_tags = [] %}
+  {% for tag in all_tags %}
+    {% if tag.startswith('func:') %}{% if tag[5:] not in func_tags %}{% if func_tags.append(tag[5:]) %}{% endif %}{% endif %}
+    {% elif tag.startswith('ctx:') %}{% if tag[4:] not in ctx_tags %}{% if ctx_tags.append(tag[4:]) %}{% endif %}{% endif %}
+    {% endif %}
+  {% endfor %}
+
+  <div class="gtfo-filter-section">
+    <div class="gtfo-filter-head">Functions</div>
+    <div class="gtfo-pills" id="func-pills">
+      {% for f in ['shell','command','reverse-shell','bind-shell','file-write','file-read','upload','download','library-load','privilege-escalation','inherit'] %}
+      {% if f in func_tags %}
+      <button class="gtfo-pill" data-filter-type="func" data-filter-val="{{ f }}">{{ func_labels.get(f, f) }}</button>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="gtfo-filter-section">
+    <div class="gtfo-filter-head">Contexts</div>
+    <div class="gtfo-pills" id="ctx-pills">
+      {% for c in ['unprivileged','sudo','suid','capabilities','limited-suid'] %}
+      {% if c in ctx_tags %}
+      <button class="gtfo-pill" data-filter-type="ctx" data-filter-val="{{ c }}">{{ ctx_labels.get(c, c) }}</button>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="gtfo-filter-section">
+    <div class="gtfo-filter-head">Filter</div>
+    <p class="gtfo-filter-hint">Search among {{ entries|length }} executables: [&lt;name&gt;]/[&lt;function&gt;]/[&lt;context&gt;]</p>
+    <input type="search" id="gtfo-search" class="gtfo-search-input"
+           placeholder="e.g. vim / shell / sudo" autocomplete="off">
+    <div class="gtfo-count" id="gtfo-count"></div>
+  </div>
+
+  <ul class="gtfo-list" id="gtfo-list">
+    {% for entry in entries|sort(attribute='title') %}
+    <li class="gtfo-entry"
+        data-name="{{ entry.title|lower }}"
+        data-tags="{{ entry.tags|join('|') }}">
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+      <span class="gtfo-entry-badges">
+        {% for tag in entry.tags %}
+          {% if tag.startswith('func:') %}
+          <span class="gtfo-entry-badge gtfo-badge-func">{{ func_labels.get(tag[5:], tag[5:]) }}</span>
+          {% endif %}
+        {% endfor %}
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+(function(){
+  const searchEl  = document.getElementById('gtfo-search');
+  const listEl    = document.getElementById('gtfo-list');
+  const countEl   = document.getElementById('gtfo-count');
+  const entries   = Array.from(listEl.querySelectorAll('.gtfo-entry'));
+
+  let activeFunc = '', activeCtx = '';
+
+  function update() {
+    const q = searchEl.value.trim().toLowerCase();
+    let shown = 0;
+    entries.forEach(el => {
+      const name  = el.dataset.name;
+      const tags  = el.dataset.tags.split('|');
+      const funcs = tags.filter(t => t.startsWith('func:')).map(t => t.slice(5));
+      const ctxs  = tags.filter(t => t.startsWith('ctx:')).map(t => t.slice(4));
+
+      const qMatch = !q || name.includes(q) || funcs.some(f => f.includes(q)) || ctxs.some(c => c.includes(q));
+      const fMatch = !activeFunc || funcs.includes(activeFunc);
+      const cMatch = !activeCtx  || ctxs.includes(activeCtx);
+
+      const visible = qMatch && fMatch && cMatch;
+      el.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    });
+    countEl.textContent = shown + ' executables';
+  }
+
+  searchEl.addEventListener('input', update);
+
+  function pillClickHandler(pills, getActive, setActive) {
+    pills.addEventListener('click', e => {
+      const btn = e.target.closest('.gtfo-pill');
+      if (!btn) return;
+      const val = btn.dataset.filterVal;
+      if (getActive() === val) {
+        // Deselect
+        setActive('');
+        pills.querySelectorAll('.gtfo-pill').forEach(b => b.classList.remove('active'));
+      } else {
+        setActive(val);
+        pills.querySelectorAll('.gtfo-pill').forEach(b => b.classList.toggle('active', b.dataset.filterVal === val));
+      }
+      update();
+    });
+  }
+
+  pillClickHandler(
+    document.getElementById('func-pills'),
+    () => activeFunc,
+    v => { activeFunc = v; }
+  );
+  pillClickHandler(
+    document.getElementById('ctx-pills'),
+    () => activeCtx,
+    v => { activeCtx = v; }
+  );
+
+  update();
+})();
+</script>
+{% endblock %}

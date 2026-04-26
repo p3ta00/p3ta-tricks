@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ meta.label }} — p3ta-tricks{% endblock %}
+{% block content %}
+<div class="source-landing">
+  <div class="source-landing-header">
+    <span class="source-landing-icon">{{ meta.icon }}</span>
+    <div>
+      <h1 class="source-landing-title" style="color:{{ meta.color }}">{{ meta.label }}</h1>
+      <div class="source-landing-count">{{ entries|length }} pages</div>
+    </div>
+  </div>
+
+  <div class="entry-list">
+    {% for entry in entries %}
+    <a href="{{ entry.url }}" class="entry-item">
+      <div class="entry-title">{{ entry.title }}</div>
+      {% if entry.excerpt %}
+      <div class="entry-excerpt">{{ entry.excerpt[:120] }}…</div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

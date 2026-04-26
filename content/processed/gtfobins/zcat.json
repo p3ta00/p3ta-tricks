@@ -1,0 +1,1 @@
+{"title": "zcat", "source": "gtfobins", "source_label": "GTFOBins", "path": "zcat", "html": "<h1>zcat</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">zcat -f /path/to/input-file</code></pre>", "excerpt": "zcat File Read zcat -f /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:unprivileged"]}

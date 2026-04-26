@@ -1,0 +1,1 @@
+{"title": "pr", "source": "gtfobins", "source_label": "GTFOBins", "path": "pr", "html": "<h1>pr</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">pr -T /path/to/input-file</code></pre>", "excerpt": "pr File Read pr -T /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

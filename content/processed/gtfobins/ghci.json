@@ -1,0 +1,1 @@
+{"title": "ghci", "source": "gtfobins", "source_label": "GTFOBins", "path": "ghci", "html": "<h1>ghci</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">ghci\nSystem.Process.callCommand &quot;/bin/sh&quot;</code></pre>", "excerpt": "ghci Shell ghci System.Process.callCommand &quot;/bin/sh&quot;", "tags": ["func:shell", "ctx:sudo", "ctx:unprivileged"]}

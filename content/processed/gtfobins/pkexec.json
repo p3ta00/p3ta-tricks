@@ -1,0 +1,1 @@
+{"title": "pkexec", "source": "gtfobins", "source_label": "GTFOBins", "path": "pkexec", "html": "<h1>pkexec</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">pkexec /bin/sh</code></pre>", "excerpt": "pkexec Shell pkexec /bin/sh", "tags": ["func:shell", "ctx:sudo"]}

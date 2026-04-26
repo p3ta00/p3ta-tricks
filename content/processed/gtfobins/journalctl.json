@@ -1,0 +1,1 @@
+{"title": "journalctl", "source": "gtfobins", "source_label": "GTFOBins", "path": "journalctl", "html": "<h1>journalctl</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">journalctl</code></pre>", "excerpt": "journalctl Inherit journalctl", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

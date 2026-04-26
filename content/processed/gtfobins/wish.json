@@ -1,0 +1,1 @@
+{"title": "wish", "source": "gtfobins", "source_label": "GTFOBins", "path": "wish", "html": "<h1>wish</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">wish</code></pre>", "excerpt": "wish Inherit wish", "tags": ["func:inherit", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

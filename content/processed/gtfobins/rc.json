@@ -1,0 +1,1 @@
+{"title": "rc", "source": "gtfobins", "source_label": "GTFOBins", "path": "rc", "html": "<h1>rc</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">rc</code></pre>", "excerpt": "rc Shell rc", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

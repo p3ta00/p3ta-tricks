@@ -1,0 +1,1 @@
+{"title": "ptx", "source": "gtfobins", "source_label": "GTFOBins", "path": "ptx", "html": "<h1>ptx</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">ptx -w 999 /path/to/input-file</code></pre>", "excerpt": "ptx File Read ptx -w 999 /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

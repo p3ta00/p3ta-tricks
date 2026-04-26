@@ -1,0 +1,1 @@
+{"title": "pygmentize", "source": "gtfobins", "source_label": "GTFOBins", "path": "pygmentize", "html": "<h1>pygmentize</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">pygmentize -l text /path/to/input-file</code></pre>", "excerpt": "pygmentize File Read pygmentize -l text /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:unprivileged"]}

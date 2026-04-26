@@ -1,0 +1,1 @@
+{"title": "base58", "source": "gtfobins", "source_label": "GTFOBins", "path": "base58", "html": "<h1>base58</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">base58 /path/to/input-file | base58 --decode</code></pre>", "excerpt": "base58 File Read base58 /path/to/input-file | base58 --decode", "tags": ["func:file-read", "ctx:sudo", "ctx:unprivileged"]}

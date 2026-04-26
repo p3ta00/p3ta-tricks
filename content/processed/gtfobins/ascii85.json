@@ -1,0 +1,1 @@
+{"title": "ascii85", "source": "gtfobins", "source_label": "GTFOBins", "path": "ascii85", "html": "<h1>ascii85</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">ascii85 /path/to/input-file | ascii85 --decode</code></pre>", "excerpt": "ascii85 File Read ascii85 /path/to/input-file | ascii85 --decode", "tags": ["func:file-read", "ctx:sudo", "ctx:unprivileged"]}

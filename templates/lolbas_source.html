@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}LOLBAS — p3ta-tricks{% endblock %}
+
+{% block content %}
+<div class="gtfo-page lolbas-page">
+
+  <div class="gtfo-logo-row">
+    <span class="gtfo-logo-gtfo">LOL</span><span class="gtfo-logo-bins">BAS</span>
+  </div>
+
+  <p class="gtfo-desc">Living Off The Land Binaries, Scripts and Libraries — Windows binaries signed by Microsoft that can be used by attackers to bypass application control solutions.</p>
+  <p class="gtfo-desc">The goal of the project is to document every binary, script and library that can be used for Living Off The Land techniques.</p>
+
+  <div class="gtfo-filter-section">
+    <div class="gtfo-filter-head">Categories</div>
+    <div class="gtfo-pills" id="cat-pills">
+      {% for tag in all_tags %}
+      <button class="gtfo-pill" data-filter-val="{{ tag }}">{{ tag }}</button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="gtfo-filter-section">
+    <div class="gtfo-filter-head">Filter</div>
+    <p class="gtfo-filter-hint">Search among {{ entries|length }} binaries: [&lt;name&gt;]/[&lt;category&gt;]</p>
+    <input type="search" id="gtfo-search" class="gtfo-search-input"
+           placeholder="e.g. certutil / Download" autocomplete="off">
+    <div class="gtfo-count" id="gtfo-count"></div>
+  </div>
+
+  <ul class="gtfo-list" id="gtfo-list">
+    {% for entry in entries|sort(attribute='title') %}
+    <li class="gtfo-entry"
+        data-name="{{ entry.title|lower }}"
+        data-tags="{{ entry.tags|join('|') }}">
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+      <span class="gtfo-entry-badges">
+        {% for tag in entry.tags %}
+        <span class="gtfo-entry-badge lolbas-tag">{{ tag }}</span>
+        {% endfor %}
+      </span>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+(function(){
+  const searchEl = document.getElementById('gtfo-search');
+  const listEl   = document.getElementById('gtfo-list');
+  const countEl  = document.getElementById('gtfo-count');
+  const catPills = document.getElementById('cat-pills');
+  const entries  = Array.from(listEl.querySelectorAll('.gtfo-entry'));
+  let activeTag  = '';
+
+  function update() {
+    const q = searchEl.value.trim().toLowerCase();
+    let shown = 0;
+    entries.forEach(el => {
+      const name = el.dataset.name;
+      const tags = el.dataset.tags.split('|');
+      const qMatch = !q || name.includes(q) || tags.some(t => t.toLowerCase().includes(q));
+      const tMatch = !activeTag || tags.includes(activeTag);
+      const visible = qMatch && tMatch;
+      el.style.display = visible ? '' : 'none';
+      if (visible) shown++;
+    });
+    countEl.textContent = shown + ' binaries';
+  }
+
+  searchEl.addEventListener('input', update);
+
+  catPills.addEventListener('click', e => {
+    const btn = e.target.closest('.gtfo-pill');
+    if (!btn) return;
+    const val = btn.dataset.filterVal;
+    if (activeTag === val) {
+      activeTag = '';
+      catPills.querySelectorAll('.gtfo-pill').forEach(b => b.classList.remove('active'));
+    } else {
+      activeTag = val;
+      catPills.querySelectorAll('.gtfo-pill').forEach(b => b.classList.toggle('active', b.dataset.filterVal === val));
+    }
+    update();
+  });
+
+  update();
+})();
+</script>
+{% endblock %}

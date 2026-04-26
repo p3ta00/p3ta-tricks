@@ -1,0 +1,1 @@
+{"title": "timedatectl", "source": "gtfobins", "source_label": "GTFOBins", "path": "timedatectl", "html": "<h1>timedatectl</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">timedatectl list-timezones</code></pre>", "excerpt": "timedatectl Inherit timedatectl list-timezones", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}

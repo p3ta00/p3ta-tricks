@@ -1,0 +1,1 @@
+{"title": "pax", "source": "gtfobins", "source_label": "GTFOBins", "path": "pax", "html": "<h1>pax</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">pax -w /path/to/input-file | tar -xO</code></pre>", "excerpt": "pax File Read pax -w /path/to/input-file | tar -xO", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

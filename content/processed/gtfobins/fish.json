@@ -1,0 +1,1 @@
+{"title": "fish", "source": "gtfobins", "source_label": "GTFOBins", "path": "fish", "html": "<h1>fish</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">fish</code></pre>", "excerpt": "fish Shell fish", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

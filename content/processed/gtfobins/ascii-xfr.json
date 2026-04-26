@@ -1,0 +1,1 @@
+{"title": "ascii-xfr", "source": "gtfobins", "source_label": "GTFOBins", "path": "ascii-xfr", "html": "<h1>ascii-xfr</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">ascii-xfr -ns /path/to/input-file</code></pre>", "excerpt": "ascii-xfr File Read ascii-xfr -ns /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

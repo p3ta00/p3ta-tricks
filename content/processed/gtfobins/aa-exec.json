@@ -1,0 +1,1 @@
+{"title": "aa-exec", "source": "gtfobins", "source_label": "GTFOBins", "path": "aa-exec", "html": "<h1>aa-exec</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">aa-exec /bin/sh</code></pre>", "excerpt": "aa-exec Shell aa-exec /bin/sh", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

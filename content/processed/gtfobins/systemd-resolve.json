@@ -1,0 +1,1 @@
+{"title": "systemd-resolve", "source": "gtfobins", "source_label": "GTFOBins", "path": "systemd-resolve", "html": "<h1>systemd-resolve</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">systemd-resolve --status</code></pre>", "excerpt": "systemd-resolve Inherit systemd-resolve --status", "tags": ["func:inherit", "ctx:sudo"]}

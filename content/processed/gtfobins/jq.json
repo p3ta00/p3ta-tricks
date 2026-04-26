@@ -1,0 +1,1 @@
+{"title": "jq", "source": "gtfobins", "source_label": "GTFOBins", "path": "jq", "html": "<h1>jq</h1>\n<h2>File Read</h2>\n<pre><code class=\"language-bash\">jq -Rr . /path/to/input-file</code></pre>", "excerpt": "jq File Read jq -Rr . /path/to/input-file", "tags": ["func:file-read", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

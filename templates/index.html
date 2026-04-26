@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}p3ta-tricks — Pentest Reference{% endblock %}
+{% block content %}
+<div class="home-hero">
+  <h1 class="home-title">p3ta-tricks</h1>
+  <p class="home-sub">Pentest reference — {{ total }} pages across {{ sources|length }} sources</p>
+  <div class="home-search-hint">Press <kbd>Ctrl+K</kbd> to search</div>
+</div>
+
+<div class="home-beta-notice">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <span><strong>Beta Notice —</strong> This platform is currently under active development. You may encounter rendering issues, missing content, or broken links. If you come across any problems, please report them on Discord: <strong>p3ta00</strong>. Your feedback is appreciated.</span>
+</div>
+
+<div class="source-cards">
+  {% for src in sources %}
+  <a href="/source/{{ src.id }}" class="source-card source-card-{{ src.id }}">
+    <div class="source-card-icon">{{ src.icon }}</div>
+    <div class="source-card-body">
+      <div class="source-card-name">{{ src.label }}</div>
+      <div class="source-card-count">{{ src.count }} pages</div>
+    </div>
+    <svg class="source-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,1 @@
+{"title": "byebug", "source": "gtfobins", "source_label": "GTFOBins", "path": "byebug", "html": "<h1>byebug</h1>\n<h2>Inherit</h2>\n<pre><code class=\"language-bash\">byebug --no-stop /path/to/script.rb</code></pre>", "excerpt": "byebug Inherit byebug --no-stop /path/to/script.rb", "tags": ["func:inherit", "ctx:sudo", "ctx:unprivileged"]}
