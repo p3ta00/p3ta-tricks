@@ -56,7 +56,8 @@ SOURCES_DEF = [
         "root":    SOURCES / "hacker-recipes" / "docs" / "src",
         "summary": None,
         "skip_dirs": {"assets","contributing",".vitepress"},
-        "skip_files": {"index.md","variables.md","template.md","ads.md","donate.md"},
+        "skip_files": {"index.md","variables.md","template.md","ads.md","donate.md",
+                       "network-secrets.md"},
     },
     {
         "id":      "hacktricks",

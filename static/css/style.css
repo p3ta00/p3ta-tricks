@@ -1030,3 +1030,106 @@ code[class*="language-"], pre[class*="language-"] {
   font-family: inherit; cursor: pointer; transition: color .12s;
 }
 .var-btn-secondary:hover { color: var(--fg); }
+
+/* ====== Compile box (offline tool download) ====== */
+.compile-box {
+  border: 1px solid rgba(158,206,106,.3);
+  border-radius: 6px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  background: var(--bg1);
+}
+.compile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(158,206,106,.15);
+}
+.compile-label { color: var(--green); font-weight: 700; font-size: .88rem; }
+.compile-sln   { color: var(--fg-dim); font-size: .8rem; font-family: var(--mono); flex: 1; }
+.compile-btn {
+  background: var(--green); color: #1a1b26;
+  border: none; border-radius: 4px;
+  padding: .35rem 1rem; font-size: .82rem; font-weight: 700;
+  font-family: inherit; cursor: pointer; transition: opacity .12s;
+  white-space: nowrap;
+}
+.compile-btn:hover   { opacity: .85; }
+.compile-btn:disabled { opacity: .5; cursor: default; }
+.compile-log {
+  max-height: 280px;
+  overflow-y: auto;
+  background: #11121c;
+  border-bottom: 1px solid var(--border);
+}
+.compile-log pre {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: .78rem;
+  font-family: var(--mono);
+  color: var(--fg-dim);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.compile-downloads { padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.compile-dl-title  { color: var(--green); font-size: .82rem; font-weight: 700; width: 100%; }
+.compile-dl-link {
+  display: inline-block;
+  border: 1px solid rgba(158,206,106,.4);
+  border-radius: 4px;
+  padding: .3rem .8rem;
+  font-size: .82rem;
+  color: var(--green);
+  text-decoration: none;
+  font-family: var(--mono);
+  transition: background .12s;
+}
+.compile-dl-link:hover { background: rgba(158,206,106,.1); }
+
+/* ── Compiled Binaries page ──────────────────────────────────────── */
+.badge-binaries { color: var(--cyan); border-color: var(--cyan); }
+.badge-binaries:hover, .badge-binaries.active { background: rgba(122,162,247,.15); }
+
+.bin-tool-block {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.bin-tool-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .5rem .85rem;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border);
+}
+.bin-tool-name  { font-weight: 700; font-size: .95rem; color: var(--cyan); }
+.bin-tool-count { font-size: .75rem; color: var(--fg-dim); }
+.bin-file-list  { display: flex; flex-direction: column; }
+.bin-file-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem .85rem;
+  text-decoration: none;
+  color: var(--fg);
+  border-bottom: 1px solid var(--border);
+  transition: background .1s;
+}
+.bin-file-row:last-child { border-bottom: none; }
+.bin-file-row:hover { background: rgba(122,162,247,.07); }
+.bin-file-icon  { font-size: 1rem; width: 1.3rem; text-align: center; flex-shrink: 0; }
+.bin-file-name  { flex: 1; font-family: var(--mono); font-size: .82rem; color: var(--fg); }
+.bin-file-size  { font-size: .75rem; color: var(--fg-dim); min-width: 4rem; text-align: right; }
+.bin-dl-btn {
+  font-size: .75rem;
+  padding: .2rem .5rem;
+  border-radius: 3px;
+  background: rgba(122,162,247,.12);
+  color: var(--cyan);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bin-file-row:hover .bin-dl-btn { background: rgba(122,162,247,.25); }

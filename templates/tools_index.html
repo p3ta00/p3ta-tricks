@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Local Tools — p3ta-tricks Offline{% endblock %}
+{% block content %}
+<article class="page-article">
+  <div class="page-header">
+    <div class="page-breadcrumb">
+      <span class="breadcrumb-source" style="color:var(--green)">📥 p3ta-tricks Offline</span>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-title">Local Tools</span>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <h1>Local Tools</h1>
+    <p>Tools cloned locally for offline use. Click a tool to browse its files.</p>
+
+    {% if tools %}
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Browse</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tool in tools %}
+        <tr>
+          <td><code>{{ tool }}</code></td>
+          <td><a href="/tools/{{ tool }}/">Browse →</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--fg-dim)">No tools found in the tools directory.</p>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

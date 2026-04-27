@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}{{ tool_name }}{% if filepath %}/{{ filepath }}{% endif %} — p3ta-tricks Offline{% endblock %}
+{% block content %}
+<article class="page-article">
+  <div class="page-header">
+    <div class="page-breadcrumb">
+      <a href="/tools/" class="breadcrumb-source" style="color:var(--green)">📥 Local Tools</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="/tools/{{ tool_name }}/" class="breadcrumb-source" style="color:var(--green)">{{ tool_name }}</a>
+      {% if filepath %}
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-title">{{ filepath }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="page-body">
+    <h1>{{ tool_name }}{% if filepath %} / {{ filepath }}{% endif %}</h1>
+
+    {% if not filepath %}
+    <div class="compile-box">
+      <div class="compile-header">
+        <span class="compile-label">📥 Download</span>
+        <span class="compile-sln" style="flex:1"></span>
+        <a href="/tools/{{ tool_name }}/zip" class="compile-btn" download="{{ tool_name }}.zip">
+          ⬇ Download All (.zip)
+        </a>
+      </div>
+
+      {% if sharp_prebuilt %}
+      <div class="compile-downloads" style="display:flex">
+        <div class="compile-dl-title">📦 Pre-built binaries</div>
+        {% for b in sharp_prebuilt %}
+        <a href="/tools/{{ b.path }}" class="compile-dl-link" download>
+          ⬇ {{ b.name }}
+          <span style="color:var(--fg-dim);font-size:.7rem">
+            ({{ b.tier }}{% if b.size > 1048576 %}, {{ "%.1f"|format(b.size/1048576) }}MB{% else %}, {{ "%.0f"|format(b.size/1024) }}KB{% endif %})
+          </span>
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if has_pip_install %}
+      <div class="compile-downloads" style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-top:1px solid var(--border)">
+        <span style="color:var(--yellow);font-size:.8rem">🐍 Python tool</span>
+        <code style="font-size:.75rem;background:var(--bg-code);padding:.15rem .4rem;border-radius:3px">pip install -r /tools/{{ tool_name }}/requirements.txt</code>
+        <span style="color:var(--fg-dim);font-size:.75rem">— run after extracting</span>
+      </div>
+      {% elif is_powershell %}
+      <div class="compile-downloads" style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-top:1px solid var(--border)">
+        <span style="color:var(--blue);font-size:.8rem">🔵 PowerShell module</span>
+        <span style="color:var(--fg-dim);font-size:.75rem">— extract zip and import/run .ps1 files directly</span>
+      </div>
+      {% elif is_python_script %}
+      <div class="compile-downloads" style="display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-top:1px solid var(--border)">
+        <span style="color:var(--yellow);font-size:.8rem">🐍 Python script</span>
+        <span style="color:var(--fg-dim);font-size:.75rem">— extract zip and run with <code>python3 &lt;script&gt;.py</code></span>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Size</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if filepath %}
+          {% if parent %}
+        <tr>
+          <td><a href="/tools/{{ tool_name }}/{{ parent }}/">.. (up)</a></td>
+          <td>dir</td><td>—</td><td>—</td>
+        </tr>
+          {% else %}
+        <tr>
+          <td><a href="/tools/{{ tool_name }}/">.. (root)</a></td>
+          <td>dir</td><td>—</td><td>—</td>
+        </tr>
+          {% endif %}
+        {% else %}
+        <tr>
+          <td><a href="/tools/">.. (tools index)</a></td>
+          <td>dir</td><td>—</td><td>—</td>
+        </tr>
+        {% endif %}
+        {% for entry in entries %}
+        <tr>
+          <td>
+            {% if entry.is_dir %}
+            📁 <a href="/tools/{{ tool_name }}/{% if filepath %}{{ filepath }}/{% endif %}{{ entry.name }}/">{{ entry.name }}/</a>
+            {% else %}
+            📄 {{ entry.name }}
+            {% endif %}
+          </td>
+          <td>{{ 'dir' if entry.is_dir else 'file' }}</td>
+          <td>
+            {% if entry.size is not none %}
+              {% if entry.size > 1048576 %}{{ "%.1f" | format(entry.size / 1048576) }} MB
+              {% elif entry.size > 1024 %}{{ "%.1f" | format(entry.size / 1024) }} KB
+              {% else %}{{ entry.size }} B
+              {% endif %}
+            {% else %}—{% endif %}
+          </td>
+          <td>
+            {% if not entry.is_dir %}
+            <a href="/tools/{{ tool_name }}/{% if filepath %}{{ filepath }}/{% endif %}{{ entry.name }}" download>⬇</a>
+            {% else %}—{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</article>
+{% endblock %}

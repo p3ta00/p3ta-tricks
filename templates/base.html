@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}p3ta-tricks{% endblock %}</title>
   <link rel="stylesheet" href="/static/css/style.css">
+  <script>window.__OFFLINE__={{ offline_config_json | safe }};</script>
 </head>
 <body data-source="{{ page.source if page is defined else (source_id if source_id is defined else '') }}"
       data-page-url="{{ request.path }}">
@@ -27,6 +28,7 @@
     <div class="header-sources">
       <a href="/source/gtfobins"         class="source-badge badge-gtfobins"     data-source-id="gtfobins">🐚 GTFOBins</a>
       <a href="/source/lolbas"           class="source-badge badge-lolbas"       data-source-id="lolbas">🪟 LOLBAS</a>
+      <a href="/binaries/"               class="source-badge badge-binaries"     data-source-id="binaries">💾 Compiled Binaries</a>
       <a href="/source/bloodhound"       class="source-badge badge-bloodhound"   data-source-id="bloodhound">🩸 BloodHound</a>
       <a href="/source/bloodyad"         class="source-badge badge-bloodyad"     data-source-id="bloodyad">🩸 bloodyAD</a>
       <a href="/source/certipy"          class="source-badge badge-certipy"      data-source-id="certipy">📜 Certipy</a>

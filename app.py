@@ -1,16 +1,165 @@
 #!/usr/bin/env python3
 """p3ta-tricks Flask app — unified offline pentest reference."""
-import json, re
+import json, re, os, shutil
 from pathlib import Path
-from flask import Flask, render_template, request, jsonify, abort
+from flask import Flask, render_template, request, jsonify, abort, send_from_directory, Response, stream_with_context
 
-ROOT      = Path(__file__).parent
-PROCESSED = ROOT / "content" / "processed"
-INDEX     = ROOT / "static" / "search_index.json"
-SOURCES   = ROOT / "sources"
+ROOT          = Path(__file__).parent
+PROCESSED     = ROOT / "content" / "processed"
+INDEX         = ROOT / "static" / "search_index.json"
+SOURCES       = ROOT / "sources"
 NAV_CACHE_DIR = ROOT / "content" / "nav"
 
+# Offline mode — set OFFLINE_MODE=1 and TOOLS_DIR=/path/to/tools
+OFFLINE_MODE = os.environ.get("OFFLINE_MODE", os.environ.get("OFFLINE_MODE", "0")) == "1"
+TOOLS_DIR    = Path(os.environ.get("TOOLS_DIR", ROOT.parent / "p3ta-tricks-offline" / "tools"))
+BINARIES_DIR = ROOT / "binaries"  # compiled binaries served on online mode too
+
+# GitHub URL prefix → local tool directory name (for badge injection)
+TOOL_MAP = {
+    # ── Windows Privilege Escalation ──────────────────────────────────────────
+    "BeichenDream/GodPotato":                    "GodPotato",
+    "itm4n/PrintSpoofer":                        "PrintSpoofer",
+    "itm4n/PrivescCheck":                        "PrivescCheck",
+    "GhostPack/Seatbelt":                        "Seatbelt",
+    "rasta-mouse/Watson":                        "Watson",
+    "carlospolop/PEASS-ng":                      "PEASS-ng",
+    "peass-ng/PEASS-ng":                         "PEASS-ng",
+    "carlospolop/privilege-escalation-awesome-scripts-suite": "PEASS-ng",
+    "ohpe/juicy-potato":                         "juicy-potato",
+    "antonioCoco/RoguePotato":                   "RoguePotato",
+    "CCob/SweetPotato":                          "SweetPotato",
+    "GhostPack/SharpUp":                         "SharpUp",
+    "gtworek/Priv2Admin":                        "Priv2Admin",
+    "SecWiki/windows-kernel-exploits":           "windows-kernel-exploits",
+    # ── GhostPack / C# Tools ──────────────────────────────────────────────────
+    "GhostPack/Rubeus":                          "Rubeus",
+    "GhostPack/Certify":                         "Certify",
+    "GhostPack/SharpDPAPI":                      "SharpDPAPI",
+    "GhostPack/SafetyKatz":                      "SafetyKatz",
+    "Flangvik/SharpCollection":                  "SharpCollection",
+    "tevora-threat/SharpView":                   "SharpView",
+    "0xthirteen/SharpMove":                      "SharpMove",
+    # ── ADCS / Certificate Attacks ────────────────────────────────────────────
+    "ly4k/Certipy":                              "Certipy",
+    "AlmondOffSec/PassTheCert":                  "PassTheCert",
+    "jamarir/Invoke-PassTheCert":                "PassTheCert",
+    "bats3c/ADCSPwn":                            "ADCSPwn",
+    # ── Kerberos Attacks ──────────────────────────────────────────────────────
+    "dirkjanm/krbrelayx":                        "krbrelayx",
+    "dirkjanm/PKINITtools":                      "PKINITtools",
+    "ShutdownRepo/targetedKerberoast":           "targetedKerberoast",
+    "ropnop/kerbrute":                           "kerbrute",
+    "gentilkiwi/kekeo":                          "kekeo",
+    "TarlogicSecurity/tickey":                   "tickey",
+    "SecuraBV/Timeroast":                        "Timeroast",
+    # ── Coercion & NTLM Relay ─────────────────────────────────────────────────
+    "topotam/PetitPotam":                        "PetitPotam",
+    "p0dalirius/Coercer":                        "Coercer",
+    "Wh04m1001/DFSCoerce":                       "DFSCoerce",
+    "ShutdownRepo/ShadowCoerce":                 "ShadowCoerce",
+    "lgandx/Responder":                          "Responder",
+    "dirkjanm/mitm6":                            "mitm6",
+    "Kevin-Robertson/Inveigh":                   "Inveigh",
+    # ── Shadow Credentials ────────────────────────────────────────────────────
+    "eladshamir/Whisker":                        "Whisker",
+    "ShutdownRepo/pywhisker":                    "pywhisker",
+    # ── AD Enumeration & Manipulation ─────────────────────────────────────────
+    "dirkjanm/BloodHound.py":                    "BloodHound.py",
+    "CravateRouge/bloodyAD":                     "bloodyAD",
+    "PowerShellMafia/PowerSploit":               "PowerSploit",
+    "FuzzySecurity/StandIn":                     "StandIn",
+    "dirkjanm/ldapdomaindump":                   "ldapdomaindump",
+    "dirkjanm/ROADtools":                        "ROADtools",
+    "Kevin-Robertson/Powermad":                  "Powermad",
+    "franc-pentest/ldeep":                       "ldeep",
+    "SnaffCon/Snaffler":                         "Snaffler",
+    "EmpireProject/Empire":                      "Empire",
+    # ── gMSA Attacks ──────────────────────────────────────────────────────────
+    "Semperis/GoldenGMSA":                       "GoldenGMSA",
+    "felixbillieres/pyGoldenGMSA":               "pyGoldenGMSA",
+    # ── SCCM / MECM ───────────────────────────────────────────────────────────
+    "subat0mik/Misconfiguration-Manager":        "Misconfiguration-Manager",
+    "Mayyhem/SharpSCCM":                         "SharpSCCM",
+    "garrettfoster13/sccmhunter":                "sccmhunter",
+    # ── LSASS Dumping & Credential Extraction ────────────────────────────────
+    "Hackndo/lsassy":                            "lsassy",
+    "fortra/nanodump":                           "nanodump",
+    "AlessandroZ/LaZagne":                       "LaZagne",
+    "login-securite/DonPAPI":                    "DonPAPI",
+    "skelsec/pypykatz":                          "pypykatz",
+    "lgandx/PCredz":                             "PCredz",
+    # ── Credentials / Mimikatz ────────────────────────────────────────────────
+    "gentilkiwi/mimikatz":                       "mimikatz-tool",
+    # ── MSSQL Attacks ─────────────────────────────────────────────────────────
+    "NetSPI/PowerUpSQL":                         "PowerUpSQL",
+    "ScorpionesLabs/MSSqlPwner":                 "MSSqlPwner",
+    # ── PowerShell Post-Exploitation ─────────────────────────────────────────
+    "samratashok/nishang":                       "nishang",
+    # ── Tunneling & Pivoting ──────────────────────────────────────────────────
+    "jpillora/chisel":                           "chisel",
+    "Fahrj/reverse-ssh":                         "reverse-ssh",
+    # ── Linux Enumeration & Exploitation ─────────────────────────────────────
+    "DominicBreuker/pspy":                       "pspy",
+    "diego-treitos/linux-smart-enumeration":     "linux-smart-enumeration",
+    "nongiach/sudo_inject":                      "sudo_inject",
+    # ── Certificate Forgery ───────────────────────────────────────────────────
+    "GhostPack/ForgeCert":                       "ForgeCert",
+    # ── CVE PoCs ──────────────────────────────────────────────────────────────
+    "cube0x0/CVE-2021-1675":                     "CVE-2021-1675",
+    "BreenmMachine/RottenPotatoNG":              "RottenPotatoNG",
+    "breenmachine/RottenPotatoNG":               "RottenPotatoNG",
+    # ── Network / MITM ────────────────────────────────────────────────────────
+    "SpiderLabs/Responder":                      "Responder",
+    "spiderlabs/Responder":                      "Responder",
+    "bettercap/bettercap":                       "bettercap",
+    # ── Impacket aliases (standard kali — link to wiki source) ───────────────
+    "SecureAuthCorp/impacket":                   "impacket-src",
+    "fortra/impacket":                           "impacket-src",
+    # ── NetExec ───────────────────────────────────────────────────────────────
+    "Pennyw0rth/NetExec":                        "NetExec",
+    "Pennyw0rth/NetExec-Wiki":                   "NetExec",
+    # ── .NET Reverse Engineering ──────────────────────────────────────────────
+    "dnspy/dnspy":                               "dnspy",
+    # ── Java Deserialization ──────────────────────────────────────────────────
+    "frohoff/ysoserial":                         "ysoserial-java",
+    # ── Web Exploitation ──────────────────────────────────────────────────────
+    "pwntester/ysoserial.net":                   "ysoserial.net",
+    "epinna/tplmap":                             "tplmap",
+    "tarunkant/Gopherus":                        "Gopherus",
+    "ticarpi/jwt_tool":                          "jwt_tool",
+    # ── Azure / Cloud ─────────────────────────────────────────────────────────
+    "NetSPI/MicroBurst":                         "MicroBurst",
+    "RhinoSecurityLabs/pacu":                    "pacu",
+    # ── BloodHound ────────────────────────────────────────────────────────────
+    "BloodHoundAD/BloodHound":                   "BloodHound.py",
+    # ── Misc ──────────────────────────────────────────────────────────────────
+    "Hackndo/pyGPOAbuse":                        "pyGPOAbuse",
+    "n00py/LAPSDumper":                          "LAPSDumper",
+    "layer8secure/SilentHound":                  "SilentHound",
+    "t3l3machus/Villain":                        "Villain",
+    "sensepost/objection":                       "objection",
+    # ── Web Recon / SSRF / Fuzzing ────────────────────────────────────────────
+    "assetnote/blind-ssrf-chains":              "blind-ssrf-chains",
+    "s0md3v/Arjun":                             "Arjun",
+    # ── VoIP ─────────────────────────────────────────────────────────────────
+    "Pepelux/sippts":                           "sippts",
+    # ── Java RMI ─────────────────────────────────────────────────────────────
+    "qtc-de/remote-method-guesser":             "remote-method-guesser",
+}
+
 app = Flask(__name__)
+
+
+@app.context_processor
+def inject_offline():
+    """Inject offline config into every template so badge injection is synchronous."""
+    if not OFFLINE_MODE:
+        return {"offline_mode": False, "offline_config_json": "null"}
+    available = {name: True for name in set(TOOL_MAP.values())
+                 if (TOOLS_DIR / name).exists()}
+    cfg = {"offline": True, "tools": available, "tool_map": TOOL_MAP}
+    return {"offline_mode": True, "offline_config_json": json.dumps(cfg)}
 
 SOURCE_META = {
     "bloodhound":      {"label": "BloodHound",          "color": "var(--red)",     "icon": "🩸"},
@@ -530,7 +679,186 @@ def not_found(e):
     return render_template("404.html"), 404
 
 
+# ---------------------------------------------------------------------------
+# Compiled binaries — available in both online and offline modes
+# ---------------------------------------------------------------------------
+
+def _get_all_binaries() -> list[dict]:
+    """Return sorted list of all downloadable compiled binaries."""
+    binaries = []
+    if not BINARIES_DIR.exists():
+        return binaries
+    for tool_dir in sorted(BINARIES_DIR.iterdir()):
+        if not tool_dir.is_dir():
+            continue
+        tool_name = tool_dir.name
+        for f in sorted(tool_dir.iterdir()):
+            if f.is_file():
+                sz = f.stat().st_size
+                binaries.append({
+                    "tool": tool_name,
+                    "name": f.name,
+                    "path": f"{tool_name}/{f.name}",
+                    "size": sz,
+                    "size_str": f"{sz/1048576:.1f} MB" if sz > 1048576 else f"{sz/1024:.0f} KB",
+                })
+    return binaries
+
+
+@app.route("/binaries/")
+def binaries_index():
+    binaries = _get_all_binaries()
+    # Group by tool
+    by_tool = {}
+    for b in binaries:
+        by_tool.setdefault(b["tool"], []).append(b)
+    return render_template("binaries_index.html", by_tool=by_tool, total=len(binaries))
+
+
+@app.route("/binaries/<tool_name>/<filename>")
+def serve_binary(tool_name, filename):
+    tool_path = BINARIES_DIR / tool_name
+    if not tool_path.exists():
+        abort(404)
+    f = tool_path / filename
+    if not f.exists() or not f.is_file():
+        abort(404)
+    return send_from_directory(str(tool_path), filename, as_attachment=True)
+
+
+# ---------------------------------------------------------------------------
+# Offline mode routes (/tools/)
+# ---------------------------------------------------------------------------
+@app.route("/api/offline-config")
+def offline_config():
+    if not OFFLINE_MODE:
+        return jsonify({"offline": False})
+    available = {name: True for name in TOOL_MAP.values()
+                 if (TOOLS_DIR / name).exists()}
+    return jsonify({"offline": True, "tools": available, "tool_map": TOOL_MAP})
+
+
+@app.route("/tools/")
+def tools_index():
+    if not OFFLINE_MODE:
+        abort(404)
+    tools = sorted(
+        [d.name for d in TOOLS_DIR.iterdir() if d.is_dir()] if TOOLS_DIR.exists() else []
+    )
+    return render_template("tools_index.html", tools=tools)
+
+
+@app.route("/tools/<tool_name>/")
+@app.route("/tools/<tool_name>/<path:filepath>")
+def serve_tool_file(tool_name, filepath=""):
+    if not OFFLINE_MODE:
+        abort(404)
+    tool_path = TOOLS_DIR / tool_name
+    if not tool_path.exists():
+        abort(404)
+    target = tool_path / filepath if filepath else tool_path
+    if not target.exists():
+        abort(404)
+    if target.is_file():
+        return send_from_directory(str(target.parent), target.name)
+    # Directory listing — dirs first, then files, each alphabetical
+    items = sorted(target.iterdir(), key=lambda p: (p.is_file(), p.name.lower()))
+    entries = [{"name": p.name, "is_dir": p.is_dir(),
+                "size": p.stat().st_size if p.is_file() else None} for p in items]
+    parent = str(Path(filepath).parent) if filepath and '/' in filepath else ""
+
+    # Pre-built binaries: releases/ subdir (Go/compiled tools) + SharpCollection (GhostPack)
+    sharp_prebuilt = []
+    has_requirements = False
+    if not filepath:
+        # releases/ directory binaries (kerbrute, chisel, pspy, reverse-ssh, bettercap, etc.)
+        releases_dir = tool_path / "releases"
+        if releases_dir.exists():
+            for f in sorted(releases_dir.iterdir()):
+                if f.is_file():
+                    sharp_prebuilt.append({
+                        "tier": "pre-built",
+                        "name": f.name,
+                        "path": f"{tool_name}/releases/{f.name}",
+                        "size": f.stat().st_size,
+                    })
+
+        # SharpCollection (GhostPack) binaries
+        sc_root = TOOLS_DIR / "SharpCollection"
+        if sc_root.exists():
+            tiers = ["NetFramework_4.7_Any", "NetFramework_4.7_x64",
+                     "NetFramework_4.0_Any", "NetFramework_4.0_x64"]
+            candidates = [tool_name, tool_name.replace("-", ""), tool_name.replace("_", "")]
+            seen = set()
+            for tier in tiers:
+                for cand in candidates:
+                    binary = sc_root / tier / f"{cand}.exe"
+                    if binary.exists() and cand not in seen:
+                        seen.add(cand)
+                        sharp_prebuilt.append({
+                            "tier": tier,
+                            "name": binary.name,
+                            "path": f"SharpCollection/{tier}/{binary.name}",
+                            "size": binary.stat().st_size,
+                        })
+
+        # Script tool detection — check root and one level of subdirs
+        _req_files = ("requirements.txt", "setup.py", "pyproject.toml", "setup.cfg")
+        has_pip_install = (
+            any((tool_path / f).exists() for f in _req_files) or
+            any(p.exists() for f in _req_files for p in tool_path.glob(f"*/{f}"))
+        )
+        is_powershell = bool(
+            list(tool_path.glob("*.ps1")) or list(tool_path.glob("*.psm1")) or
+            list(tool_path.glob("*/*.ps1")) or list(tool_path.glob("*/*.psm1"))
+        )
+        is_python_script = (
+            not has_pip_install and (
+                bool(list(tool_path.glob("*.py"))) or
+                bool(list(tool_path.glob("*/*.py")))
+            )
+        )
+        has_requirements = has_pip_install or is_python_script or is_powershell
+
+    return render_template("tool_dir.html", tool_name=tool_name,
+                           filepath=filepath, parent=parent, entries=entries,
+                           sharp_prebuilt=sharp_prebuilt,
+                           has_requirements=has_requirements,
+                           has_pip_install=has_pip_install if not filepath else False,
+                           is_powershell=is_powershell if not filepath else False,
+                           is_python_script=is_python_script if not filepath else False)
+
+
+@app.route("/tools/<tool_name>/zip")
+def download_tool_zip(tool_name):
+    """Stream the entire tool directory as a zip archive."""
+    import zipfile, io
+    if not OFFLINE_MODE:
+        abort(404)
+    tool_path = TOOLS_DIR / tool_name
+    if not tool_path.exists():
+        abort(404)
+
+    def _stream_zip():
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED, allowZip64=True) as zf:
+            for f in sorted(tool_path.rglob("*")):
+                if f.is_file() and ".git" not in f.parts:
+                    zf.write(f, f.relative_to(tool_path.parent))
+        buf.seek(0)
+        while True:
+            chunk = buf.read(65536)
+            if not chunk:
+                break
+            yield chunk
+
+    return Response(
+        stream_with_context(_stream_zip()),
+        mimetype="application/zip",
+        headers={"Content-Disposition": f"attachment; filename={tool_name}.zip"},
+    )
+
+
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)

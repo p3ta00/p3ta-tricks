@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Compiled Binaries — p3ta-tricks{% endblock %}
+{% block content %}
+<article class="page-article">
+  <div class="page-header">
+    <div class="page-breadcrumb">
+      <span class="breadcrumb-source" style="color:var(--cyan)">💾 Compiled Binaries</span>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <h1>Compiled Binaries</h1>
+    <p style="color:var(--fg-dim);margin:.25rem 0 1.5rem">
+      Pre-compiled attack tools ready for direct download. {{ total }} file{{ 's' if total != 1 else '' }} across {{ by_tool|length }} tool{{ 's' if by_tool|length != 1 else '' }}.
+    </p>
+
+    {% for tool_name, files in by_tool.items() %}
+    <div class="bin-tool-block">
+      <div class="bin-tool-header">
+        <span class="bin-tool-name">{{ tool_name }}</span>
+        <span class="bin-tool-count">{{ files|length }} file{{ 's' if files|length != 1 else '' }}</span>
+      </div>
+      <div class="bin-file-list">
+        {% for f in files %}
+        <a href="/binaries/{{ f.path }}" class="bin-file-row" download>
+          <span class="bin-file-icon">
+            {% if f.name.endswith('.exe') or f.name.endswith('.dll') %}🪟
+            {% elif f.name.endswith('.jar') %}☕
+            {% elif f.name.endswith('.sh') or f.name.endswith('.ps1') %}📜
+            {% elif f.name.endswith('.zip') %}📦
+            {% else %}💾{% endif %}
+          </span>
+          <span class="bin-file-name">{{ f.name }}</span>
+          <span class="bin-file-size">{{ f.size_str }}</span>
+          <span class="bin-dl-btn">⬇ Download</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <p style="color:var(--fg-dim)">No compiled binaries available yet.</p>
+    {% endfor %}
+  </div>
+</article>
+{% endblock %}

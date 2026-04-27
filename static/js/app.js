@@ -215,6 +215,20 @@ async function buildAllSourcesNav() {
       lnk.innerHTML = `<span class="st-icon">${src.icon}</span><span class="st-label">${src.label}</span>`;
       wrap.appendChild(lnk);
       root.appendChild(wrap);
+
+      // Inject Compiled Binaries link immediately after LOLBAS
+      if (src.id === 'lolbas') {
+        const binWrap = document.createElement('div');
+        binWrap.className = 'st-wrap';
+        const isBinActive = window.location.pathname === '/binaries/' || window.location.pathname.startsWith('/binaries/');
+        const binLnk = document.createElement('a');
+        binLnk.className = 'st-toggle st-toggle-link' + (isBinActive ? ' st-toggle-active' : '');
+        binLnk.href = '/binaries/';
+        binLnk.style.setProperty('--c', '#2ac3de');
+        binLnk.innerHTML = '<span class="st-icon">💾</span><span class="st-label">Compiled Binaries</span>';
+        binWrap.appendChild(binLnk);
+        root.appendChild(binWrap);
+      }
       continue;
     }
 
@@ -862,6 +876,73 @@ function _initSearchHelp() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close_(); });
 }
 
+/* ====== Offline badge injection ====== */
+function _initOfflineBadges() {
+  // Config is injected server-side as window.__OFFLINE__ — no async fetch needed.
+  const cfg = window.__OFFLINE__;
+  if (!cfg || !cfg.offline) return;
+
+  const toolMap   = cfg.tool_map  || {};
+  const available = cfg.tools     || {};
+
+  // Build lookup: lowercased slug → local tool dir name
+  const slugToDir = {};
+  for (const [slug, dir] of Object.entries(toolMap)) {
+    slugToDir[slug.toLowerCase()] = dir;
+  }
+
+  function _resolveGithubHref(href) {
+    if (!href.includes('github.com')) return null;
+    const m = href.match(/github\.com\/([^/#?]+\/[^/#?\s"]+)/i);
+    if (!m) return null;
+    const slug = m[1].toLowerCase().replace(/\.git$/, '');
+    const dir  = slugToDir[slug];
+    if (!dir) return null;
+    return { dir, local: !!available[dir] };
+  }
+
+  function _applyBadge(a) {
+    if (a.dataset.offlineDone) return;
+    a.dataset.offlineDone = '1';
+    const res = _resolveGithubHref(a.getAttribute('href') || '');
+    if (!res) return;
+
+    if (res.local) {
+      a.href  = `/tools/${res.dir}/`;
+      a.title = `Local copy: ${res.dir}`;
+      a.style.color = 'var(--green)';
+      const badge = document.createElement('span');
+      badge.className = 'offline-badge';
+      badge.textContent = '📥';
+      badge.style.cssText = 'margin-left:3px;font-size:.8rem;';
+      a.appendChild(badge);
+    } else {
+      a.target = '_blank';
+      a.rel    = 'noopener';
+      const badge = document.createElement('span');
+      badge.className = 'offline-badge';
+      badge.textContent = '⬇';
+      badge.title = `Not downloaded: ${res.dir}`;
+      badge.style.cssText = 'margin-left:3px;font-size:.8rem;color:var(--orange);';
+      a.appendChild(badge);
+    }
+  }
+
+  // Scan page-body on load
+  const body = document.querySelector('.page-body');
+  if (body) body.querySelectorAll('a[href]').forEach(_applyBadge);
+
+  // Also intercept clicks anywhere on the page as a safety net
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href]');
+    if (!a || a.dataset.offlineDone) return;
+    const res = _resolveGithubHref(a.getAttribute('href') || '');
+    if (!res || !res.local) return;
+    e.preventDefault();
+    window.location.href = `/tools/${res.dir}/`;
+  }, true);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   addCopyButtons();
   buildAllSourcesNav();
@@ -870,4 +951,5 @@ document.addEventListener('DOMContentLoaded', () => {
   _initImplToggle();
   _initVarSystem();
   _initSearchHelp();
+  _initOfflineBadges();
 });
