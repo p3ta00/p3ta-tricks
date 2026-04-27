@@ -604,6 +604,24 @@ def main():
 
     INDEX_PATH.write_text(json.dumps(entries, ensure_ascii=False), encoding='utf-8')
 
+    # Pre-generate nav JSON for all sources so Railway (no sources/ dir) can serve them
+    import sys
+    sys.path.insert(0, str(ROOT))
+    try:
+        from app import _get_nav, SOURCE_META
+        NAV_OUT = ROOT / "content" / "nav"
+        NAV_OUT.mkdir(parents=True, exist_ok=True)
+        for source_id in SOURCE_META:
+            try:
+                nav = _get_nav(source_id)
+                (NAV_OUT / f"{source_id}.json").write_text(
+                    json.dumps(nav, ensure_ascii=False), encoding='utf-8')
+            except Exception as e:
+                log.warning("Nav gen failed for %s: %s", source_id, e)
+        log.info("Nav JSON pre-generated for %d sources", len(SOURCE_META))
+    except Exception as e:
+        log.warning("Nav pre-generation skipped: %s", e)
+
     from collections import Counter
     counts = Counter(e["source"] for e in entries)
     log.info("Done in %.1fs — %d pages indexed:", time.time()-t0, len(entries))

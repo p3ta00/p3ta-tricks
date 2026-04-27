@@ -8,6 +8,7 @@ ROOT      = Path(__file__).parent
 PROCESSED = ROOT / "content" / "processed"
 INDEX     = ROOT / "static" / "search_index.json"
 SOURCES   = ROOT / "sources"
+NAV_CACHE_DIR = ROOT / "content" / "nav"
 
 app = Flask(__name__)
 
@@ -408,6 +409,13 @@ def _get_nav(source_id: str) -> list:
         idx     = _load_index()
         entries = [e for e in idx if e.get('source') == source_id]
         tree    = _build_az_nav(source_id, entries)
+        _nav_cache[source_id] = tree
+        return tree
+
+    # If sources/ dir is unavailable (e.g. Railway), serve pre-built nav JSON
+    pre_built = NAV_CACHE_DIR / f"{source_id}.json"
+    if not cfg['root'].exists() and pre_built.exists():
+        tree = json.loads(pre_built.read_text(encoding='utf-8'))
         _nav_cache[source_id] = tree
         return tree
 
