@@ -287,8 +287,8 @@ pre code { background: none; padding: 0; color: inherit; }
 .hero-video {
   display: block;
   border-radius: 12px;
-  max-width: min(640px, calc(100vw - 80px));
-  max-height: 360px;
+  max-width: min(880px, calc(100vw - 80px));
+  max-height: 500px;
   width: 100%;
   object-fit: contain;
   background: var(--bg0);
