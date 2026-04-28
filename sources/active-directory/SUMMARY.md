@@ -13,3 +13,4 @@
 - [Lateral Movement](Active Directory/Lateral Movement.md)
 - [MSSQL, Exchange & SCCM](Active Directory/MSSQL Exchange SCCM.md)
 - [Windows Attacks & Defense](Active Directory/Windows Attacks & Defense.md)
+- [Windows Fundamentals](Active Directory/Windows Fundamentals.md)

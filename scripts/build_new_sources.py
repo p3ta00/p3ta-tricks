@@ -19,7 +19,7 @@ SOURCE_LABELS = {
     "enum":        "Enumeration",
     "revshells":   "Reverse Shells",
     "bug-bounty":  "Bug Bounty",
-    "htb-academy": "HTB Academy",
+    "active-directory": "Active Directory",
 }
 
 NEW_SOURCES = {
@@ -38,9 +38,9 @@ NEW_SOURCES = {
         "summary": SOURCES / "bug-bounty" / "SUMMARY.md",
         "skip":    {"SUMMARY.md", "README.md"},
     },
-    "htb-academy": {
-        "root":    SOURCES / "htb-academy",
-        "summary": SOURCES / "htb-academy" / "SUMMARY.md",
+    "active-directory": {
+        "root":    SOURCES / "active-directory",
+        "summary": SOURCES / "active-directory" / "SUMMARY.md",
         "skip":    {"SUMMARY.md"},
     },
 }

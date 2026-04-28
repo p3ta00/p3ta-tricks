@@ -34695,5 +34695,12 @@
     "url": "/page/active-directory/Active Directory/Windows Attacks & Defense",
     "path": "Active Directory/Windows Attacks & Defense",
     "excerpt": "Kerberoasting Request TGS tickets for SPN-configured accounts and crack them offline. Detectable via Event ID 4769. Attack .\\ Rubeus . exe kerberoast / outfile : spn . txt Crack hashcat -m 13100 -a 0 "
+  },
+  {
+    "title": "Windows Fundamentals",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Windows Fundamentals",
+    "path": "Active Directory/Windows Fundamentals",
+    "excerpt": "Remote Access RDP to Target xfreerdp /v:&lt;target-ip&gt; /u:&lt;username&gt; /p:&lt;password&gt; /dynamic-resolution System Information OS Info via WMI (PowerShell) Get-WmiObject -Class win32_Operati"
   }
 ]
