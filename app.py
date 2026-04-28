@@ -182,7 +182,7 @@ SOURCE_META = {
     "hardware-att":    {"label": "HardwareAllTheThings", "color": "var(--yellow)",  "icon": "🔌"},
     "internal-att":    {"label": "InternalAllTheThings", "color": "var(--purple)",  "icon": "🏰"},
     "goexec":          {"label": "goexec",               "color": "var(--green)",   "icon": "⚡"},
-    "osai-research":   {"label": "OSAI Research",        "color": "var(--magenta)", "icon": "🤖"},
+    "osai-research":   {"label": "OSAI Research",        "color": "var(--magenta)", "icon": "🤖", "offline_only": True},
     "sliver":          {"label": "Sliver C2",             "color": "var(--red)",     "icon": "🐍"},
     "impacket":        {"label": "Impacket",              "color": "var(--cyan)",    "icon": "📦"},
     "gopacket":        {"label": "GoPacket",              "color": "var(--green)",   "icon": "🐹"},
@@ -739,6 +739,8 @@ def index():
     counts = Counter(e.get("source", "") for e in idx)
     sources = []
     for sid, meta in SOURCE_META.items():
+        if meta.get("offline_only") and not OFFLINE_MODE:
+            continue
         sources.append({**meta, "id": sid, "count": counts.get(sid, 0)})
     return render_template("index.html", sources=sources, total=len(idx))
 
@@ -749,6 +751,9 @@ def search():
     source  = request.args.get("source", "")
     fmt     = request.args.get("format", "")
     results = _search(q)
+    if not OFFLINE_MODE:
+        _hidden = {sid for sid, m in SOURCE_META.items() if m.get("offline_only")}
+        results = [r for r in results if r.get("source") not in _hidden]
     if source:
         results = [r for r in results if r.get("source") == source]
     if fmt == "json" or request.accept_mimetypes.best == "application/json":
@@ -760,6 +765,8 @@ def search():
 @app.route("/source/<source_id>")
 def source_index(source_id):
     if source_id not in SOURCE_META:
+        abort(404)
+    if SOURCE_META[source_id].get("offline_only") and not OFFLINE_MODE:
         abort(404)
     idx  = _load_index()
     entries = [e for e in idx if e.get("source") == source_id]

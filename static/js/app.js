@@ -32,12 +32,15 @@ const SOURCES = [
   { id: 'mimikatz',         label: 'Mimikatz',             icon: '🐱', color: '#f7768e' },
   { id: 'msfvenom',         label: 'msfvenom',             icon: '💣', color: '#bb9af7' },
   { id: 'netexec',          label: 'NetExec Wiki',         icon: '🔧', color: '#9ece6a' },
-  { id: 'osai-research',    label: 'OSAI Research',        icon: '🤖', color: '#bb9af7' },
+  { id: 'osai-research',    label: 'OSAI Research',        icon: '🤖', color: '#bb9af7', offlineOnly: true },
   { id: 'patt',             label: 'PayloadsAllTheThings', icon: '💥', color: '#ff9e64' },
   { id: 'rubeus',           label: 'Rubeus',               icon: '🎟️', color: '#ff9e64' },
   { id: 'sliver',           label: 'Sliver C2',            icon: '🐍', color: '#f7768e' },
   { id: 'hacker-recipes',   label: 'The Hacker Recipes',  icon: '🍳', color: '#7dcfff' },
 ];
+
+const _isOffline = !!(window.__OFFLINE__ && window.__OFFLINE__.offline);
+const VISIBLE_SOURCES = SOURCES.filter(s => !s.offlineOnly || _isOffline);
 
 const _navCache   = {};
 const _activeSource  = document.body.dataset.source || '';
@@ -207,7 +210,7 @@ async function buildAllSourcesNav() {
   btnRow.appendChild(collapseBtn);
   root.appendChild(btnRow);
 
-  for (const src of SOURCES) {
+  for (const src of VISIBLE_SOURCES) {
     const srcKey = 'src_' + src.id;
     const isActive = src.id === _activeSource;
 
@@ -315,7 +318,7 @@ function _updateFilterLabel() {
   const btn = document.getElementById('search-filter-btn');
   if (!lbl) return;
   const off = _offSources.size;
-  const total = SOURCES.length;
+  const total = VISIBLE_SOURCES.length;
   if (off === 0) {
     lbl.textContent = 'All Sources';
     btn && btn.classList.remove('sfp-active');
@@ -336,8 +339,8 @@ function _initSourceFilter() {
   const noneBtn = document.getElementById('sfp-none');
   if (!btn || !panel || !list) return;
 
-  // Build checkbox list from SOURCES
-  list.innerHTML = SOURCES.map(src => `
+  // Build checkbox list from VISIBLE_SOURCES
+  list.innerHTML = VISIBLE_SOURCES.map(src => `
     <label class="sfp-item">
       <input type="checkbox" class="sfp-cb" data-sid="${src.id}" checked>
       <span class="sfp-icon" style="color:${src.color}">${src.icon}</span>
@@ -371,7 +374,7 @@ function _initSourceFilter() {
 
   // Select None
   noneBtn && noneBtn.addEventListener('click', () => {
-    SOURCES.forEach(s => _offSources.add(s.id));
+    VISIBLE_SOURCES.forEach(s => _offSources.add(s.id));
     list.querySelectorAll('.sfp-cb').forEach(cb => cb.checked = false);
     _updateFilterLabel();
     if (searchInput && searchInput.value.trim().length >= 2) _runSearch(searchInput.value.trim());
