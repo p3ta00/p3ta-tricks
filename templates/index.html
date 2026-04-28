@@ -57,17 +57,4 @@
     </div>
   </div>
 </div>
-
-<div class="source-cards">
-  {% for src in sources %}
-  <a href="/source/{{ src.id }}" class="source-card source-card-{{ src.id }}">
-    <div class="source-card-icon">{{ src.icon }}</div>
-    <div class="source-card-body">
-      <div class="source-card-name">{{ src.label }}</div>
-      <div class="source-card-count">{{ src.count }} pages</div>
-    </div>
-    <svg class="source-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-  </a>
-  {% endfor %}
-</div>
 {% endblock %}
