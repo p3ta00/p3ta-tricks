@@ -24,6 +24,40 @@
   </a>
 </div>
 
+<div class="home-about">
+  <p class="home-about-lead">p3ta-tricks is a fast, searchable pentest reference that aggregates attack techniques, tool syntax, and post-exploitation chains from BloodHound, HackTricks, PayloadsAllTheThings, GTFOBins, Impacket, Certipy, NetExec, and more — all in one place, with zero context switching.</p>
+  <div class="home-about-grid">
+    <div class="home-about-card">
+      <div class="home-about-card-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        Variables
+      </div>
+      <p>Every code block uses <code>&lt;placeholders&gt;</code> like <code>&lt;target-ip&gt;</code>, <code>&lt;domain&gt;</code>, and <code>&lt;username&gt;</code>. Click <strong>Variables</strong> in the sidebar to fill them in — values persist across every page for your whole session so you never retype the same IP twice.</p>
+    </div>
+    <div class="home-about-card">
+      <div class="home-about-card-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Distro Toggle — Kali / Exegol / Script
+      </div>
+      <p>The sidebar <strong>Distro</strong> toggle changes how Impacket commands are rendered. <strong>Kali</strong> uses the <code>impacket-secretsdump</code> format installed via apt. <strong>Exegol</strong> uses the <code>secretsdump.py</code> Python script format native to the Exegol container. <strong>Script</strong> prefixes with <code>python3</code>.</p>
+    </div>
+    <div class="home-about-card">
+      <div class="home-about-card-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search
+      </div>
+      <p>Press <kbd>Ctrl+K</kbd> from anywhere to search across all {{ total }} pages instantly. Use the funnel button next to the search bar to restrict results to specific sources. Results rank by relevance and show the source they came from.</p>
+    </div>
+    <div class="home-about-card">
+      <div class="home-about-card-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Tools Toggle — Impacket / GoPacket
+      </div>
+      <p>The sidebar <strong>Tools</strong> toggle switches between Python Impacket and its Go equivalent GoPacket. When GoPacket is selected, every <code>impacket-</code> / <code>secretsdump.py</code> reference is rewritten to the Go style automatically. Distro selection is ignored when GoPacket is active.</p>
+    </div>
+  </div>
+</div>
+
 <div class="source-cards">
   {% for src in sources %}
   <a href="/source/{{ src.id }}" class="source-card source-card-{{ src.id }}">
