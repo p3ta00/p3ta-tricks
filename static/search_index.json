@@ -34607,92 +34607,92 @@
   },
   {
     "title": "Introduction to Active Directory",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/Introduction to Active Directory",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Introduction to Active Directory",
     "path": "Active Directory/Introduction to Active Directory",
     "excerpt": "General Module Commands Basic PowerShell and Active Directory module commands for getting oriented in a domain environment. Get Loaded PowerShell Modules Lists all currently loaded PowerShell modules,"
   },
   {
     "title": "Enumeration",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/Enumeration",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Enumeration",
     "path": "Active Directory/Enumeration",
     "excerpt": "Initial Enumeration Passive and active techniques to discover hosts, services, and domain information before authentication. DNS Lookup Query DNS to discover IP-to-hostname mappings. nslookup ns1.&lt;"
   },
   {
     "title": "PowerView",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/PowerView",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/PowerView",
     "path": "Active Directory/PowerView",
     "excerpt": "Quick Reference Common PowerView commands at a glance. Import the module first: Import-Module .\\ PowerView . ps1 Domain Information Get Domain Object Returns the AD object and details for the current "
   },
   {
     "title": "LDAP",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/LDAP",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/LDAP",
     "path": "Active Directory/LDAP",
     "excerpt": "LDAP Enumeration LDAP queries for enumerating Active Directory objects from both Linux and Windows. From Linux (ldapsearch) Enumerate Password Policy ldapsearch -h &lt;dc-ip&gt; -x -b &quot;DC=&lt;DOM"
   },
   {
     "title": "BloodHound",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/BloodHound",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/BloodHound",
     "path": "Active Directory/BloodHound",
     "excerpt": "BloodHound Collection BloodHound maps attack paths through Active Directory by ingesting data about users, groups, computers, ACLs, and trusts. Collect data with SharpHound or bloodhound-python, then "
   },
   {
     "title": "DACL Attacks I",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/DACL Attacks I",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/DACL Attacks I",
     "path": "Active Directory/DACL Attacks I",
     "excerpt": "DACL Abuse Overview Discretionary Access Control Lists (DACLs) define who has what rights over AD objects. Misconfigured DACLs allow attackers to reset passwords, add users to groups, read LAPS/gMSA p"
   },
   {
     "title": "DACL Attacks II",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/DACL Attacks II",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/DACL Attacks II",
     "path": "Active Directory/DACL Attacks II",
     "excerpt": "Shadow Credentials Abuse msDS-KeyCredentialLink write access to add a certificate-based credential to a target account, then request a TGT and extract the NT hash without changing the password. Check "
   },
   {
     "title": "Trust Attacks",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/Trust Attacks",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Trust Attacks",
     "path": "Active Directory/Trust Attacks",
     "excerpt": "Trust Enumeration and Mapping Map trust relationships before attempting cross-domain or cross-forest attacks. Enumerate Trusts (AD Module) Import-Module activedirectory Get-ADTrust -Filter * Enumerate"
   },
   {
     "title": "Kerberos Attacks",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/Kerberos Attacks",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Kerberos Attacks",
     "path": "Active Directory/Kerberos Attacks",
     "excerpt": "Kerberoasting Request TGS tickets for accounts with SPNs set. The tickets are encrypted with the account's NT hash and can be cracked offline. From Windows Invoke-Kerberoast Get-DomainUser * -spn | se"
   },
   {
     "title": "NTLM Relay Attacks",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/NTLM Relay Attacks",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/NTLM Relay Attacks",
     "path": "Active Directory/NTLM Relay Attacks",
     "excerpt": "Enumeration Identify hosts without SMB signing (relay targets) and map the attack surface before launching relay attacks. Responder - Analyze Mode (No Poisoning) Observe LLMNR/NBT-NS/MDNS traffic with"
   },
   {
     "title": "Lateral Movement",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/Lateral Movement",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Lateral Movement",
     "path": "Active Directory/Lateral Movement",
     "excerpt": "Remote Desktop Protocol (RDP) Connect with xfreerdp xfreerdp /v:&lt;target-ip&gt; /u:&lt;username&gt; /p:&lt;password&gt; /dynamic-resolution RDP with Restricted Admin Mode (Pass-the-Hash) Restricted "
   },
   {
     "title": "MSSQL, Exchange & SCCM",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/MSSQL Exchange SCCM",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/MSSQL Exchange SCCM",
     "path": "Active Directory/MSSQL Exchange SCCM",
     "excerpt": "MSSQL Attacks Connect to MSSQL impacket-mssqlclient &lt;username&gt;@&lt;target-ip&gt; mssqlclient.py &lt;DOMAIN&gt;/&lt;username&gt;@&lt;target-ip&gt; -windows-auth Enumerate Server Logins and Roles "
   },
   {
     "title": "Windows Attacks & Defense",
-    "source": "htb-academy",
-    "url": "/page/htb-academy/Active Directory/Windows Attacks & Defense",
+    "source": "active-directory",
+    "url": "/page/active-directory/Active Directory/Windows Attacks & Defense",
     "path": "Active Directory/Windows Attacks & Defense",
     "excerpt": "Kerberoasting Request TGS tickets for SPN-configured accounts and crack them offline. Detectable via Event ID 4769. Attack .\\ Rubeus . exe kerberoast / outfile : spn . txt Crack hashcat -m 13100 -a 0 "
   }

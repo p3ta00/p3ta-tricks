@@ -16,9 +16,10 @@ MD = md_lib.Markdown(extensions=[
 ])
 
 SOURCE_LABELS = {
-    "enum":       "Enumeration",
-    "revshells":  "Reverse Shells",
-    "bug-bounty": "Bug Bounty",
+    "enum":        "Enumeration",
+    "revshells":   "Reverse Shells",
+    "bug-bounty":  "Bug Bounty",
+    "htb-academy": "HTB Academy",
 }
 
 NEW_SOURCES = {
@@ -36,6 +37,11 @@ NEW_SOURCES = {
         "root":    SOURCES / "bug-bounty",
         "summary": SOURCES / "bug-bounty" / "SUMMARY.md",
         "skip":    {"SUMMARY.md", "README.md"},
+    },
+    "htb-academy": {
+        "root":    SOURCES / "htb-academy",
+        "summary": SOURCES / "htb-academy" / "SUMMARY.md",
+        "skip":    {"SUMMARY.md"},
     },
 }
 

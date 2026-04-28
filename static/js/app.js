@@ -24,7 +24,7 @@ const SOURCES = [
   { id: 'gopacket',         label: 'GoPacket',             icon: '🐹', color: '#9ece6a' },
   { id: 'hacktricks',       label: 'HackTricks',           icon: '🤖', color: '#f7768e' },
   { id: 'hacktricks-cloud', label: 'HackTricks Cloud',     icon: '☁️',  color: '#7aa2f7' },
-  { id: 'htb-academy',      label: 'HTB Academy',          icon: '🎓', color: '#9ece6a' },
+  { id: 'active-directory', label: 'Active Directory',     icon: '🎓', color: '#9ece6a' },
   { id: 'hardware-att',     label: 'HardwareAllTheThings', icon: '🔌', color: '#e0af68' },
   { id: 'impacket',         label: 'Impacket',             icon: '📦', color: '#2ac3de' },
   { id: 'internal-att',     label: 'InternalAllTheThings', icon: '🏰', color: '#bb9af7' },

@@ -187,7 +187,7 @@ SOURCE_META = {
     "enum":            {"label": "Enumeration",           "color": "var(--green)",   "icon": "🔍"},
     "revshells":       {"label": "Reverse Shells",        "color": "var(--orange)",  "icon": "🐚"},
     "bug-bounty":      {"label": "Bug Bounty",            "color": "var(--yellow)",  "icon": "🐛"},
-    "htb-academy":     {"label": "HTB Academy",           "color": "var(--green)",   "icon": "🎓"},
+    "active-directory": {"label": "Active Directory",           "color": "var(--green)",   "icon": "🎓"},
 }
 
 _NAV_SOURCES = {
@@ -339,9 +339,9 @@ _NAV_SOURCES = {
         "skip_files": {"README.md"},
         "readme_only": False,
     },
-    "htb-academy": {
-        "root":    SOURCES / "htb-academy",
-        "summary": SOURCES / "htb-academy" / "SUMMARY.md",
+    "active-directory": {
+        "root":    SOURCES / "active-directory",
+        "summary": SOURCES / "active-directory" / "SUMMARY.md",
         "skip_dirs": set(),
         "skip_files": {"SUMMARY.md"},
     },

@@ -1,6 +1,5 @@
-# HTB Academy
+# Active Directory
 
-## Active Directory
 - [Introduction to Active Directory](Active Directory/Introduction to Active Directory.md)
 - [Enumeration](Active Directory/Enumeration.md)
 - [PowerView](Active Directory/PowerView.md)
