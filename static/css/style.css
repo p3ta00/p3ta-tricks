@@ -24,7 +24,7 @@
   --crimson:   #db4b4b;
   --magenta:   #c678dd;
 
-  --header-h:  90px;
+  --header-h:  124px;
   --sidebar-w: 240px;
   --font-mono: "JetBrains Mono","Fira Code","Cascadia Code",Consolas,monospace;
   --font-sans: Inter,system-ui,-apple-system,sans-serif;
@@ -101,7 +101,7 @@ pre code { background: none; padding: 0; color: inherit; }
   flex-shrink: 0;
 }
 .logo-img {
-  height: 72px;
+  height: 108px;
   width: auto;
   display: block;
   flex-shrink: 0;
@@ -262,8 +262,9 @@ pre code { background: none; padding: 0; color: inherit; }
 }
 .source-badge:hover { opacity: .8; text-decoration: none; }
 .badge-recipes    { color: var(--cyan);   border-color: var(--cyan);   }
-.badge-hacktricks { color: var(--red);    border-color: var(--red);    }
-.badge-cloud      { color: var(--blue);   border-color: var(--blue);   }
+.badge-hacktricks  { color: var(--red);    border-color: var(--red);    }
+.badge-cloud       { color: var(--blue);   border-color: var(--blue);   }
+.badge-htbacademy  { color: var(--green);  border-color: var(--green);  }
 .badge-netexec    { color: var(--green);  border-color: var(--green);  }
 
 
