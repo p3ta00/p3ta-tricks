@@ -1,5 +1,7 @@
 sources/
 scripts/
+content/processed/osai-research/
+content/nav/osai-research.json
 __pycache__/
 *.pyc
 *.pyo
