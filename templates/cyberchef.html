@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}CyberChef — p3ta-tricks{% endblock %}
+{% block content %}
+<div style="display:flex;flex-direction:column;height:calc(100vh - var(--header-h));">
+  <div style="display:flex;align-items:center;gap:.6rem;padding:.55rem 1rem;background:var(--bg1);border-bottom:1px solid var(--border);flex-shrink:0;">
+    <span style="font-size:1.1rem">🍳</span>
+    <span style="font-weight:700;color:var(--fg)">CyberChef</span>
+    <span style="font-size:.75rem;color:var(--fg-dim);background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.1rem .5rem;">The Cyber Swiss Army Knife</span>
+    <a href="https://github.com/gchq/CyberChef" target="_blank" rel="noopener"
+       style="margin-left:auto;font-size:.75rem;color:var(--fg-dim);text-decoration:none;border:1px solid var(--border);border-radius:5px;padding:.2rem .55rem;">
+      ↗ GitHub
+    </a>
+  </div>
+  <iframe
+    src="https://gchq.github.io/CyberChef/"
+    style="flex:1;border:none;width:100%;background:#fff;"
+    title="CyberChef"
+    allow="clipboard-read; clipboard-write"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads">
+  </iframe>
+</div>
+{% endblock %}

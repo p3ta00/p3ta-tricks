@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}WADComs — p3ta-tricks{% endblock %}
+{% block content %}
+<div class="wad-app">
+
+  <!-- Top bar -->
+  <div class="wad-topbar">
+    <div class="wad-topbar-left">
+      <span class="wad-topbar-icon">🏴</span>
+      <span class="wad-topbar-title">WADComs</span>
+      <span class="wad-topbar-count" id="wad-count">{{ entries|length }} commands</span>
+    </div>
+    <div class="wad-search-wrap">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:.55rem;top:50%;transform:translateY(-50%);color:var(--fg-dim)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="wad-search" type="search" placeholder="Search commands…" autocomplete="off" class="wad-search-inp">
+    </div>
+  </div>
+
+  <div class="wad-body">
+
+    <!-- Left: filter panel -->
+    <aside class="wad-filters">
+      <div class="wad-fgroup">
+        <div class="wad-fgroup-title">OS</div>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="os" value="" checked> All</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="os" value="windows"> 🪟 Windows</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="os" value="linux"> 🐧 Linux</label>
+      </div>
+      <div class="wad-fgroup">
+        <div class="wad-fgroup-title">You Have</div>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="No_Creds"> No Creds</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="Username"> Username</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="Password"> Password</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="Hash"> Hash</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="TGT"> TGT</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="TGS"> TGS</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="PFX"> PFX</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="Shell"> Shell</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="have" value="PowerShell"> PowerShell</label>
+      </div>
+      <div class="wad-fgroup">
+        <div class="wad-fgroup-title">Attack Type</div>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="Enumeration"> Enumeration</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="Exploitation"> Exploitation</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="PrivEsc"> PrivEsc</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="Credential Access"> Cred Access</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="Kerberoasting"> Kerberoasting</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="AS-REP Roasting"> AS-REP Roasting</label>
+        <label class="wad-fcheck"><input type="checkbox" data-filter="type" value="Persistence"> Persistence</label>
+      </div>
+      <button id="wad-clear" class="wad-clear-btn">Clear Filters</button>
+    </aside>
+
+    <!-- Right: command list -->
+    <div class="wad-list" id="wad-list">
+      {% for e in entries %}
+      <div class="wad-entry"
+           data-os="{{ e.os | join(' ') | lower }}"
+           data-have="{{ e.have | join(' ') }}"
+           data-types="{{ e.attack_types | join(' ') }}"
+           data-text="{{ (e.title + ' ' + e.description + ' ' + e.command) | lower | e }}">
+        <div class="wad-entry-header">
+          <span class="wad-entry-title">{{ e.title }}</span>
+          <div class="wad-entry-tags">
+            {% for os in e.os %}<span class="wad-tag wad-tag-os">{{ os }}</span>{% endfor %}
+            {% for t in e.attack_types %}<span class="wad-tag wad-tag-type">{{ t }}</span>{% endfor %}
+            {% for i in e.have %}<span class="wad-tag wad-tag-have">{{ i.replace('_',' ') }}</span>{% endfor %}
+          </div>
+        </div>
+        {% if e.description %}
+        <p class="wad-entry-desc">{{ e.description }}</p>
+        {% endif %}
+        <div class="wad-cmd-wrap">
+          <pre class="language-bash wad-pre"><code class="language-bash">{{ e.command | e }}</code></pre>
+          <button class="wad-copy-btn" title="Copy command">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+        {% if e.references %}
+        <div class="wad-refs">
+          {% for r in e.references %}<a href="{{ r }}" target="_blank" rel="noopener" class="wad-ref-link">↗ {{ r | replace('https://','') | truncate(60,True,'…') }}</a>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      <div id="wad-empty" class="wad-empty" style="display:none">No commands match your filters.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const entries = Array.from(document.querySelectorAll('.wad-entry'));
+  const countEl = document.getElementById('wad-count');
+  const searchEl = document.getElementById('wad-search');
+
+  let activeOS = new Set(), activeHave = new Set(), activeTypes = new Set(), searchQ = '';
+
+  function update() {
+    let n = 0;
+    entries.forEach(el => {
+      const os    = el.dataset.os   || '';
+      const have  = el.dataset.have || '';
+      const types = el.dataset.types|| '';
+      const text  = el.dataset.text || '';
+      const ok = (
+        (activeOS.size   === 0 || [...activeOS].some(v   => os.includes(v.toLowerCase()))) &&
+        (activeHave.size === 0 || [...activeHave].some(v => have.includes(v))) &&
+        (activeTypes.size=== 0 || [...activeTypes].some(v=> types.includes(v))) &&
+        (!searchQ || text.includes(searchQ))
+      );
+      el.style.display = ok ? '' : 'none';
+      if (ok) n++;
+    });
+    countEl.textContent = n + ' command' + (n !== 1 ? 's' : '');
+    document.getElementById('wad-empty').style.display = n === 0 ? '' : 'none';
+  }
+
+  // Checkbox filters
+  document.querySelectorAll('input[data-filter]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      // "All OS" checkbox clears OS filters
+      if (cb.value === '' && cb.dataset.filter === 'os') {
+        if (cb.checked) {
+          document.querySelectorAll('input[data-filter="os"]').forEach(c => {
+            if (c.value !== '') c.checked = false;
+          });
+          activeOS.clear();
+        }
+      } else {
+        const set = cb.dataset.filter === 'os' ? activeOS :
+                    cb.dataset.filter === 'have' ? activeHave : activeTypes;
+        if (cb.checked) {
+          set.add(cb.value);
+          // Uncheck "All" if OS-specific checked
+          if (cb.dataset.filter === 'os') {
+            const allCb = document.querySelector('input[data-filter="os"][value=""]');
+            if (allCb) allCb.checked = false;
+          }
+        } else {
+          set.delete(cb.value);
+        }
+      }
+      update();
+    });
+  });
+
+  // Search
+  searchEl.addEventListener('input', () => {
+    searchQ = searchEl.value.trim().toLowerCase();
+    update();
+  });
+
+  // Clear
+  document.getElementById('wad-clear').addEventListener('click', () => {
+    activeOS.clear(); activeHave.clear(); activeTypes.clear(); searchQ = '';
+    searchEl.value = '';
+    document.querySelectorAll('input[data-filter]').forEach(cb => cb.checked = cb.value === '');
+    update();
+  });
+
+  // Copy buttons
+  document.querySelectorAll('.wad-copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.closest('.wad-cmd-wrap').querySelector('code');
+      navigator.clipboard.writeText(code.textContent).then(() => {
+        btn.classList.add('wad-copied');
+        setTimeout(() => btn.classList.remove('wad-copied'), 1400);
+      });
+    });
+  });
+
+  update();
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block title %}Reverse Shell Generator — p3ta-tricks{% endblock %}
+{% block content %}
+<script id="rs-shells"    type="application/json">{{ shell_types.shells    | tojson }}</script>
+<script id="rs-listeners" type="application/json">{{ shell_types.listeners | tojson }}</script>
+<script id="rs-shtypes"   type="application/json">{{ shell_types.shell_types | tojson }}</script>
+
+<div class="rs-page">
+
+  <div class="rs-page-title"><span>🐚</span> Reverse Shell Generator</div>
+
+  <!-- Top cards -->
+  <div class="rs-cards-row">
+    <div class="rs-card">
+      <div class="rs-card-label">IP &amp; Port</div>
+      <div class="rs-ip-row">
+        <span class="rs-inp-prefix">IP</span>
+        <input id="rs-ip"   class="rs-inp rs-inp-ip"   type="text" placeholder="10.10.14.1" autocomplete="off" spellcheck="false">
+        <span class="rs-inp-prefix">Port</span>
+        <input id="rs-port" class="rs-inp rs-inp-port" type="text" placeholder="4444"       autocomplete="off" spellcheck="false">
+        <button class="rs-port-inc" id="rs-port-inc" title="Increment port">+1</button>
+      </div>
+    </div>
+    <div class="rs-card">
+      <div class="rs-card-label">Listener</div>
+      <div class="rs-listener-row">
+        <div class="rs-listener-cmd-wrap">
+          <span class="rs-rocket">🚀</span>
+          <code class="rs-listener-code" id="rs-listener-code"></code>
+        </div>
+        <select class="rs-select" id="rs-listener-sel"></select>
+        <button class="rs-btn rs-btn-blue" id="rs-copy-listener">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="rs-tabs">
+    <button class="rs-tab rs-tab-active" data-tab="reverse">Reverse</button>
+    <button class="rs-tab" data-tab="bind">Bind</button>
+    <button class="rs-tab" data-tab="msfvenom">MSFVenom</button>
+    <button class="rs-tab" data-tab="hoax">HoaxShell</button>
+    <button class="rs-tab" data-tab="assembled">Assembled</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="rs-filterbar">
+    <label class="rs-filterbar-label">OS</label>
+    <select class="rs-select" id="rs-os-sel">
+      <option value="">All</option>
+      <option value="linux">Linux</option>
+      <option value="mac">Mac</option>
+      <option value="windows">Windows</option>
+    </select>
+    <label class="rs-filterbar-label" style="margin-left:.75rem">Name</label>
+    <input id="rs-name-inp" class="rs-inp rs-inp-search" type="search" placeholder="Search…" autocomplete="off">
+    <span class="rs-shell-count" id="rs-shell-count"></span>
+  </div>
+
+  <!-- Body -->
+  <div class="rs-body">
+    <div class="rs-shell-list" id="rs-shell-list"></div>
+    <div class="rs-preview" id="rs-preview">
+      <div class="rs-preview-empty" id="rs-preview-empty">← Select a shell from the list</div>
+      <div class="rs-preview-content" id="rs-preview-content" style="display:none">
+        <div class="rs-preview-name" id="rs-preview-name"></div>
+        <div class="rs-preview-cmd-wrap">
+          <pre class="rs-preview-pre"><code class="language-bash rs-preview-code" id="rs-preview-code"></code></pre>
+        </div>
+        <div class="rs-preview-footer">
+          <div class="rs-shell-sel-wrap">
+            <label class="rs-filterbar-label">Shell</label>
+            <select class="rs-select" id="rs-shell-sel"></select>
+          </div>
+          <div style="margin-left:auto;display:flex;gap:.5rem">
+            <button class="rs-btn rs-btn-ghost" id="rs-btn-raw">Raw</button>
+            <button class="rs-btn rs-btn-blue"  id="rs-btn-copy">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const ALL   = JSON.parse(document.getElementById('rs-shells').textContent);
+  const LSNRS = JSON.parse(document.getElementById('rs-listeners').textContent);
+  const SHTYPES = JSON.parse(document.getElementById('rs-shtypes').textContent);
+
+  let ip = '', port = '', shell = 'sh', activeTab = 'reverse', activeOS = '', nameQ = '', selId = null;
+
+  // ── Seed from site vars ──────────────────────────────────────────────────
+  try {
+    const sv = JSON.parse(sessionStorage.getItem('pt_vars') || '{}');
+    if (sv.lhost) { ip   = sv.lhost; document.getElementById('rs-ip').value   = ip;   }
+    if (sv.lport) { port = sv.lport; document.getElementById('rs-port').value = port; }
+  } catch(_) {}
+
+  // ── Shell-type dropdown ──────────────────────────────────────────────────
+  const shellSel = document.getElementById('rs-shell-sel');
+  SHTYPES.forEach(s => {
+    const o = document.createElement('option'); o.value = s; o.textContent = s; shellSel.appendChild(o);
+  });
+  shellSel.value = 'sh';
+  shellSel.addEventListener('change', () => { shell = shellSel.value; refreshPreview(); });
+
+  // ── Listener dropdown ────────────────────────────────────────────────────
+  const listenerSel  = document.getElementById('rs-listener-sel');
+  const listenerCode = document.getElementById('rs-listener-code');
+  LSNRS.forEach(([name]) => {
+    const o = document.createElement('option'); o.value = name; o.textContent = name; listenerSel.appendChild(o);
+  });
+
+  function subListener(tmpl) {
+    return tmpl.replace(/\{ip\}/g, ip || '{ip}').replace(/\{port\}/g, port || '{port}');
+  }
+
+  function updateListener() {
+    const name = listenerSel.value;
+    const pair = LSNRS.find(([n]) => n === name);
+    const tmpl = pair ? pair[1] : '';
+    listenerCode.textContent = subListener(tmpl);
+    listenerCode.dataset.raw = tmpl;
+  }
+  listenerSel.addEventListener('change', updateListener);
+  updateListener();
+
+  document.getElementById('rs-copy-listener').addEventListener('click', () => {
+    const text = subListener(listenerCode.dataset.raw || listenerCode.textContent);
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('rs-copy-listener');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy'; }, 1400);
+    });
+  });
+
+  // ── Substitution ─────────────────────────────────────────────────────────
+  function sub(cmd) {
+    return cmd
+      .replace(/\{ip\}/g,    ip    || '{ip}')
+      .replace(/\{port\}/g,  port  || '{port}')
+      .replace(/\{shell\}/g, shell || 'sh');
+  }
+
+  // ── IP / Port ─────────────────────────────────────────────────────────────
+  const ipInp   = document.getElementById('rs-ip');
+  const portInp = document.getElementById('rs-port');
+
+  function onIPChange() {
+    ip   = ipInp.value.trim();
+    port = portInp.value.trim();
+    updateListener();
+    refreshPreview();
+    try {
+      const sv = JSON.parse(sessionStorage.getItem('pt_vars') || '{}');
+      if (ip)   sv.lhost = ip;
+      if (port) sv.lport = port;
+      sessionStorage.setItem('pt_vars', JSON.stringify(sv));
+    } catch(_) {}
+  }
+  ipInp.addEventListener('input',   onIPChange);
+  portInp.addEventListener('input',  onIPChange);
+  document.getElementById('rs-port-inc').addEventListener('click', () => {
+    portInp.value = (parseInt(portInp.value) || 4443) + 1;
+    onIPChange();
+  });
+
+  // ── Tabs ──────────────────────────────────────────────────────────────────
+  document.querySelectorAll('.rs-tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.rs-tab').forEach(x => x.classList.remove('rs-tab-active'));
+      t.classList.add('rs-tab-active');
+      activeTab = t.dataset.tab;
+      selId = null;
+      document.getElementById('rs-preview-empty').style.display   = '';
+      document.getElementById('rs-preview-content').style.display = 'none';
+      renderList();
+    });
+  });
+
+  // ── Filters ───────────────────────────────────────────────────────────────
+  document.getElementById('rs-os-sel').addEventListener('change', e => { activeOS = e.target.value; renderList(); });
+  document.getElementById('rs-name-inp').addEventListener('input', e => { nameQ = e.target.value.trim().toLowerCase(); renderList(); });
+
+  // ── Filter logic ──────────────────────────────────────────────────────────
+  function visible() {
+    return ALL.filter(s => {
+      if (s.tab !== activeTab) return false;
+      if (activeOS && !s.os.includes(activeOS)) return false;
+      if (nameQ && !s.name.toLowerCase().includes(nameQ)) return false;
+      return true;
+    });
+  }
+
+  // ── Render shell list ─────────────────────────────────────────────────────
+  function renderList() {
+    const list = document.getElementById('rs-shell-list');
+    const vis  = visible();
+    document.getElementById('rs-shell-count').textContent = vis.length + ' shell' + (vis.length !== 1 ? 's' : '');
+    list.innerHTML = '';
+    if (!vis.length) {
+      list.innerHTML = '<div class="rs-list-empty">No shells match.</div>';
+      return;
+    }
+    vis.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className  = 'rs-list-item' + (s.id === selId ? ' rs-list-item-active' : '');
+      btn.dataset.id = s.id;
+      btn.textContent = s.name;
+      btn.addEventListener('click', () => select(s.id));
+      list.appendChild(btn);
+    });
+  }
+
+  // ── Select shell ──────────────────────────────────────────────────────────
+  function select(id) {
+    selId = id;
+    const s = ALL[id];
+    if (!s) return;
+    document.querySelectorAll('.rs-list-item').forEach(el =>
+      el.classList.toggle('rs-list-item-active', parseInt(el.dataset.id) === id));
+    document.getElementById('rs-preview-empty').style.display   = 'none';
+    document.getElementById('rs-preview-content').style.display = 'flex';
+    document.getElementById('rs-preview-name').textContent = s.name;
+    const code = document.getElementById('rs-preview-code');
+    code.dataset.raw = s.command;
+    code.textContent = sub(s.command);
+    if (window.Prism) Prism.highlightElement(code);
+  }
+
+  function refreshPreview() {
+    if (selId === null) return;
+    const s = ALL[selId];
+    if (!s) return;
+    const code = document.getElementById('rs-preview-code');
+    code.textContent = sub(s.command);
+    if (window.Prism) Prism.highlightElement(code);
+    updateListener();
+  }
+
+  // ── Copy / Raw ────────────────────────────────────────────────────────────
+  document.getElementById('rs-btn-copy').addEventListener('click', () => {
+    const code = document.getElementById('rs-preview-code');
+    navigator.clipboard.writeText(sub(code.dataset.raw || code.textContent)).then(() => {
+      const btn = document.getElementById('rs-btn-copy');
+      btn.innerHTML = '✓ Copied';
+      setTimeout(() => {
+        btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy';
+      }, 1400);
+    });
+  });
+  document.getElementById('rs-btn-raw').addEventListener('click', () => {
+    const code = document.getElementById('rs-preview-code');
+    const w = window.open('about:blank','_blank');
+    w.document.write('<pre style="font:14px monospace;background:#1a1b26;color:#c0caf5;padding:1rem;white-space:pre-wrap">'
+      + sub(code.dataset.raw || code.textContent).replace(/</g,'&lt;') + '</pre>');
+    w.document.close();
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+  renderList();
+  const first = visible()[0];
+  if (first) select(first.id);
+})();
+</script>
+{% endblock %}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """p3ta-tricks Flask app — unified offline pentest reference."""
-import json, re, os, shutil
+import json, re, os, shutil, yaml
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify, abort, send_from_directory, Response, stream_with_context
 
@@ -169,6 +169,7 @@ SOURCE_META = {
     "netexec":         {"label": "NetExec Wiki",         "color": "var(--green)",   "icon": "🔧"},
     "gtfobins":        {"label": "GTFOBins",             "color": "var(--orange)",  "icon": "🐚"},
     "lolbas":          {"label": "LOLBAS",               "color": "var(--yellow)",  "icon": "🪟"},
+    "wadcoms":         {"label": "WADComs",              "color": "var(--blue)",    "icon": "🏴"},
     "msfvenom":        {"label": "msfvenom",             "color": "var(--purple)",  "icon": "💣"},
     "ligolo-ng":       {"label": "Ligolo-ng",            "color": "var(--teal)",    "icon": "🔀"},
     "certipy":         {"label": "Certipy",              "color": "var(--red)",     "icon": "📜"},
@@ -183,6 +184,9 @@ SOURCE_META = {
     "gopacket":        {"label": "GoPacket",              "color": "var(--green)",   "icon": "🐹"},
     "rubeus":          {"label": "Rubeus",                "color": "var(--orange)",  "icon": "🎟️"},
     "mimikatz":        {"label": "Mimikatz",              "color": "var(--crimson)", "icon": "🐱"},
+    "enum":            {"label": "Enumeration",           "color": "var(--green)",   "icon": "🔍"},
+    "revshells":       {"label": "Reverse Shells",        "color": "var(--orange)",  "icon": "🐚"},
+    "bug-bounty":      {"label": "Bug Bounty",            "color": "var(--yellow)",  "icon": "🐛"},
 }
 
 _NAV_SOURCES = {
@@ -315,10 +319,29 @@ _NAV_SOURCES = {
         "skip_dirs": set(),
         "skip_files": {"SUMMARY.md"},
     },
+    "enum": {
+        "root":    SOURCES / "enum",
+        "summary": SOURCES / "enum" / "SUMMARY.md",
+        "skip_dirs": set(),
+        "skip_files": {"SUMMARY.md"},
+    },
+    "revshells": {
+        "root":    SOURCES / "revshells",
+        "summary": SOURCES / "revshells" / "SUMMARY.md",
+        "skip_dirs": set(),
+        "skip_files": {"SUMMARY.md"},
+    },
+    "bug-bounty": {
+        "root":    SOURCES / "bug-bounty",
+        "summary": SOURCES / "bug-bounty" / "SUMMARY.md",
+        "skip_dirs": {"Bypass", "Checklist", "CVEs", "Misc", "Reconnaissance", "Technologies"},
+        "skip_files": {"README.md"},
+        "readme_only": False,
+    },
 }
 
 _EMOJI_RE   = re.compile(r'[\U0001F000-\U0001FFFF‍ -⟿☀-⟿︀-﻿]+\s*')
-_LINK_RE    = re.compile(r'^(\s*)[-*]\s+\[([^\]]+)\]\(([^)]+\.md)\)')
+_LINK_RE    = re.compile(r'^(\s*)[-*]\s+\[([^\]]+)\]\(([^)]+\.md(?:#[^)]*)?)\)')
 _SECTION_RE = re.compile(r'^#{1,3}\s+(.+)$')
 
 _index_cache = None
@@ -342,7 +365,12 @@ def _load_page(source: str, page_path: str):
         safe = page_path.replace("/", "__")
         candidates = list((PROCESSED / source).glob(f"{safe}.json"))
         if not candidates:
+            safe_hyp = safe.replace(" ", "-")
+            candidates = list((PROCESSED / source).glob(f"{safe_hyp}.json"))
+        if not candidates:
             candidates = list(PROCESSED.rglob(f"{safe}.json"))
+        if not candidates:
+            candidates = list(PROCESSED.rglob(f"{safe.replace(' ', '-')}.json"))
         if not candidates:
             return None
         try:
@@ -383,12 +411,16 @@ def _clean_title(t: str) -> str:
 
 
 def _make_url(source_id: str, summary_path: Path, root: Path, rel: str) -> str:
+    anchor = ''
+    if '#' in rel:
+        rel, frag = rel.split('#', 1)
+        anchor = '#' + frag
     try:
         abs_path = (summary_path.parent / rel).resolve()
         rel_to_root = abs_path.relative_to(root)
         page_path = str(rel_to_root.with_suffix('')).replace('\\', '/').replace(' ', '-')
         page_path = re.sub(r'/README$', '', page_path)
-        return f'/page/{source_id}/{page_path}'
+        return f'/page/{source_id}/{page_path}{anchor}'
     except Exception:
         return '#'
 
@@ -578,8 +610,109 @@ def _get_nav(source_id: str) -> list:
     if source_id == "bloodhound":
         tree.insert(0, {"type": "link", "title": "BloodHound Search", "url": "/source/bloodhound", "items": []})
 
+    # If nav has exactly one section whose title is generic ("CONTENTS") or matches
+    # the source label, flatten items to top-level links to avoid redundant header.
+    if (len(tree) == 1 and
+            tree[0].get('type') == 'section' and
+            tree[0].get('title', '').upper() in (
+                'CONTENTS',
+                SOURCE_META.get(source_id, {}).get('label', '').upper(),
+                source_id.upper())):
+        tree = [{'type': 'link', 'title': item['title'], 'url': item['url'],
+                 'children': item.get('children', [])}
+                for item in tree[0].get('items', [])]
+
     _nav_cache[source_id] = tree
     return tree
+
+
+# ---------------------------------------------------------------------------
+# RevShells — load from authoritative data.js export
+# ---------------------------------------------------------------------------
+_revshells_cache = None
+
+_RS_TYPE_TO_TAB = {
+    'ReverseShell': 'reverse',
+    'BindShell':    'bind',
+    'MSFVenom':     'msfvenom',
+    'HoaxShell':    'hoax',
+    'Assembled':    'assembled',
+}
+
+def _parse_revshells_app():
+    global _revshells_cache
+    if _revshells_cache is not None:
+        return _revshells_cache
+    data_path = SOURCES / "revshells" / "shells_data.json"
+    if not data_path.exists():
+        _revshells_cache = {'shells': [], 'listeners': [], 'shell_types': []}
+        return _revshells_cache
+    raw = json.loads(data_path.read_text(encoding='utf-8'))
+    shells = []
+    for uid, entry in enumerate(raw.get('allShells', [])):
+        meta    = entry.get('meta', [])
+        tab     = next((_RS_TYPE_TO_TAB[m] for m in meta if m in _RS_TYPE_TO_TAB), 'reverse')
+        os_tags = [m for m in meta if m in ('linux', 'mac', 'windows')]
+        shells.append({
+            'id':      uid,
+            'name':    entry.get('name', ''),
+            'command': entry.get('command', ''),
+            'tab':     tab,
+            'os':      os_tags,
+        })
+    result = {
+        'shells':      shells,
+        'listeners':   raw.get('listenerCommands', []),
+        'shell_types': raw.get('shells', []),
+    }
+    _revshells_cache = result
+    return result
+
+
+# ---------------------------------------------------------------------------
+# WADComs parser
+# ---------------------------------------------------------------------------
+_wadcoms_cache = None
+
+def _load_wadcoms() -> list:
+    global _wadcoms_cache
+    if _wadcoms_cache is not None:
+        return _wadcoms_cache
+    wad_dir = SOURCES / "wadcoms" / "_wadcoms"
+    entries = []
+    if not wad_dir.exists():
+        return entries
+    _FM_RE = re.compile(r'^---\s*\n(.*?)\n---', re.DOTALL)
+    for md_file in sorted(wad_dir.glob("*.md")):
+        text = md_file.read_text(encoding="utf-8", errors="ignore")
+        m = _FM_RE.search(text)
+        if not m:
+            continue
+        try:
+            data = yaml.safe_load(m.group(1)) or {}
+        except Exception:
+            continue
+        slug = md_file.stem
+        # Normalize command: replace common literal IPs/users with site variables
+        cmd = (data.get("command") or "").strip()
+        cmd = re.sub(r'\b10\.10\.10\.1\b', '<ip>', cmd)
+        cmd = re.sub(r'\b192\.168\.\d+\.\d+\b', '<ip>', cmd)
+        cmd = re.sub(r'\bjohn\b', '<username>', cmd)
+        cmd = re.sub(r'\bpassword123\b', '<password>', cmd)
+        cmd = re.sub(r'\bdomain\.local\b', '<domain>', cmd)
+        entries.append({
+            "slug":         slug,
+            "title":        slug.replace("-", " ").replace("_", " "),
+            "description":  (data.get("description") or "").strip(),
+            "command":      cmd,
+            "have":         data.get("items") or [],
+            "os":           data.get("OS") or [],
+            "attack_types": data.get("attack_types") or [],
+            "services":     data.get("services") or [],
+            "references":   data.get("references") or [],
+        })
+    _wadcoms_cache = entries
+    return entries
 
 
 # ---------------------------------------------------------------------------
@@ -643,6 +776,16 @@ def source_index(source_id):
                                collector_count=collector_count, pages=pages,
                                source_meta=SOURCE_META)
 
+    if source_id == "revshells":
+        shell_types = _parse_revshells_app()
+        return render_template("revshells_app.html", source_id=source_id, meta=meta,
+                               shell_types=shell_types, source_meta=SOURCE_META)
+
+    if source_id == "wadcoms":
+        wadcoms_entries = _load_wadcoms()
+        return render_template("wadcoms_source.html", source_id=source_id, meta=meta,
+                               entries=wadcoms_entries, source_meta=SOURCE_META)
+
     return render_template("source.html", source_id=source_id, meta=meta,
                            entries=entries, source_meta=SOURCE_META)
 
@@ -656,6 +799,12 @@ def page(source_id, page_path):
         abort(404)
     meta = SOURCE_META[source_id]
     return render_template("page.html", page=data, meta=meta, source_meta=SOURCE_META)
+
+
+@app.route("/cyberchef/")
+@app.route("/cyberchef/<path:sub>")
+def cyberchef(sub=""):
+    return render_template("cyberchef.html", source_meta=SOURCE_META)
 
 
 @app.route("/api/index")
