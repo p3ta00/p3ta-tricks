@@ -592,6 +592,15 @@ const VAR_META = {
   'access-token':     { label: 'Access Token',           placeholder: 'eyJ0eXA...',          group: 'Azure'       },
   'refresh-token':    { label: 'Refresh Token',          placeholder: 'eyJ0eXA...',          group: 'Azure'       },
   'new-secret':       { label: 'New Secret Value',       placeholder: 'MySecret123!',        group: 'Azure'       },
+  // AWS / Cognito
+  'region':           { label: 'AWS/Cloud Region',       placeholder: 'us-east-1',           group: 'AWS'         },
+  'role_arn':         { label: 'IAM Role ARN',           placeholder: 'arn:aws:iam::123:role/RoleName', group: 'AWS' },
+  'mfa-device-name':  { label: 'MFA Device Name',        placeholder: 'arn:aws:iam::123:mfa/user',      group: 'AWS' },
+  'user_pool_id':     { label: 'Cognito User Pool ID',   placeholder: 'us-east-1_XXXXXX',    group: 'AWS'         },
+  'identity_pool_id': { label: 'Cognito Identity Pool ID', placeholder: 'us-east-1:xxxxxxxx-xxxx', group: 'AWS'   },
+  'identity_id':      { label: 'Cognito Identity ID',    placeholder: 'us-east-1:xxxxxxxx-xxxx', group: 'AWS'     },
+  'id_token':         { label: 'OIDC ID Token',          placeholder: 'eyJ0eXA...',          group: 'AWS'         },
+  'code-from-token':  { label: 'Auth Code (from token)', placeholder: 'auth-code-here',      group: 'AWS'         },
 };
 
 // When a var has no value, check if a known alias has been set and suggest it
