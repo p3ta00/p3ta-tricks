@@ -24,7 +24,7 @@
   --crimson:   #db4b4b;
   --magenta:   #c678dd;
 
-  --header-h:  54px;
+  --header-h:  90px;
   --sidebar-w: 240px;
   --font-mono: "JetBrains Mono","Fira Code","Cascadia Code",Consolas,monospace;
   --font-sans: Inter,system-ui,-apple-system,sans-serif;
@@ -72,13 +72,13 @@ pre code { background: none; padding: 0; color: inherit; }
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
+  gap: 12px;
+  padding: 8px 16px;
   position: sticky;
   top: 0;
   z-index: 100;
   flex-shrink: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   min-height: var(--header-h);
 }
 
@@ -101,9 +101,17 @@ pre code { background: none; padding: 0; color: inherit; }
   flex-shrink: 0;
 }
 .logo-img {
-  height: 28px;
+  height: 72px;
   width: auto;
   display: block;
+  flex-shrink: 0;
+}
+.header-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 .logo-text {
   font-weight: 700;
@@ -143,7 +151,7 @@ pre code { background: none; padding: 0; color: inherit; }
 /* Search bar */
 .header-search {
   flex: 1;
-  max-width: 480px;
+  max-width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -630,8 +638,10 @@ code[class*="language-"], pre[class*="language-"] {
 
 /* ---------- Mobile ---------- */
 @media (max-width: 768px) {
+  :root { --header-h: 64px; }
   .mobile-menu-btn { display: flex; }
   .header-sources { display: none; }
+  .logo-img { height: 44px; }
   .sidebar {
     position: fixed;
     left: 0;
