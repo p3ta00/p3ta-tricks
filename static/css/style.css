@@ -100,6 +100,11 @@ pre code { background: none; padding: 0; color: inherit; }
   text-decoration: none;
   flex-shrink: 0;
 }
+.logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
 .logo-text {
   font-weight: 700;
   font-size: 1rem;
@@ -265,14 +270,28 @@ pre code { background: none; padding: 0; color: inherit; }
 /* ---------- Home ---------- */
 .home-hero {
   text-align: center;
-  padding: 48px 0 32px;
+  padding: 40px 0 32px;
 }
-.home-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--purple);
-  letter-spacing: -.5px;
-  margin-bottom: 8px;
+.hero-video-wrap {
+  display: inline-block;
+  position: relative;
+  border-radius: 14px;
+  padding: 3px;
+  background: linear-gradient(135deg, #bb9af7 0%, #7aa2f7 40%, #7dcfff 70%, #9ece6a 100%);
+  box-shadow:
+    0 0 32px rgba(187,154,247,.25),
+    0 0 64px rgba(122,162,247,.15),
+    0 8px 32px rgba(0,0,0,.4);
+  margin-bottom: 20px;
+}
+.hero-video {
+  display: block;
+  border-radius: 12px;
+  max-width: min(640px, calc(100vw - 80px));
+  max-height: 360px;
+  width: 100%;
+  object-fit: contain;
+  background: var(--bg0);
 }
 .home-sub {
   color: var(--fg-dim);

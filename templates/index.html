@@ -2,7 +2,11 @@
 {% block title %}p3ta-tricks — Pentest Reference{% endblock %}
 {% block content %}
 <div class="home-hero">
-  <h1 class="home-title">p3ta-tricks</h1>
+  <div class="hero-video-wrap">
+    <video class="hero-video" autoplay loop muted playsinline>
+      <source src="/static/video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
   <p class="home-sub">Pentest reference — {{ total }} pages across {{ sources|length }} sources</p>
   <div class="home-search-hint">Press <kbd>Ctrl+K</kbd> to search</div>
 </div>
