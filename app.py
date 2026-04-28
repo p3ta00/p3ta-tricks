@@ -374,7 +374,10 @@ def _load_page(source: str, page_path: str):
         if not candidates:
             return None
         try:
-            _page_cache[key] = json.loads(candidates[0].read_text(encoding="utf-8"))
+            data = json.loads(candidates[0].read_text(encoding="utf-8"))
+            if 'html' in data:
+                data['html'] = re.sub(r'\{\{#[^}]*\}\}', '', data['html'])
+            _page_cache[key] = data
         except Exception:
             return None
     return _page_cache.get(key)

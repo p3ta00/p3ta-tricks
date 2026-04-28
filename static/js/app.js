@@ -8,16 +8,18 @@ const ICON_RIGHT = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" 
 
 /* ====== Source metadata ====== */
 const SOURCES = [
+  // ── Interactive apps (no nav tree) ──────────────────────────────────────
   { id: 'revshells',        label: 'RevShells',            icon: '🐚', color: '#ff9e64', noNav: true },
+  { id: 'cyberchef',        label: 'CyberChef',            icon: '🍳', color: '#9ece6a', noNav: true, url: '/cyberchef/' },
   { id: 'gtfobins',         label: 'GTFOBins',             icon: '🐚', color: '#ff9e64', noNav: true },
   { id: 'lolbas',           label: 'LOLBAS',               icon: '🪟', color: '#e0af68', noNav: true },
   { id: 'wadcoms',          label: 'WADComs',              icon: '🏴', color: '#7aa2f7', noNav: true },
-  { id: 'enum',             label: 'Enumeration',          icon: '🔍', color: '#9ece6a' },
-  { id: 'cyberchef',        label: 'CyberChef',            icon: '🍳', color: '#9ece6a', noNav: true },
+  // ── Reference sources (alphabetical) ────────────────────────────────────
   { id: 'bloodhound',       label: 'BloodHound',           icon: '🩸', color: '#f7768e' },
   { id: 'bloodyad',         label: 'bloodyAD',             icon: '🩸', color: '#db4b4b' },
   { id: 'bug-bounty',       label: 'Bug Bounty',           icon: '🐛', color: '#e0af68' },
   { id: 'certipy',          label: 'Certipy',              icon: '📜', color: '#f7768e' },
+  { id: 'enum',             label: 'Enumeration',          icon: '🔍', color: '#9ece6a' },
   { id: 'goexec',           label: 'goexec',               icon: '⚡', color: '#9ece6a' },
   { id: 'gopacket',         label: 'GoPacket',             icon: '🐹', color: '#9ece6a' },
   { id: 'hacktricks',       label: 'HackTricks',           icon: '🤖', color: '#f7768e' },
@@ -215,7 +217,7 @@ async function buildAllSourcesNav() {
     if (src.noNav) {
       const lnk = document.createElement('a');
       lnk.className = 'st-toggle st-toggle-link' + (isActive ? ' st-toggle-active' : '');
-      lnk.href = '/source/' + src.id;
+      lnk.href = src.url || '/source/' + src.id;
       lnk.style.setProperty('--c', src.color);
       lnk.innerHTML = `<span class="st-icon">${src.icon}</span><span class="st-label">${src.label}</span>`;
       wrap.appendChild(lnk);
