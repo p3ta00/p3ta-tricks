@@ -14,6 +14,7 @@ NAV_CACHE_DIR = ROOT / "content" / "nav"
 OFFLINE_MODE = os.environ.get("OFFLINE_MODE", os.environ.get("OFFLINE_MODE", "0")) == "1"
 TOOLS_DIR    = Path(os.environ.get("TOOLS_DIR", ROOT.parent / "p3ta-tricks-offline" / "tools"))
 BINARIES_DIR = ROOT / "binaries"  # compiled binaries served on online mode too
+SITE_URL     = os.environ.get("SITE_URL", "https://p3ta-tricks.com")
 
 # GitHub URL prefix → local tool directory name (for badge injection)
 TOOL_MAP = {
@@ -152,14 +153,17 @@ app = Flask(__name__)
 
 
 @app.context_processor
-def inject_offline():
-    """Inject offline config into every template so badge injection is synchronous."""
+def inject_globals():
+    """Inject globals into every template."""
+    base = {"site_url": SITE_URL}
     if not OFFLINE_MODE:
-        return {"offline_mode": False, "offline_config_json": "null"}
+        base.update({"offline_mode": False, "offline_config_json": "null"})
+        return base
     available = {name: True for name in set(TOOL_MAP.values())
                  if (TOOLS_DIR / name).exists()}
     cfg = {"offline": True, "tools": available, "tool_map": TOOL_MAP}
-    return {"offline_mode": True, "offline_config_json": json.dumps(cfg)}
+    base.update({"offline_mode": True, "offline_config_json": json.dumps(cfg)})
+    return base
 
 SOURCE_META = {
     "bloodhound":      {"label": "BloodHound",          "color": "var(--red)",     "icon": "🩸"},

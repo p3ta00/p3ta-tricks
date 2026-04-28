@@ -6,20 +6,19 @@
   <title>{% block title %}p3ta-tricks{% endblock %}</title>
 
   <!-- Open Graph / Discord / LinkedIn previews -->
-  {% set _base_url = request.url_root.rstrip('/') %}
   {% set _page_title = self.title() %}
-  <meta property="og:type"        content="website">
-  <meta property="og:site_name"   content="p3ta-tricks">
-  <meta property="og:title"       content="{{ _page_title }}">
-  <meta property="og:description" content="Offline-capable pentest reference — GTFOBins, BloodHound, PowerView, HackTricks, Impacket, Certipy, NetExec and more in one place.">
-  <meta property="og:image"       content="{{ _base_url }}/static/img/logo.jpg">
+  <meta property="og:type"         content="website">
+  <meta property="og:site_name"    content="p3ta-tricks">
+  <meta property="og:title"        content="{{ _page_title }}">
+  <meta property="og:description"  content="Offline-capable pentest reference — GTFOBins, BloodHound, PowerView, HackTricks, Impacket, Certipy, NetExec and more in one place.">
+  <meta property="og:image"        content="{{ site_url }}/static/img/logo.jpg">
   <meta property="og:image:width"  content="784">
   <meta property="og:image:height" content="1168">
-  <meta property="og:url"         content="{{ request.url }}">
-  <meta name="twitter:card"       content="summary">
-  <meta name="twitter:title"      content="{{ _page_title }}">
+  <meta property="og:url"          content="{{ site_url }}{{ request.path }}">
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="{{ _page_title }}">
   <meta name="twitter:description" content="Offline-capable pentest reference — GTFOBins, BloodHound, PowerView, HackTricks, Impacket, Certipy, NetExec and more in one place.">
-  <meta name="twitter:image"      content="{{ _base_url }}/static/img/logo.jpg">
+  <meta name="twitter:image"       content="{{ site_url }}/static/img/logo.jpg">
 
   <link rel="stylesheet" href="/static/css/style.css">
   <script>window.__OFFLINE__={{ offline_config_json | safe }};</script>
