@@ -25,10 +25,22 @@
       <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="search" id="search-input" placeholder="Search across all sources…" autocomplete="off" aria-label="Search">
       <kbd class="search-kbd">Ctrl+K</kbd>
+      <button class="search-filter-btn" id="search-filter-btn" aria-label="Filter sources" title="Filter sources">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        <span id="search-filter-label">All Sources</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
       <button class="search-help-btn" id="search-help-btn" aria-label="Search help" title="How to search">?</button>
       <div id="search-dropdown" class="search-dropdown" role="listbox"></div>
+      <div id="source-filter-panel" class="source-filter-panel" role="dialog" aria-label="Filter sources">
+        <div class="sfp-actions">
+          <button id="sfp-all">Select All</button>
+          <button id="sfp-none">Select None</button>
+        </div>
+        <div class="sfp-list" id="sfp-list"></div>
+      </div>
     </div>
-    <div class="header-sources">
+    <div class="header-sources" style="display:none">
       <a href="/source/revshells"        class="source-badge badge-revshells"    data-source-id="revshells">🐚 RevShells</a>
       <a href="/cyberchef/"              class="source-badge badge-cyberchef"    data-source-id="cyberchef">🍳 CyberChef</a>
       <a href="/source/gtfobins"         class="source-badge badge-gtfobins"     data-source-id="gtfobins">🐚 GTFOBins</a>

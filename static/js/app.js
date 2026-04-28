@@ -15,6 +15,7 @@ const SOURCES = [
   { id: 'lolbas',           label: 'LOLBAS',               icon: '🪟', color: '#e0af68', noNav: true },
   { id: 'wadcoms',          label: 'WADComs',              icon: '🏴', color: '#7aa2f7', noNav: true },
   // ── Reference sources (alphabetical) ────────────────────────────────────
+  { id: 'active-directory', label: 'Active Directory',     icon: '🎓', color: '#9ece6a' },
   { id: 'bloodhound',       label: 'BloodHound',           icon: '🩸', color: '#f7768e' },
   { id: 'bloodyad',         label: 'bloodyAD',             icon: '🩸', color: '#db4b4b' },
   { id: 'bug-bounty',       label: 'Bug Bounty',           icon: '🐛', color: '#e0af68' },
@@ -24,7 +25,6 @@ const SOURCES = [
   { id: 'gopacket',         label: 'GoPacket',             icon: '🐹', color: '#9ece6a' },
   { id: 'hacktricks',       label: 'HackTricks',           icon: '🤖', color: '#f7768e' },
   { id: 'hacktricks-cloud', label: 'HackTricks Cloud',     icon: '☁️',  color: '#7aa2f7' },
-  { id: 'active-directory', label: 'Active Directory',     icon: '🎓', color: '#9ece6a' },
   { id: 'hardware-att',     label: 'HardwareAllTheThings', icon: '🔌', color: '#e0af68' },
   { id: 'impacket',         label: 'Impacket',             icon: '📦', color: '#2ac3de' },
   { id: 'internal-att',     label: 'InternalAllTheThings', icon: '🏰', color: '#bb9af7' },
@@ -307,27 +307,81 @@ async function buildAllSourcesNav() {
   }, { passive: true });
 }
 
-/* ====== Badge source filter toggles ====== */
-// All sources on by default (empty set = all). A source in _offSources is excluded.
+/* ====== Source filter dropdown ====== */
 const _offSources = new Set();
 
-function _initBadgeToggles() {
-  document.querySelectorAll('.source-badge[data-source-id]').forEach(badge => {
-    badge.addEventListener('click', e => {
-      e.preventDefault();
-      const sid = badge.dataset.sourceId;
-      if (_offSources.has(sid)) {
-        _offSources.delete(sid);
-        badge.classList.remove('badge-off');
-      } else {
-        _offSources.add(sid);
-        badge.classList.add('badge-off');
-      }
-      // Re-run search if active
-      if (searchInput && searchInput.value.trim().length >= 2) {
-        _runSearch(searchInput.value.trim());
-      }
-    });
+function _updateFilterLabel() {
+  const lbl = document.getElementById('search-filter-label');
+  const btn = document.getElementById('search-filter-btn');
+  if (!lbl) return;
+  const off = _offSources.size;
+  const total = SOURCES.length;
+  if (off === 0) {
+    lbl.textContent = 'All Sources';
+    btn && btn.classList.remove('sfp-active');
+  } else if (off === total) {
+    lbl.textContent = 'No Sources';
+    btn && btn.classList.add('sfp-active');
+  } else {
+    lbl.textContent = `${total - off} / ${total} Sources`;
+    btn && btn.classList.add('sfp-active');
+  }
+}
+
+function _initSourceFilter() {
+  const btn   = document.getElementById('search-filter-btn');
+  const panel = document.getElementById('source-filter-panel');
+  const list  = document.getElementById('sfp-list');
+  const allBtn  = document.getElementById('sfp-all');
+  const noneBtn = document.getElementById('sfp-none');
+  if (!btn || !panel || !list) return;
+
+  // Build checkbox list from SOURCES
+  list.innerHTML = SOURCES.map(src => `
+    <label class="sfp-item">
+      <input type="checkbox" class="sfp-cb" data-sid="${src.id}" checked>
+      <span class="sfp-icon" style="color:${src.color}">${src.icon}</span>
+      <span class="sfp-name">${src.label}</span>
+    </label>
+  `).join('');
+
+  // Toggle panel open/close
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    panel.classList.toggle('open');
+  });
+
+  // Checkbox change
+  list.addEventListener('change', e => {
+    if (!e.target.classList.contains('sfp-cb')) return;
+    const sid = e.target.dataset.sid;
+    if (e.target.checked) _offSources.delete(sid);
+    else _offSources.add(sid);
+    _updateFilterLabel();
+    if (searchInput && searchInput.value.trim().length >= 2) _runSearch(searchInput.value.trim());
+  });
+
+  // Select All
+  allBtn && allBtn.addEventListener('click', () => {
+    _offSources.clear();
+    list.querySelectorAll('.sfp-cb').forEach(cb => cb.checked = true);
+    _updateFilterLabel();
+    if (searchInput && searchInput.value.trim().length >= 2) _runSearch(searchInput.value.trim());
+  });
+
+  // Select None
+  noneBtn && noneBtn.addEventListener('click', () => {
+    SOURCES.forEach(s => _offSources.add(s.id));
+    list.querySelectorAll('.sfp-cb').forEach(cb => cb.checked = false);
+    _updateFilterLabel();
+    if (searchInput && searchInput.value.trim().length >= 2) _runSearch(searchInput.value.trim());
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#search-filter-btn') && !e.target.closest('#source-filter-panel')) {
+      panel.classList.remove('open');
+    }
   });
 }
 
@@ -954,7 +1008,7 @@ function _initOfflineBadges() {
 document.addEventListener('DOMContentLoaded', () => {
   addCopyButtons();
   buildAllSourcesNav();
-  _initBadgeToggles();
+  _initSourceFilter();
   _initDistroToggle();
   _initImplToggle();
   _initVarSystem();
