@@ -1141,10 +1141,13 @@ function _initPalette() {
   function _openMenu() {
     wrap.classList.add('open');
     btn.setAttribute('aria-expanded', 'true');
-    // On mobile the sidebar clips absolute children via overflow — use fixed positioning
+    // On mobile the sidebar uses CSS transform for its slide animation.
+    // iOS Safari positions fixed children relative to transformed ancestors,
+    // so we must subtract the sidebar's top offset (= header height) to correct.
     if (window.innerWidth <= 768) {
       const r = btn.getBoundingClientRect();
-      menu.style.cssText = `position:fixed;left:${r.left}px;width:${r.width}px;top:${r.bottom + 4}px;bottom:auto;z-index:9999;`;
+      const headerH = document.querySelector('.site-header')?.getBoundingClientRect().height || 96;
+      menu.style.cssText = `position:fixed;left:${r.left}px;width:${r.width}px;top:${r.bottom - headerH + 4}px;bottom:auto;z-index:9999;`;
     }
   }
 
