@@ -1131,6 +1131,12 @@ function _initPalette() {
   if (!wrap || !btn || !menu) return;
 
   const saved = localStorage.getItem('p3ta-theme') || '';
+  if (saved === 'nes') { // load font immediately if NES was saved
+    const l = document.createElement('link');
+    l.id = 'nes-font'; l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap';
+    document.head.appendChild(l);
+  }
 
   function _closeMenu() {
     wrap.classList.remove('open');
@@ -1151,10 +1157,19 @@ function _initPalette() {
     }
   }
 
+  function _loadNesFontOnce() {
+    if (document.getElementById('nes-font')) return;
+    const l = document.createElement('link');
+    l.id = 'nes-font'; l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap';
+    document.head.appendChild(l);
+  }
+
   function _apply(theme) {
     if (theme) document.documentElement.setAttribute('data-theme', theme);
     else document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('p3ta-theme', theme);
+    if (theme === 'nes') _loadNesFontOnce();
     const active = menu.querySelector(`.theme-option[data-theme="${theme}"]`);
     label.textContent = active ? active.textContent : 'Retro';
     menu.querySelectorAll('.theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
