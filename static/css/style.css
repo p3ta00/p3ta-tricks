@@ -1251,12 +1251,6 @@ code[class*="language-"], pre[class*="language-"] {
   .nt-row { min-height: 34px; }
   .st-toggle { padding: 10px 12px 10px 10px; }
 
-  /* Theme dropdown — open upward if near bottom */
-  .theme-select-menu {
-    top: auto;
-    bottom: calc(100% + 4px);
-  }
-
   /* Block vars button always visible on mobile (no hover) */
   .block-vars-btn, .copy-btn { opacity: 1 !important; }
 }

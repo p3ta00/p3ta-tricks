@@ -1132,6 +1132,22 @@ function _initPalette() {
 
   const saved = localStorage.getItem('p3ta-theme') || '';
 
+  function _closeMenu() {
+    wrap.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    menu.style.cssText = '';
+  }
+
+  function _openMenu() {
+    wrap.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    // On mobile the sidebar clips absolute children via overflow — use fixed positioning
+    if (window.innerWidth <= 768) {
+      const r = btn.getBoundingClientRect();
+      menu.style.cssText = `position:fixed;left:${r.left}px;width:${r.width}px;top:${r.bottom + 4}px;bottom:auto;z-index:9999;`;
+    }
+  }
+
   function _apply(theme) {
     if (theme) document.documentElement.setAttribute('data-theme', theme);
     else document.documentElement.removeAttribute('data-theme');
@@ -1139,16 +1155,14 @@ function _initPalette() {
     const active = menu.querySelector(`.theme-option[data-theme="${theme}"]`);
     label.textContent = active ? active.textContent : 'Retro';
     menu.querySelectorAll('.theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
-    wrap.classList.remove('open');
-    btn.setAttribute('aria-expanded', 'false');
+    _closeMenu();
   }
 
   _apply(saved);
 
   btn.addEventListener('click', e => {
     e.stopPropagation();
-    const isOpen = wrap.classList.toggle('open');
-    btn.setAttribute('aria-expanded', isOpen);
+    wrap.classList.contains('open') ? _closeMenu() : _openMenu();
   });
 
   menu.querySelectorAll('.theme-option').forEach(opt => {
@@ -1156,7 +1170,7 @@ function _initPalette() {
   });
 
   document.addEventListener('click', e => {
-    if (!wrap.contains(e.target)) { wrap.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    if (!wrap.contains(e.target)) _closeMenu();
   });
 }
 
