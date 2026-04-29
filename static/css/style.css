@@ -642,8 +642,8 @@ html[data-theme="nes"] .theme-option.active::before { content: '► '; color: #f
 /* Code blocks — pixel border + shadow */
 html[data-theme="nes"] .page-body pre {
   background: #0c0c0c;
-  border: 2px solid #00b800;
-  box-shadow: 4px 4px 0 #00b800;
+  border: 2px solid #d82800;
+  box-shadow: 4px 4px 0 #d82800;
   font-size: .75rem;
 }
 
