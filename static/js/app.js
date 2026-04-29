@@ -5,6 +5,7 @@ const ICON_COPY  = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" 
 const ICON_CHECK = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 const ICON_DOWN  = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
 const ICON_RIGHT = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>';
+const ICON_VARS  = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>';
 
 /* ====== Source metadata ====== */
 const SOURCES = [
@@ -454,9 +455,86 @@ document.addEventListener('keydown', e => {
 });
 
 /* ====== Copy buttons ====== */
+
+// Detect <variable> tokens in a single pre block
+function _detectBlockVars(pre) {
+  const found = new Set();
+  const re = /<([a-zA-Z][a-zA-Z0-9_:.-]*)>/g;
+  let text = '';
+  if (pre.dataset.origHtml) {
+    // After _renderCode has run — origHtml has the original template
+    const tmp = document.createElement('span');
+    tmp.innerHTML = pre.dataset.origHtml;
+    text = tmp.textContent;
+  } else {
+    const code = pre.querySelector('code');
+    text = code ? code.textContent : pre.textContent;
+  }
+  let m;
+  while ((m = re.exec(text)) !== null) found.add(m[1].toLowerCase());
+  return [...found].sort();
+}
+
+// Open the var modal pre-filtered to only the vars present in a specific block
+function _openBlockVarModal(varKeys) {
+  const modal = document.getElementById('var-modal');
+  const form  = document.getElementById('var-form');
+  const title = document.getElementById('var-modal-title-text');
+  const hint  = document.getElementById('var-modal-hint');
+  if (!modal || !form) return;
+
+  const session = _getVars();
+  form.innerHTML = '';
+  if (title) title.textContent = 'Block Variables';
+  if (hint)  hint.textContent  = 'Only variables used in this code block — values are saved to your session and fill every matching block.';
+
+  if (!varKeys.length) {
+    form.innerHTML = '<p class="var-empty">No <code>&lt;variable&gt;</code> placeholders in this block.</p>';
+  } else {
+    const grouped = {};
+    varKeys.forEach(v => {
+      const meta  = VAR_META[v] || { label: v, placeholder: v, group: 'Other' };
+      const group = meta.group || 'Other';
+      (grouped[group] = grouped[group] || []).push({ v, meta });
+    });
+    const ORDER = ['Target','Attacker','Network','AD','Auth User','Target User','Hashes','Files','Misc','AWS','Azure','Other'];
+    const groupKeys = [...ORDER.filter(g => grouped[g]), ...Object.keys(grouped).filter(g => !ORDER.includes(g))];
+    groupKeys.forEach(group => {
+      const sec = document.createElement('div');
+      sec.className = 'var-group-block';
+      sec.innerHTML = `<div class="var-group-label">${group}</div>`;
+      grouped[group].forEach(({ v, meta }) => {
+        const existing   = session[v] || '';
+        const suggestion = !existing ? _getSuggestion(v, session) : '';
+        const displayVal = existing || suggestion;
+        const row = document.createElement('div');
+        row.className = 'var-row';
+        row.innerHTML = `
+          <label class="var-label" for="vf-${v}">
+            <code class="var-token">&lt;${v}&gt;</code>
+            <span class="var-label-text">${meta.label || v}</span>
+          </label>
+          <input class="var-input${suggestion && !existing ? ' var-suggested' : ''}"
+                 id="vf-${v}" name="${v}" type="text"
+                 value="${displayVal.replace(/"/g,'&quot;')}"
+                 placeholder="${(meta.placeholder || v).replace(/"/g,'&quot;')}"
+                 autocomplete="off" spellcheck="false">`;
+        sec.appendChild(row);
+      });
+      form.appendChild(sec);
+    });
+  }
+
+  modal.classList.add('open');
+  const firstInput = form.querySelector('.var-input:not([value])') || form.querySelector('.var-input');
+  if (firstInput) { firstInput.focus(); firstInput.select(); }
+}
+
 function addCopyButtons() {
   document.querySelectorAll('.page-body pre').forEach(pre => {
     if (pre.querySelector('.copy-btn')) return;
+
+    // Copy button — always present
     const btn = document.createElement('button');
     btn.className = 'copy-btn'; btn.title = 'Copy'; btn.setAttribute('aria-label','Copy code');
     btn.innerHTML = ICON_COPY;
@@ -468,6 +546,21 @@ function addCopyButtons() {
       });
     });
     pre.appendChild(btn);
+
+    // Block vars button — only for blocks that contain <variable> tokens
+    const blockVars = _detectBlockVars(pre);
+    if (blockVars.length) {
+      const vbtn = document.createElement('button');
+      vbtn.className = 'block-vars-btn';
+      vbtn.title = `Set variables (${blockVars.length})`;
+      vbtn.setAttribute('aria-label', 'Set variables for this block');
+      vbtn.innerHTML = ICON_VARS;
+      vbtn.addEventListener('click', e => {
+        e.stopPropagation();
+        _openBlockVarModal(blockVars);
+      });
+      pre.appendChild(vbtn);
+    }
   });
 }
 
@@ -604,6 +697,17 @@ const VAR_META = {
   'identity_id':      { label: 'Cognito Identity ID',    placeholder: 'us-east-1:xxxxxxxx-xxxx', group: 'AWS'     },
   'id_token':         { label: 'OIDC ID Token',          placeholder: 'eyJ0eXA...',          group: 'AWS'         },
   'code-from-token':  { label: 'Auth Code (from token)', placeholder: 'auth-code-here',      group: 'AWS'         },
+  // Network (extended)
+  'subnet':           { label: 'Target Subnet',          placeholder: '10.10.10.0/24',        group: 'Network'     },
+  // Auth User (extended)
+  'service-account':  { label: 'Service Account',        placeholder: 'svc_account',          group: 'Auth User'   },
+  // Misc (extended)
+  'server-name':      { label: 'Server Hostname',        placeholder: 'SRV01',               group: 'Misc'        },
+  // AD (extended)
+  'dc-name-2':        { label: 'DC Short Name (2)',      placeholder: 'DC02',                 group: 'AD'          },
+  // Target (extended)
+  'sccm-server-ip':   { label: 'SCCM Server IP',         placeholder: '10.10.10.2',           group: 'Target'      },
+  'relay-target-ip':  { label: 'Relay Target IP',        placeholder: '10.10.10.3',           group: 'Target'      },
 };
 
 // When a var has no value, check if a known alias has been set and suggest it
@@ -1017,6 +1121,43 @@ function _initOfflineBadges() {
   }, true);
 }
 
+function _initPalette() {
+  const wrap  = document.getElementById('theme-select');
+  const btn   = document.getElementById('theme-select-btn');
+  const menu  = document.getElementById('theme-select-menu');
+  const label = document.getElementById('theme-select-label');
+  if (!wrap || !btn || !menu) return;
+
+  const saved = localStorage.getItem('p3ta-theme') || '';
+
+  function _apply(theme) {
+    if (theme) document.documentElement.setAttribute('data-theme', theme);
+    else document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('p3ta-theme', theme);
+    const active = menu.querySelector(`.theme-option[data-theme="${theme}"]`);
+    label.textContent = active ? active.textContent : 'Retro';
+    menu.querySelectorAll('.theme-option').forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
+    wrap.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  _apply(saved);
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = wrap.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+  });
+
+  menu.querySelectorAll('.theme-option').forEach(opt => {
+    opt.addEventListener('click', () => _apply(opt.dataset.theme));
+  });
+
+  document.addEventListener('click', e => {
+    if (!wrap.contains(e.target)) { wrap.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   addCopyButtons();
   buildAllSourcesNav();
@@ -1026,4 +1167,5 @@ document.addEventListener('DOMContentLoaded', () => {
   _initVarSystem();
   _initSearchHelp();
   _initOfflineBadges();
+  _initPalette();
 });

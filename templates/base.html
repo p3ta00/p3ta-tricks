@@ -21,6 +21,7 @@
   <meta name="twitter:image"       content="{{ site_url }}/static/img/og-preview.jpg">
 
   <link rel="stylesheet" href="/static/css/style.css">
+  <script>try{var _t=localStorage.getItem('p3ta-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
   <script>window.__OFFLINE__={{ offline_config_json | safe }};</script>
 </head>
 <body data-source="{{ page.source if page is defined else (source_id if source_id is defined else '') }}"
@@ -122,6 +123,28 @@
           <div class="distro-toggle" id="impl-toggle">
             <button class="distro-btn distro-btn-active" data-impl="impacket">Impacket</button>
             <button class="distro-btn" data-impl="gopacket">GoPacket</button>
+          </div>
+        </div>
+
+        <div class="palette-row">
+          <span class="distro-label">Theme</span>
+          <div class="theme-select" id="theme-select">
+            <button class="theme-select-btn" id="theme-select-btn" aria-haspopup="listbox" aria-expanded="false">
+              <span id="theme-select-label">Retro</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="theme-select-menu" id="theme-select-menu" role="listbox">
+              <button class="theme-option" data-theme="">Retro</button>
+              <button class="theme-option" data-theme="tokyo-night">Tokyo Night</button>
+              <button class="theme-option" data-theme="mocha">Catppuccin Mocha</button>
+              <button class="theme-option" data-theme="latte">Catppuccin Latte</button>
+              <button class="theme-option" data-theme="rose-pine">Rosé Pine</button>
+              <button class="theme-option" data-theme="dracula">Dracula</button>
+              <button class="theme-option" data-theme="nord">Nord</button>
+              <button class="theme-option" data-theme="gruvbox">Gruvbox</button>
+              <button class="theme-option" data-theme="hacker">Hacker Green</button>
+              <button class="theme-option" data-theme="wonderland">Wonderland</button>
+            </div>
           </div>
         </div>
 
