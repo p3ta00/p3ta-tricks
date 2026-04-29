@@ -1173,10 +1173,10 @@ code[class*="language-"], pre[class*="language-"] {
   padding: 3px 4px; cursor: pointer; text-align: center;
   transition: color .12s, border-color .12s, background .12s;
 }
-.distro-btn:hover { color: var(--fg); border-color: var(--cyan); }
+.distro-btn:hover { color: var(--fg); border-color: var(--purple); }
 .distro-btn-active {
-  background: var(--cyan); color: #1a1b26 !important;
-  border-color: var(--cyan); font-weight: 600;
+  background: var(--purple); color: #1a1b26 !important;
+  border-color: var(--purple); font-weight: 600;
 }
 
 /* Filled variable highlight in code blocks */
