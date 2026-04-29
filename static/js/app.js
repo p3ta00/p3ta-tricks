@@ -569,8 +569,10 @@ const mobileBtn = document.getElementById('mobile-menu-btn');
 const sidebar   = document.getElementById('sidebar');
 const overlay   = document.getElementById('sidebar-overlay');
 if (mobileBtn && sidebar) {
-  mobileBtn.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay&&overlay.classList.toggle('open'); });
-  overlay&&overlay.addEventListener('click', () => { sidebar.classList.remove('open'); overlay.classList.remove('open'); });
+  function _sidebarOpen()  { sidebar.classList.add('open');    overlay&&overlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+  function _sidebarClose() { sidebar.classList.remove('open'); overlay&&overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  mobileBtn.addEventListener('click', () => sidebar.classList.contains('open') ? _sidebarClose() : _sidebarOpen());
+  overlay&&overlay.addEventListener('click', _sidebarClose);
 }
 
 /* ====== Variable Substitution System ====== */
