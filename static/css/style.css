@@ -792,7 +792,7 @@ pre code { background: none; padding: 0; color: inherit; }
 .highlight .m,  .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: var(--orange); }
 .highlight .s,  .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .s1, .highlight .ss { color: var(--green); }
 .highlight .na  { color: var(--blue); }
-.highlight .nb  { color: var(--cyan); }
+.highlight .nb  { color: #89b4fa; }
 .highlight .nc  { color: var(--blue); font-weight: 600; }
 .highlight .no  { color: var(--orange); }
 .highlight .nd  { color: var(--purple); }
