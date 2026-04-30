@@ -1076,6 +1076,22 @@ pre code { background: none; padding: 0; color: inherit; }
 .home-beta-notice svg { color: var(--yellow); }
 .home-beta-notice strong { color: var(--fg); }
 
+.home-osai-notice {
+  display: flex; align-items: flex-start; gap: 10px;
+  max-width: 680px; margin: 0 auto 32px;
+  padding: 14px 18px;
+  background: rgba(0,232,255,.08);
+  border: 1px solid rgba(0,232,255,.45);
+  border-left: 4px solid var(--cyan);
+  border-radius: 6px;
+  color: var(--fg-dim);
+  font-size: .84rem;
+  line-height: 1.6;
+  box-shadow: 0 0 12px rgba(0,232,255,.08);
+}
+.home-osai-notice svg { color: var(--cyan); flex-shrink: 0; margin-top: 2px; }
+.home-osai-notice strong { color: var(--fg); }
+
 /* ---------- Home about section ---------- */
 .home-about {
   margin: 0 0 32px;

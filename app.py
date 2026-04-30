@@ -182,7 +182,7 @@ SOURCE_META = {
     "hardware-att":    {"label": "HardwareAllTheThings", "color": "var(--yellow)",  "icon": "🔌"},
     "internal-att":    {"label": "InternalAllTheThings", "color": "var(--purple)",  "icon": "🏰"},
     "goexec":          {"label": "goexec",               "color": "var(--green)",   "icon": "⚡"},
-    "osai-research":   {"label": "OSAI Research",        "color": "var(--magenta)", "icon": "🤖", "offline_only": True},
+    "osai-research":   {"label": "OSAI Research",        "color": "var(--magenta)", "icon": "🤖"},
     "sliver":          {"label": "Sliver C2",             "color": "var(--red)",     "icon": "🐍"},
     "impacket":        {"label": "Impacket",              "color": "var(--cyan)",    "icon": "📦"},
     "gopacket":        {"label": "GoPacket",              "color": "var(--green)",   "icon": "🐹"},
