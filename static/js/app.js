@@ -12,6 +12,8 @@ const SOURCES = [
   // ── Interactive apps (no nav tree) ──────────────────────────────────────
   { id: 'revshells',        label: 'RevShells',            icon: '🐚', color: '#ff9e64', noNav: true },
   { id: 'cyberchef',        label: 'CyberChef',            icon: '🍳', color: '#9ece6a', noNav: true, url: '/cyberchef/' },
+  { id: 'payload-encoder', label: 'Payload Encoder',     icon: '🔐', color: '#7dcfff', noNav: true, url: '/payload-encoder/' },
+  { id: 'jwt-decoder',     label: 'JWT Decoder',          icon: '🎫', color: '#e0af68', noNav: true, url: '/jwt-decoder/' },
   { id: 'gtfobins',         label: 'GTFOBins',             icon: '🐚', color: '#ff9e64', noNav: true },
   { id: 'lolbas',           label: 'LOLBAS',               icon: '🪟', color: '#e0af68', noNav: true },
   { id: 'wadcoms',          label: 'WADComs',              icon: '🏴', color: '#7aa2f7', noNav: true },

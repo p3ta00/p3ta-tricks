@@ -190,6 +190,8 @@ SOURCE_META = {
     "mimikatz":        {"label": "Mimikatz",              "color": "var(--crimson)", "icon": "🐱"},
     "enum":            {"label": "Enumeration",           "color": "var(--green)",   "icon": "🔍"},
     "revshells":       {"label": "Reverse Shells",        "color": "var(--orange)",  "icon": "🐚"},
+    "payload-encoder": {"label": "Payload Encoder",       "color": "var(--cyan)",    "icon": "🔐"},
+    "jwt-decoder":     {"label": "JWT Decoder",            "color": "var(--yellow)",  "icon": "🎫"},
     "bug-bounty":      {"label": "Bug Bounty",            "color": "var(--yellow)",  "icon": "🐛"},
     "active-directory": {"label": "Active Directory",           "color": "var(--green)",   "icon": "🎓"},
 }
@@ -826,6 +828,16 @@ def page(source_id, page_path):
 @app.route("/cyberchef/<path:sub>")
 def cyberchef(sub=""):
     return render_template("cyberchef.html", source_meta=SOURCE_META)
+
+
+@app.route("/payload-encoder/")
+def payload_encoder():
+    return render_template("payload_encoder.html", source_meta=SOURCE_META)
+
+
+@app.route("/jwt-decoder/")
+def jwt_decoder():
+    return render_template("jwt_decoder.html", source_meta=SOURCE_META)
 
 
 @app.route("/api/index")

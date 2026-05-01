@@ -1,0 +1,320 @@
+{% extends "base.html" %}
+{% block title %}Payload Encoder / Decoder — p3ta-tricks{% endblock %}
+{% block content %}
+<div class="tool-page">
+  <div class="tool-header">
+    <h1 class="tool-title">🔐 Payload Encoder / Decoder</h1>
+    <p class="tool-desc">Client-side only — nothing leaves your browser. Auto-updates on input.</p>
+  </div>
+
+  <div class="enc-input-wrap">
+    <div class="enc-input-toolbar">
+      <span class="enc-label-main">Input</span>
+      <div class="enc-toolbar-btns">
+        <button id="enc-paste-btn" class="enc-tool-btn">Paste</button>
+        <button id="enc-clear-btn" class="enc-tool-btn">Clear</button>
+        <button id="enc-smart-btn" class="enc-tool-btn enc-tool-btn-primary">⚡ Smart Decode</button>
+      </div>
+    </div>
+    <textarea id="enc-input" class="enc-textarea" placeholder="Enter text, hash, encoded payload, JWT fragment…" spellcheck="false" autocomplete="off"></textarea>
+  </div>
+
+  <div class="enc-grid">
+
+    <div class="enc-section-header">URL Encoding</div>
+    <div class="enc-row">
+      <div class="enc-row-label">URL Encode<span class="enc-tag">encodeURIComponent</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="url" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">URL Encode All<span class="enc-tag">every char %XX</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="url-full" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Double URL Encode<span class="enc-tag">WAF bypass</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="url-double" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">URL Decode</div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="url-decode" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+
+    <div class="enc-section-header">Base64</div>
+    <div class="enc-row">
+      <div class="enc-row-label">Base64 Encode<span class="enc-tag">standard</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="b64" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Base64 URL-safe<span class="enc-tag">no padding — JWT/OAuth</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="b64url" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Base64 Decode</div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="b64-decode" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+
+    <div class="enc-section-header">HTML Entities</div>
+    <div class="enc-row">
+      <div class="enc-row-label">HTML Encode<span class="enc-tag">&amp; &lt; &gt; &quot; &#x27;</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="html" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">HTML Encode All<span class="enc-tag">&#NNN; every char</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="html-full" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">HTML Decode</div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="html-decode" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+
+    <div class="enc-section-header">Hex / Binary</div>
+    <div class="enc-row">
+      <div class="enc-row-label">Hex \x Encode<span class="enc-tag">\x41\x42\x43</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="hex-x" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Hex Plain<span class="enc-tag">414243…</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="hex-plain" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Hex 0x Encode<span class="enc-tag">0x41 0x42 0x43</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="hex-0x" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Unicode Escape<span class="enc-tag">AB</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="unicode" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+
+    <div class="enc-section-header">Other</div>
+    <div class="enc-row">
+      <div class="enc-row-label">ROT13</div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="rot13" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">ASCII Codes<span class="enc-tag">decimal space-sep</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="ascii" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">Reverse String</div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="reverse" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+    <div class="enc-row">
+      <div class="enc-row-label">MD5 Length<span class="enc-tag">char count → hash hint</span></div>
+      <div class="enc-row-out-wrap">
+        <textarea class="enc-output" data-enc="meta" readonly spellcheck="false"></textarea>
+        <button class="enc-copy-btn">copy</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="enc-smart-result" class="enc-smart-result" style="display:none">
+    <div class="enc-smart-header">⚡ Smart Decode Results</div>
+    <div id="enc-smart-body"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const input = document.getElementById('enc-input');
+
+  function b64enc(s) {
+    try { return btoa(unescape(encodeURIComponent(s))); }
+    catch { return 'Error: use CyberChef for binary data'; }
+  }
+  function b64dec(s) {
+    try {
+      const p = s.trim().replace(/-/g,'+').replace(/_/g,'/');
+      const padded = p + '='.repeat((4 - p.length % 4) % 4);
+      return decodeURIComponent(escape(atob(padded)));
+    } catch { return 'Invalid Base64'; }
+  }
+  function htmlDec(s) {
+    const d = document.createElement('textarea'); d.innerHTML = s; return d.value;
+  }
+
+  const ENCODERS = {
+    'url':        s => { try { return encodeURIComponent(s); } catch { return ''; } },
+    'url-full':   s => Array.from(s).map(c => '%' + c.charCodeAt(0).toString(16).toUpperCase().padStart(2,'0')).join(''),
+    'url-double': s => { try { return encodeURIComponent(encodeURIComponent(s)); } catch { return ''; } },
+    'url-decode': s => { try { return decodeURIComponent(s.replace(/\+/g,' ')); } catch { return 'Invalid URL encoding'; } },
+    'b64':        b64enc,
+    'b64url':     s => b64enc(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,''),
+    'b64-decode': b64dec,
+    'html':       s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;'),
+    'html-full':  s => Array.from(s).map(c => `&#${c.charCodeAt(0)};`).join(''),
+    'html-decode':htmlDec,
+    'hex-x':      s => Array.from(s).map(c => '\\x' + c.charCodeAt(0).toString(16).padStart(2,'0')).join(''),
+    'hex-plain':  s => Array.from(s).map(c => c.charCodeAt(0).toString(16).padStart(2,'0')).join(''),
+    'hex-0x':     s => Array.from(s).map(c => '0x' + c.charCodeAt(0).toString(16).padStart(2,'0')).join(' '),
+    'unicode':    s => Array.from(s).map(c => '\\u' + c.charCodeAt(0).toString(16).padStart(4,'0')).join(''),
+    'rot13':      s => s.replace(/[a-zA-Z]/g, c => { const b = c <= 'Z' ? 65 : 97; return String.fromCharCode(((c.charCodeAt(0)-b+13)%26)+b); }),
+    'ascii':      s => Array.from(s).map(c => c.charCodeAt(0)).join(' '),
+    'reverse':    s => Array.from(s).reverse().join(''),
+    'meta':       s => {
+      const len = s.length;
+      const bytes = new TextEncoder().encode(s).length;
+      const hints = [];
+      if (len === 32)  hints.push('MD5 / NTLM length');
+      if (len === 40)  hints.push('SHA1 length');
+      if (len === 56)  hints.push('SHA224 length');
+      if (len === 64)  hints.push('SHA256 / NTDS length');
+      if (len === 96)  hints.push('SHA384 length');
+      if (len === 128) hints.push('SHA512 length');
+      if (/^[a-f0-9]+$/i.test(s) && len % 2 === 0) hints.push('hex string');
+      if (/^[A-Za-z0-9+/]+=*$/.test(s)) hints.push('possible Base64');
+      return `${len} chars · ${bytes} bytes${hints.length ? ' · ' + hints.join(' · ') : ''}`;
+    },
+  };
+
+  function updateAll() {
+    const val = input.value;
+    document.querySelectorAll('.enc-output[data-enc]').forEach(out => {
+      const fn = ENCODERS[out.dataset.enc];
+      try { out.value = fn ? fn(val) : ''; }
+      catch (e) { out.value = 'Error: ' + e.message; }
+    });
+  }
+
+  input.addEventListener('input', updateAll);
+  updateAll();
+
+  // Copy buttons
+  document.querySelectorAll('.enc-copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const out = btn.previousElementSibling;
+      if (!out) return;
+      navigator.clipboard.writeText(out.value).then(() => {
+        btn.textContent = '✓'; setTimeout(() => btn.textContent = 'copy', 1400);
+      });
+    });
+  });
+
+  document.getElementById('enc-paste-btn').addEventListener('click', async () => {
+    try { input.value = await navigator.clipboard.readText(); updateAll(); } catch {}
+  });
+  document.getElementById('enc-clear-btn').addEventListener('click', () => {
+    input.value = ''; updateAll();
+    document.getElementById('enc-smart-result').style.display = 'none';
+  });
+
+  // Smart decode
+  document.getElementById('enc-smart-btn').addEventListener('click', () => {
+    const val = input.value.trim();
+    const resultEl = document.getElementById('enc-smart-result');
+    const bodyEl   = document.getElementById('enc-smart-body');
+    bodyEl.innerHTML = '';
+    if (!val) { resultEl.style.display = 'none'; return; }
+
+    const attempts = [
+      { label: 'URL Decoded',          fn: () => decodeURIComponent(val.replace(/\+/g,' ')) },
+      { label: 'Double URL Decoded',   fn: () => decodeURIComponent(decodeURIComponent(val.replace(/\+/g,' '))) },
+      { label: 'Base64 Decoded',       fn: () => b64dec(val) },
+      { label: 'HTML Entity Decoded',  fn: () => { const d=document.createElement('textarea'); d.innerHTML=val; return d.value; } },
+      { label: 'Hex \\x Decoded',      fn: () => { if(!/^(\\x[0-9a-fA-F]{2})+$/.test(val)) return null; return val.split('\\x').filter(Boolean).map(h=>String.fromCharCode(parseInt(h,16))).join(''); } },
+      { label: 'Hex Plain Decoded',    fn: () => { if(!/^[0-9a-fA-F]+$/.test(val) || val.length%2!==0) return null; return (val.match(/.{2}/g)||[]).map(h=>String.fromCharCode(parseInt(h,16))).join(''); } },
+      { label: 'Unicode Decoded',      fn: () => { if(!/\\u[0-9a-fA-F]{4}/.test(val)) return null; return val.replace(/\\u([0-9a-fA-F]{4})/g,(_,h)=>String.fromCharCode(parseInt(h,16))); } },
+      { label: 'ROT13',                fn: () => ENCODERS.rot13(val) },
+      { label: 'ASCII Code Decoded',   fn: () => { if(!/^\d+(\s+\d+)+$/.test(val)) return null; return val.trim().split(/\s+/).map(n=>String.fromCharCode(parseInt(n))).join(''); } },
+    ];
+
+    const printableRatio = s => (s.match(/[\x20-\x7E]/g)||[]).length / s.length;
+    const results = [];
+    attempts.forEach(({ label, fn }) => {
+      try {
+        const out = fn();
+        if (out && out !== val && out !== 'Invalid Base64' && out !== 'Invalid URL encoding' && printableRatio(out) > 0.75) {
+          results.push({ label, out });
+        }
+      } catch {}
+    });
+
+    if (!results.length) {
+      bodyEl.innerHTML = '<p style="color:var(--fg-dim);margin:0;padding:12px 14px">Could not auto-detect encoding. Try specific rows above.</p>';
+    } else {
+      results.forEach(({ label, out }) => {
+        const item = document.createElement('div');
+        item.className = 'enc-smart-item';
+
+        const lbl = document.createElement('div');
+        lbl.className = 'enc-smart-item-label';
+        lbl.textContent = label;
+
+        const row = document.createElement('div');
+        row.className = 'enc-smart-item-row';
+
+        const ta = document.createElement('textarea');
+        ta.className = 'enc-output';
+        ta.readOnly = true; ta.spellcheck = false;
+        ta.value = out;
+
+        const cpBtn = document.createElement('button');
+        cpBtn.className = 'enc-copy-btn'; cpBtn.textContent = 'copy';
+        cpBtn.addEventListener('click', () => navigator.clipboard.writeText(ta.value).then(() => { cpBtn.textContent='✓'; setTimeout(()=>cpBtn.textContent='copy',1400); }));
+
+        const useBtn = document.createElement('button');
+        useBtn.className = 'enc-copy-btn'; useBtn.textContent = 'use →';
+        useBtn.style.borderColor = 'var(--purple)'; useBtn.style.color = 'var(--purple)';
+        useBtn.addEventListener('click', () => { input.value = ta.value; updateAll(); resultEl.style.display='none'; input.focus(); });
+
+        row.appendChild(ta); row.appendChild(cpBtn); row.appendChild(useBtn);
+        item.appendChild(lbl); item.appendChild(row);
+        bodyEl.appendChild(item);
+      });
+    }
+    resultEl.style.display = 'block';
+  });
+})();
+</script>
+{% endblock %}

