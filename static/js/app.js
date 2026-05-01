@@ -1056,6 +1056,77 @@ function _initSearchHelp() {
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close_(); });
 }
 
+/* ====== Admonition renderer (GitHub-style > [!TYPE] alerts) ====== */
+function _renderAdmonitions() {
+  const TYPE_META = {
+    NOTE:      { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>', label: 'Note',      cls: 'note'      },
+    TIP:       { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 0 1 7 7c0 3-1.8 5.4-4.5 6.5V17a.5.5 0 0 1-.5.5h-4A.5.5 0 0 1 10 17v-1.5C7.3 14.4 5 12 5 9a7 7 0 0 1 7-7z"/><line x1="10" y1="21" x2="14" y2="21"/><line x1="9" y1="18" x2="15" y2="18"/></svg>', label: 'Tip',       cls: 'tip'       },
+    WARNING:   { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>', label: 'Warning',   cls: 'warning'   },
+    CAUTION:   { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>', label: 'Caution',   cls: 'caution'   },
+    DANGER:    { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>', label: 'Danger',    cls: 'danger'    },
+    IMPORTANT: { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>', label: 'Important', cls: 'important' },
+    SUCCESS:   { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>', label: 'Success',   cls: 'success'   },
+    INFO:      { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>', label: 'Info',      cls: 'info'      },
+    YOUTUBE:   { icon: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>', label: 'Video',     cls: 'info'      },
+  };
+
+  document.querySelectorAll('.page-body blockquote').forEach(bq => {
+    const firstP = bq.querySelector('p');
+    if (!firstP) return;
+    const text = firstP.textContent.trim();
+    const match = text.match(/^\[!([A-Z]+)\]/);
+    if (!match) return;
+    const meta = TYPE_META[match[1]];
+    if (!meta) return;
+
+    // Strip [!TYPE] prefix from innerHTML, keeping remaining HTML content
+    const firstPBody = firstP.innerHTML.replace(/^\[![A-Z]+\]\s*/, '');
+    const siblings = Array.from(bq.children)
+      .filter(c => c !== firstP)
+      .map(el => el.outerHTML).join('');
+
+    const div = document.createElement('div');
+    div.className = `admonition admonition-${meta.cls}`;
+    div.innerHTML =
+      `<div class="admonition-title">${meta.icon} ${meta.label}</div>` +
+      `<div class="admonition-body">${firstPBody ? `<p>${firstPBody}</p>` : ''}${siblings}</div>`;
+    bq.replaceWith(div);
+  });
+}
+
+/* ====== Mermaid diagram renderer ====== */
+function _initMermaid() {
+  const blocks = document.querySelectorAll('.page-body pre code.language-mermaid');
+  if (!blocks.length) return;
+
+  // Replace pre blocks synchronously with placeholders (prevents copy buttons attaching)
+  const pending = [];
+  blocks.forEach((code, i) => {
+    const pre = code.parentElement;
+    const source = code.textContent;
+    const uid = `mermaid-${Date.now()}-${i}`;
+    const container = document.createElement('div');
+    container.className = 'mermaid-diagram';
+    container.innerHTML = '<span class="mermaid-loading">Rendering diagram…</span>';
+    pre.replaceWith(container);
+    pending.push({ uid, source, container });
+  });
+
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+  s.onload = () => {
+    const theme = document.documentElement.getAttribute('data-theme') || '';
+    const lightThemes = new Set(['catppuccin-latte', 'win95', 'nes']);
+    mermaid.initialize({ startOnLoad: false, theme: lightThemes.has(theme) ? 'default' : 'dark' });
+    pending.forEach(({ uid, source, container }) => {
+      mermaid.render(uid + '-svg', source)
+        .then(({ svg }) => { container.innerHTML = svg; })
+        .catch(() => { container.innerHTML = `<pre style="text-align:left;white-space:pre-wrap">${source}</pre>`; });
+    });
+  };
+  document.head.appendChild(s);
+}
+
 /* ====== Offline badge injection ====== */
 function _initOfflineBadges() {
   // Config is injected server-side as window.__OFFLINE__ — no async fetch needed.
@@ -1193,6 +1264,8 @@ function _initPalette() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  _renderAdmonitions(); // Must run before addCopyButtons (replaces blockquotes)
+  _initMermaid();       // Must run before addCopyButtons (replaces mermaid pre blocks)
   addCopyButtons();
   buildAllSourcesNav();
   _initSourceFilter();
