@@ -710,25 +710,134 @@ const VAR_META = {
   // Target (extended)
   'sccm-server-ip':   { label: 'SCCM Server IP',         placeholder: '10.10.10.2',           group: 'Target'      },
   'relay-target-ip':  { label: 'Relay Target IP',        placeholder: '10.10.10.3',           group: 'Target'      },
+
+  // ── Web / URL ──────────────────────────────────────────────────────────────
+  'url':              { label: 'Target URL',              placeholder: 'http://10.10.10.1',    group: 'Web'         },
+  'base-url':         { label: 'Base URL',                placeholder: 'http://10.10.10.1',    group: 'Web'         },
+  'endpoint':         { label: 'API / Web Endpoint',      placeholder: '/api/v1/users',        group: 'Web'         },
+  'wordlist':         { label: 'Wordlist Path',           placeholder: '/usr/share/wordlists/rockyou.txt', group: 'Files' },
+  'dict':             { label: 'Dictionary Path',         placeholder: '/usr/share/wordlists/rockyou.txt', group: 'Files' },
+  'filename':         { label: 'Filename',                placeholder: 'output.txt',           group: 'Files'       },
+
+  // ── Attack / Execution ─────────────────────────────────────────────────────
+  'cmd':              { label: 'Command',                 placeholder: 'whoami',               group: 'Misc'        },
+  'command':          { label: 'Command',                 placeholder: 'whoami',               group: 'Misc'        },
+  'pkg':              { label: 'Package Name',            placeholder: 'libssl-dev',           group: 'Misc'        },
+  'user-id':          { label: 'User ID',                 placeholder: '1001',                 group: 'Misc'        },
+  'server':           { label: 'Server Hostname',         placeholder: 'srv01.corp.local',     group: 'Target'      },
+
+  // ── Credentials / Secrets ──────────────────────────────────────────────────
+  'token':            { label: 'Token (JWT/OAuth/Bearer)',placeholder: 'eyJ0eXA...',           group: 'Auth User'   },
+  'email':            { label: 'Email Address',           placeholder: 'user@corp.local',      group: 'Auth User'   },
+  'secret':           { label: 'Secret / API Key',        placeholder: 'MyS3cr3tV@lue',       group: 'Hashes'      },
+  'pfx-base64':       { label: 'Base64 PFX Certificate', placeholder: 'MIIJ...',              group: 'Files'       },
+
+  // ── AD — Forest / Cross-Domain ─────────────────────────────────────────────
+  'child-domain':     { label: 'Child Domain',            placeholder: 'child.corp.local',     group: 'AD'          },
+  'tld':              { label: 'Root / Parent Domain',    placeholder: 'corp.local',           group: 'AD'          },
+  'target-domain':    { label: 'Target Domain',           placeholder: 'target.corp.local',    group: 'AD'          },
+  'victim-computer':  { label: 'Victim Computer',         placeholder: 'WORKSTATION01',        group: 'AD'          },
+  'controlled-user':  { label: 'Controlled User (RBCD)',  placeholder: 'attacker$',            group: 'AD'          },
+  'source-user':      { label: 'Source User (Delegation)',placeholder: 'svc_account',          group: 'AD'          },
+  'target-object':    { label: 'Target AD Object',        placeholder: 'svc_target',           group: 'AD'          },
+  'attacker-dn':      { label: 'Attacker LDAP DN',        placeholder: 'CN=attacker,CN=Users,DC=corp,DC=local', group: 'AD' },
+  'dn':               { label: 'LDAP Distinguished Name', placeholder: 'CN=user,CN=Users,DC=corp,DC=local',     group: 'AD' },
+  'computername':     { label: 'Computer Name',           placeholder: 'WORKSTATION01',        group: 'AD'          },
+  'masterkey-file':   { label: 'DPAPI MasterKey File',    placeholder: '/tmp/masterkey',       group: 'Files'       },
+
+  // ── Azure ──────────────────────────────────────────────────────────────────
+  'location':         { label: 'Azure Location / Region', placeholder: 'eastus',               group: 'Azure'       },
+  'app-name':         { label: 'App / Function Name',     placeholder: 'corp-funcapp',         group: 'Azure'       },
+  'resource-group-name': { label: 'Resource Group',       placeholder: 'corp-rg',              group: 'Azure'       },
+  'res-group':        { label: 'Resource Group',          placeholder: 'corp-rg',              group: 'Azure'       },
+  'rsc-group':        { label: 'Resource Group',          placeholder: 'corp-rg',              group: 'Azure'       },
+  'storage-account':  { label: 'Storage Account',         placeholder: 'corpstorage',          group: 'Azure'       },
+  'storage-account-name': { label: 'Storage Account Name',placeholder: 'corpstorage',          group: 'Azure'       },
+  'container-name':   { label: 'Container Name',          placeholder: 'mycontainer',          group: 'Azure'       },
+  'bucket-name':      { label: 'Cloud Storage Bucket',    placeholder: 'corp-bucket',          group: 'Azure'       },
+  'bucket':           { label: 'Cloud Storage Bucket',    placeholder: 'corp-bucket',          group: 'Azure'       },
+  'registry-name':    { label: 'Container Registry',      placeholder: 'corpcr.azurecr.io',    group: 'Azure'       },
+  'database':         { label: 'Database Name',           placeholder: 'corpdb',               group: 'Azure'       },
+  'acc-name':         { label: 'Account Name',            placeholder: 'corpaccount',          group: 'Azure'       },
+  'account-id':       { label: 'Cloud Account ID',        placeholder: '123456789012',         group: 'Azure'       },
+  'automation-account-name': { label: 'Automation Account', placeholder: 'corp-automation',   group: 'Azure'       },
+  'integration-account-name': { label: 'Integration Account', placeholder: 'corp-integration', group: 'Azure'       },
+  'queue-name':       { label: 'Message Queue Name',      placeholder: 'corp-queue',           group: 'Azure'       },
+  'namespace-name':   { label: 'Namespace',               placeholder: 'corp-namespace',       group: 'Azure'       },
+
+  // ── GCP / Kubernetes / Multi-cloud ────────────────────────────────────────
+  'project-id':       { label: 'Project ID',              placeholder: 'corp-project-123',     group: 'AWS'         },
+  'project-name':     { label: 'Project Name',            placeholder: 'corp-project',         group: 'AWS'         },
+  'cluster-name':     { label: 'Kubernetes Cluster',      placeholder: 'corp-cluster',         group: 'AWS'         },
+  'cluster':          { label: 'Kubernetes Cluster',      placeholder: 'corp-cluster',         group: 'AWS'         },
+  'namespace':        { label: 'Kubernetes Namespace',    placeholder: 'default',              group: 'AWS'         },
+  'zone':             { label: 'Cloud Zone',              placeholder: 'us-east-1a',           group: 'AWS'         },
+  'instance-id':      { label: 'Instance ID',             placeholder: 'i-0abc123def456',      group: 'AWS'         },
+
+  // ── DevOps / Source Control ────────────────────────────────────────────────
+  'repo-name':        { label: 'Repository Name',         placeholder: 'corp-repo',            group: 'Misc'        },
+  'org':              { label: 'Organization Name',       placeholder: 'corp-org',             group: 'Misc'        },
+  'branch':           { label: 'Git Branch',              placeholder: 'main',                 group: 'Misc'        },
+  'job-name':         { label: 'CI/CD Job Name',          placeholder: 'build-and-deploy',     group: 'Misc'        },
+
+  // ── Underscore variants (Python / script-style naming) ────────────────────
+  'server_name':      { label: 'Server Name',             placeholder: 'SRV01',                group: 'Misc'        },
+  'resource_group':   { label: 'Resource Group',          placeholder: 'corp-rg',              group: 'Azure'       },
+  'resource_group_name': { label: 'Resource Group',       placeholder: 'corp-rg',              group: 'Azure'       },
+  'dc_fqdn':          { label: 'DC FQDN',                 placeholder: 'dc01.corp.local',      group: 'AD'          },
+  'secret_name':      { label: 'Secret Name',             placeholder: 'db-password',          group: 'Azure'       },
+  'account_name':     { label: 'Account Name',            placeholder: 'corpaccount',          group: 'Azure'       },
+  'account_id':       { label: 'Cloud Account ID',        placeholder: '123456789012',         group: 'AWS'         },
+  'org_name':         { label: 'Organization Name',       placeholder: 'corp-org',             group: 'Misc'        },
+  'repo_name':        { label: 'Repository Name',         placeholder: 'corp-repo',            group: 'Misc'        },
+  'service_name':     { label: 'Service Name',            placeholder: 'corp-service',         group: 'Misc'        },
+  'service-name':     { label: 'Service Name',            placeholder: 'corp-service',         group: 'Misc'        },
+  'pod_name':         { label: 'Pod Name',                placeholder: 'corp-pod-abc123',      group: 'AWS'         },
+  'queue_name':       { label: 'Queue Name',              placeholder: 'corp-queue',           group: 'AWS'         },
 };
 
 // When a var has no value, check if a known alias has been set and suggest it
 const VAR_SUGGEST = {
+  // Target aliases
   'target': 'ip',   'rhost': 'ip',   'host': 'ip',   'target-ip': 'ip',   'victim-ip': 'ip',
+  // Attacker aliases
   'attacker-ip': 'lhost',   'my-ip': 'lhost',
+  // Credential aliases
   'pass': 'password',   'pwd': 'password',
   'user': 'username',   'u': 'username',   'auth-user': 'username',
+  'local-admin': 'username',   'admin-username': 'username',
+  // AD aliases
   'dc': 'dc-ip',   'domain-controller': 'dc-ip',
-  'dc-host': 'fqdn',   'dc-hostname': 'fqdn',   'dc-fqdn': 'fqdn',
-  'realm': 'domain',
-  'nt-hash': 'hash',   'ntlm-hash': 'hash',   'lm-hash': 'hash',
-  'krbtgt-ntlm-hash': 'krbtgt-hash',
-  'attacker-ntlm-hash': 'hash',
+  'dc-host': 'fqdn',   'dc-hostname': 'fqdn',   'dc-fqdn': 'fqdn',   'dc_fqdn': 'dc-fqdn',
+  'realm': 'domain',   'tld': 'domain',   'target-domain': 'child-domain',
   'ca-host': 'ca',   'ca-name': 'ca',
   'group-name': 'target-group',
-  'local-admin': 'username',   'admin-username': 'username',
-  'target-computer': 'computer',
+  'target-computer': 'computer',   'victim-computer': 'computer',   'computername': 'computer',
   'attacker-computer': 'computer-name',
+  'source-user': 'username',   'controlled-user': 'attacker-user',
+  // Hash aliases
+  'nt-hash': 'hash',   'ntlm-hash': 'hash',   'lm-hash': 'hash',
+  'krbtgt-ntlm-hash': 'krbtgt-hash',   'attacker-ntlm-hash': 'hash',
+  // File aliases
+  'dict': 'wordlist',
+  // Network
+  'iface': 'interface',
+  // Cloud / Azure underscore variants
+  'resource_group': 'resource-group',   'resource_group_name': 'resource-group',
+  'resource-group-name': 'resource-group',   'res-group': 'resource-group',
+  'rsc-group': 'resource-group',
+  'server_name': 'server-name',   'server': 'server-name',
+  'secret_name': 'secret-name',   'secret-name': 'secret',
+  'account_name': 'acc-name',   'account_id': 'account-id',
+  'storage-account': 'storage-account-name',
+  'bucket': 'bucket-name',
+  'cluster': 'cluster-name',
+  'namespace': 'namespace-name',
+  'org_name': 'org',   'repo_name': 'repo-name',
+  'service_name': 'service-name',
+  'queue_name': 'queue-name',   'pod_name': 'cluster',
+  // Execution
+  'cmd': 'command',
 };
 
 function _getVars()   { try { return JSON.parse(sessionStorage.getItem('pt_vars') || '{}'); } catch { return {}; } }
@@ -834,7 +943,14 @@ function _renderCode() {
     Object.entries(vars).forEach(([k, v]) => {
       if (!v) return;
       const safe = v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      html = html.split(`&lt;${k}&gt;`).join(`<span class="var-filled" title="&lt;${k}&gt;">${safe}</span>`);
+      const ek = k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      // Prism bash/powershell tokenizes < and > as operator spans, so we must match
+      // BOTH the raw form (&lt;key&gt;) and the Prism-wrapped form (<span...>&lt;</span>key<span...>&gt;</span>)
+      const re = new RegExp(
+        `<span[^>]*>&lt;<\\/span>${ek}<span[^>]*>&gt;<\\/span>|&lt;${ek}&gt;`,
+        'gi'
+      );
+      html = html.replace(re, `<span class="var-filled" title="&lt;${k}&gt;">${safe}</span>`);
     });
     el.innerHTML = html;
   });
