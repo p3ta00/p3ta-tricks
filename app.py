@@ -975,18 +975,30 @@ def api_exploitdb_index():
 
 @app.route("/api/exploitdb/code/<int:exploit_id>")
 def api_exploitdb_code(exploit_id):
+    import urllib.request as _ur
     entries = _load_exploitdb()
     entry = next((e for e in entries if e.get("id") == exploit_id), None)
     if not entry:
         return jsonify({"error": "Not found"}), 404
+
+    # Local clone takes priority (offline mode)
     code_path = _EXPLOITDB_SRC / entry["path"]
-    if not code_path.exists():
-        return jsonify({"error": "Source not available in this deployment"}), 404
+    if code_path.exists():
+        try:
+            code = code_path.read_text(encoding="utf-8", errors="replace")
+            return jsonify({"id": exploit_id, "path": entry["path"], "code": code, "source": "local"})
+        except Exception as exc:
+            return jsonify({"error": str(exc)}), 500
+
+    # Online fallback: proxy raw file from exploit-db.com
     try:
-        code = code_path.read_text(encoding="utf-8", errors="replace")
+        url = f"https://www.exploit-db.com/download/{exploit_id}"
+        req = _ur.Request(url, headers={"User-Agent": "p3ta-tricks/1.0"})
+        with _ur.urlopen(req, timeout=10) as r:
+            code = r.read().decode("utf-8", errors="replace")
+        return jsonify({"id": exploit_id, "path": entry["path"], "code": code, "source": "online"})
     except Exception as exc:
-        return jsonify({"error": str(exc)}), 500
-    return jsonify({"id": exploit_id, "path": entry["path"], "code": code})
+        return jsonify({"error": f"Could not fetch from exploit-db.com: {exc}"}), 503
 
 
 @app.route("/api/index")
