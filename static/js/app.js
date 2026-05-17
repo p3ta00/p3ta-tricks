@@ -1248,7 +1248,7 @@ function _initMermaid() {
   });
 
   const s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+  s.src = '/static/js/mermaid.min.js';
   s.onload = () => {
     const theme = document.documentElement.getAttribute('data-theme') || '';
     const lightThemes = new Set(['catppuccin-latte', 'win95', 'nes']);
@@ -1340,7 +1340,7 @@ function _initPalette() {
   if (saved === 'nes') { // load font immediately if NES was saved
     const l = document.createElement('link');
     l.id = 'nes-font'; l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap';
+    l.href = '/static/fonts/press-start-2p.css';
     document.head.appendChild(l);
   }
 
@@ -1367,7 +1367,7 @@ function _initPalette() {
     if (document.getElementById('nes-font')) return;
     const l = document.createElement('link');
     l.id = 'nes-font'; l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap';
+    l.href = '/static/fonts/press-start-2p.css';
     document.head.appendChild(l);
   }
 

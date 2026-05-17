@@ -1,0 +1,8 @@
+/* Press Start 2P — self-hosted, no Google Fonts needed */
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/static/fonts/press-start-2p.woff2') format('woff2');
+}

@@ -1001,6 +1001,35 @@ def api_exploitdb_code(exploit_id):
         return jsonify({"error": f"Could not fetch from exploit-db.com: {exc}"}), 503
 
 
+@app.route("/api/exploitdb/download/<int:exploit_id>")
+def api_exploitdb_download(exploit_id):
+    import urllib.request as _ur
+    entries = _load_exploitdb()
+    entry = next((e for e in entries if e.get("id") == exploit_id), None)
+    if not entry:
+        abort(404)
+
+    filename = Path(entry["path"]).name
+
+    # Local clone: serve as file download
+    code_path = _EXPLOITDB_SRC / entry["path"]
+    if code_path.exists():
+        try:
+            data = code_path.read_bytes()
+            return Response(
+                data,
+                headers={
+                    "Content-Disposition": f'attachment; filename="{filename}"',
+                    "Content-Type": "text/plain; charset=utf-8",
+                }
+            )
+        except Exception as exc:
+            abort(500)
+
+    # Online fallback: redirect to exploit-db.com download
+    return redirect(f"https://www.exploit-db.com/download/{exploit_id}")
+
+
 @app.route("/api/index")
 def api_index():
     source = request.args.get("source", "")
