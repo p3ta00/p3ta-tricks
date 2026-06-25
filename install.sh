@@ -126,8 +126,15 @@ VENV_PY="$VENV_DIR/bin/python3"
 info "Installing wiki requirements..."
 if [ -d "$SCRIPT_DIR/vendor" ] && [ -n "$(ls -A "$SCRIPT_DIR/vendor" 2>/dev/null)" ]; then
   info "vendor/ found — installing offline (no PyPI)"
-  "$VENV_PIP" install -r "$SCRIPT_DIR/requirements.txt" \
-    --no-index --find-links "$SCRIPT_DIR/vendor/" --quiet
+  # Wheels may live in vendor/ and/or vendor/wheels/ — search both.
+  if ! "$VENV_PIP" install -r "$SCRIPT_DIR/requirements.txt" \
+        --no-index \
+        --find-links "$SCRIPT_DIR/vendor/" \
+        --find-links "$SCRIPT_DIR/vendor/wheels/" --quiet; then
+    warn "Offline install from vendor/ failed — falling back to PyPI"
+    "$VENV_PIP" install --upgrade pip --quiet || true
+    "$VENV_PIP" install -r "$SCRIPT_DIR/requirements.txt" --quiet
+  fi
 else
   "$VENV_PIP" install --upgrade pip --quiet
   "$VENV_PIP" install -r "$SCRIPT_DIR/requirements.txt" --quiet

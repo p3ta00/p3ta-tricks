@@ -252,6 +252,12 @@ SOURCE_META = {
     "cheatsheet":      {"label": "Cheat Sheets",               "color": "var(--green)",   "icon": "📋"},
 }
 
+# Sources excluded from global search results (e.g. HackTheBox Academy content
+# that otherwise pollutes cheat-sheet searches). They remain directly browsable
+# via /source/<id> and are still returned when the search is explicitly scoped
+# to that source.
+SEARCH_HIDDEN_SOURCES = {"htb", "htb-academy"}
+
 _NAV_SOURCES = {
     "breaking-adcs": {
         "root":    SOURCES / "breaking-adcs",
@@ -975,6 +981,10 @@ def search():
     if not OFFLINE_MODE:
         _hidden = {sid for sid, m in SOURCE_META.items() if m.get("offline_only")}
         results = [r for r in results if r.get("source") not in _hidden]
+    # Always exclude HTB-style sources from global search unless the user has
+    # explicitly scoped the search to one of them.
+    if source not in SEARCH_HIDDEN_SOURCES:
+        results = [r for r in results if r.get("source") not in SEARCH_HIDDEN_SOURCES]
     if source:
         results = [r for r in results if r.get("source") == source]
     if fmt == "json" or request.accept_mimetypes.best == "application/json":
