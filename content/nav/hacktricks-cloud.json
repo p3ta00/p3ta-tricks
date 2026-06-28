@@ -57,6 +57,11 @@
                 "title": "Gh Actions - Context Script Injections",
                 "url": "/page/hacktricks-cloud/pentesting-ci-cd/github-security/abusing-github-actions/gh-actions-context-script-injections",
                 "children": []
+              },
+              {
+                "title": "GH Actions - npm Supply Chain Abuse",
+                "url": "/page/hacktricks-cloud/pentesting-ci-cd/github-security/abusing-github-actions/gh-actions-npm-supply-chain-abuse",
+                "children": []
               }
             ]
           },
@@ -2345,6 +2350,11 @@
               {
                 "title": "Az - VMs Unauth",
                 "url": "/page/hacktricks-cloud/pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/az-vms-unauth",
+                "children": []
+              },
+              {
+                "title": "Az - Monitor Alert Phishing",
+                "url": "/page/hacktricks-cloud/pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/az-monitor-alert-phishing",
                 "children": []
               },
               {

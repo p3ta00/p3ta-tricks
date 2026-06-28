@@ -1,9 +1,9 @@
 {
   "kerbrute": "v1.0.3",
-  "chisel": "v1.11.5",
+  "chisel": "v1.11.7",
   "pspy": "v1.2.1",
   "reverse-ssh": "v1.2.0",
-  "PEASS-ng": "20260604-085abf96",
+  "PEASS-ng": "20260624-872a1386",
   "linux-smart-enumeration": "4.14nw",
   "PrivescCheck": "2026.04.29-1",
   "PrintSpoofer": "v1.0",

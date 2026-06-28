@@ -8738,7 +8738,7 @@
     "source": "hacktricks",
     "url": "/page/hacktricks/linux-hardening/privilege-escalation/cisco-vmanage",
     "path": "linux-hardening/privilege-escalation/cisco-vmanage",
-    "excerpt": "Cisco - vmanage Path 1 (Example from https://www.synacktiv.com/en/publications/pentesting-cisco-sd-wan-part-1-attacking-vmanage.html ) After digging a little through some documentation related to conf",
+    "excerpt": "Cisco - vmanage Once you have code execution on Cisco vManage / Catalyst SD-WAN Manager as vmanage , netadmin , or vmanage-admin , the most interesting local privesc surfaces are usually the confd CLI",
     "tags": []
   },
   {
@@ -8995,6 +8995,14 @@
     "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-kernel-exploitation/posix-cpu-timers-toctou-cve-2025-38352",
     "path": "linux-hardening/privilege-escalation/linux-kernel-exploitation/posix-cpu-timers-toctou-cve-2025-38352",
     "excerpt": "POSIX CPU Timers TOCTOU race (CVE-2025-38352) This page documents a TOCTOU race condition in Linux/Android POSIX CPU timers that can corrupt timer state and crash the kernel, and under some circumstan",
+    "tags": []
+  },
+  {
+    "title": "Linux Ptrace Exit Race Pidfd Getfd Fd Theft",
+    "source": "hacktricks",
+    "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-kernel-exploitation/linux-ptrace-exit-race-pidfd_getfd-fd-theft",
+    "path": "linux-hardening/privilege-escalation/linux-kernel-exploitation/linux-ptrace-exit-race-pidfd_getfd-fd-theft",
+    "excerpt": "Linux ptrace exit-race pidfd_getfd() FD theft A useful Linux kernel privesc pattern is to turn a ptrace authorization bug into file descriptor theft from a privileged process. In the Qualys __ptrace_m",
     "tags": []
   },
   {
@@ -9330,7 +9338,7 @@
     "source": "hacktricks",
     "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-file-extension-apps",
     "path": "macos-hardening/macos-security-and-privilege-escalation/macos-file-extension-apps",
-    "excerpt": "macOS File Extension &amp; URL scheme app handlers LaunchServices Database This is a database of all the installed applications in the macOS that can be queried to get information about each installed",
+    "excerpt": "macOS File Extension &amp; URL scheme app handlers LaunchServices Database This is a database of all the installed applications in macOS that can be queried to get information about each installed app",
     "tags": []
   },
   {
@@ -10774,11 +10782,27 @@
     "tags": []
   },
   {
+    "title": "Android Physical Attacks",
+    "source": "hacktricks",
+    "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-physical-attacks",
+    "path": "mobile-pentesting/android-app-pentesting/android-physical-attacks",
+    "excerpt": "Android Physical Attacks BFU / AFU, FBE, and physical extraction attacks For mobile app pentests and seizure/forensics threat modeling , it is useful to separate the device into 2 states: BFU (Before ",
+    "tags": []
+  },
+  {
     "title": "Android Task Hijacking",
     "source": "hacktricks",
     "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-task-hijacking",
     "path": "mobile-pentesting/android-app-pentesting/android-task-hijacking",
     "excerpt": "Android Task Hijacking Task, Back Stack and Foreground Activities In Android, a task is essentially a set of activities that users interact with to complete a specific job, organized within a back sta",
+    "tags": []
+  },
+  {
+    "title": "Android VPN Bypass",
+    "source": "hacktricks",
+    "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-vpn-bypass",
+    "path": "mobile-pentesting/android-app-pentesting/android-vpn-bypass",
+    "excerpt": "Android VPN Bypass Hidden Binder APIs, Confused Deputies and VPN Lockdown Bypasses A hidden Java API is still reachable when the underlying Binder transaction is exposed to apps and the service implem",
     "tags": []
   },
   {
@@ -12347,6 +12371,14 @@
     "url": "/page/hacktricks/network-services-pentesting/1883-pentesting-mqtt-mosquitto",
     "path": "network-services-pentesting/1883-pentesting-mqtt-mosquitto",
     "excerpt": "1883 - Pentesting MQTT (Mosquitto) Basic Information MQ Telemetry Transport (MQTT) is known as a publish/subscribe messaging protocol that stands out for its extreme simplicity and lightness. This pro",
+    "tags": []
+  },
+  {
+    "title": "Pentesting ISO 8583 Payment Sockets",
+    "source": "hacktricks",
+    "url": "/page/hacktricks/network-services-pentesting/pentesting-iso-8583-payment-sockets",
+    "path": "network-services-pentesting/pentesting-iso-8583-payment-sockets",
+    "excerpt": "Pentesting ISO 8583 Payment Sockets Overview Some Android POS terminals and payment apps do not send payment, refund, or void traffic over HTTP. Instead, they authenticate over a raw TLS socket and th",
     "tags": []
   },
   {
@@ -14546,7 +14578,7 @@
     "source": "hacktricks",
     "url": "/page/hacktricks/binary-exploitation/libc-heap/overwriting-a-freed-chunk",
     "path": "binary-exploitation/libc-heap/overwriting-a-freed-chunk",
-    "excerpt": "Overwriting a freed chunk Several of the proposed heap exploitation techniques need to be able to overwrite pointers inside freed chunks. The goal of this page is to summarise the potential vulnerabil",
+    "excerpt": "Overwriting a freed chunk Several heap exploitation techniques require being able to modify metadata that glibc stored inside a chunk after it was freed . This page summarises the main bug classes tha",
     "tags": []
   },
   {
@@ -15747,6 +15779,14 @@
     "url": "/page/hacktricks-cloud/pentesting-ci-cd/github-security/abusing-github-actions/gh-actions-context-script-injections",
     "path": "pentesting-ci-cd/github-security/abusing-github-actions/gh-actions-context-script-injections",
     "excerpt": "Gh Actions - Context Script Injections Understanding the risk GitHub Actions renders expressions ${{ ... }} before the step executes. The rendered value is pasted into the step’s program (for run step",
+    "tags": []
+  },
+  {
+    "title": "GH Actions - npm Supply Chain Abuse",
+    "source": "hacktricks-cloud",
+    "url": "/page/hacktricks-cloud/pentesting-ci-cd/github-security/abusing-github-actions/gh-actions-npm-supply-chain-abuse",
+    "path": "pentesting-ci-cd/github-security/abusing-github-actions/gh-actions-npm-supply-chain-abuse",
+    "excerpt": "GH Actions - npm Supply Chain Abuse Overview After an attacker gets code execution in a GitHub Actions release workflow, maintainer workstation, or package build pipeline, npm publishing becomes a hig",
     "tags": []
   },
   {
@@ -19315,6 +19355,14 @@
     "url": "/page/hacktricks-cloud/pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/az-vms-unauth",
     "path": "pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/az-vms-unauth",
     "excerpt": "Az - VMs Unauth Virtual Machines For more info about Azure Virtual Machines check: ../az-services/vms/ Exposed vulnerable service A network service that is vulnerable to some RCE. Public Gallery Image",
+    "tags": []
+  },
+  {
+    "title": "Az - Monitor Alert Phishing",
+    "source": "hacktricks-cloud",
+    "url": "/page/hacktricks-cloud/pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/az-monitor-alert-phishing",
+    "path": "pentesting-cloud/azure-security/az-unauthenticated-enum-and-initial-entry/az-monitor-alert-phishing",
+    "excerpt": "Az - Monitor Alert Phishing Monitor Alert Phishing It is currently[^disclosure] possible to bypass the Azure Monitoring Action Group notification that a user has been added to a monitoring group, allo",
     "tags": []
   },
   {

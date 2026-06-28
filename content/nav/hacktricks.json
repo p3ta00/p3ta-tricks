@@ -763,6 +763,11 @@
             "children": []
           },
           {
+            "title": "Linux Ptrace Exit Race Pidfd Getfd Fd Theft",
+            "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-kernel-exploitation/linux-ptrace-exit-race-pidfd_getfd-fd-theft",
+            "children": []
+          },
+          {
             "title": "euid, ruid, suid",
             "url": "/page/hacktricks/linux-hardening/privilege-escalation/euid-ruid-suid",
             "children": []
@@ -1923,8 +1928,18 @@
             "children": []
           },
           {
+            "title": "Android Physical Attacks",
+            "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-physical-attacks",
+            "children": []
+          },
+          {
             "title": "Android Task Hijacking",
             "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-task-hijacking",
+            "children": []
+          },
+          {
+            "title": "Android VPN Bypass",
+            "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-vpn-bypass",
             "children": []
           },
           {
@@ -2930,6 +2945,11 @@
       {
         "title": "1883 - Pentesting MQTT (Mosquitto)",
         "url": "/page/hacktricks/network-services-pentesting/1883-pentesting-mqtt-mosquitto",
+        "children": []
+      },
+      {
+        "title": "Pentesting ISO 8583 Payment Sockets",
+        "url": "/page/hacktricks/network-services-pentesting/pentesting-iso-8583-payment-sockets",
         "children": []
       },
       {
