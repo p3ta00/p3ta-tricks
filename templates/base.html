@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="/static/css/style.css?v={{ static_ver }}">
   <script>try{var _t=localStorage.getItem('p3ta-theme');if(_t)document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
   <script>window.__OFFLINE__={{ offline_config_json | safe }};</script>
+  {% block head_extra %}{% endblock %}
 </head>
 <body data-source="{{ page.source if page is defined else (source_id if source_id is defined else '') }}"
       data-page-url="{{ request.path }}">

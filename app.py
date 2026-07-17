@@ -567,9 +567,24 @@ def _load_page(source: str, page_path: str):
             candidates = list(PROCESSED.rglob(f"{safe}.json"))
         if not candidates:
             candidates = list(PROCESSED.rglob(f"{safe.replace(' ', '-')}.json"))
-        if not candidates:
-            return None
-        candidate = candidates[0]
+        if candidates:
+            candidate = candidates[0]
+        else:
+            # Case-insensitive / prefix-tolerant fallback. Nav links or external
+            # refs may differ from the generated page slug in case (e.g. 'readme'
+            # vs 'README') or by a source filename prefix (e.g. files named
+            # 'adaptix-c2__<slug>' served under /page/adaptix/<slug>). Match on the
+            # index key within this source, ignoring case and any stem prefix.
+            src_pref = f"{source}__".lower()
+            want     = f"{source}__{safe}".lower()
+            tail     = f"__{safe}".lower()
+            for k, v in _PAGE_INDEX.items():
+                kl = k.lower()
+                if kl.startswith(src_pref) and (kl == want or kl.endswith(tail)):
+                    candidate = v
+                    break
+            if candidate is None:
+                return None
     try:
         data = json.loads(candidate.read_text(encoding="utf-8"))
         if 'html' in data:
