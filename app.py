@@ -549,6 +549,11 @@ def _load_index():
 
 
 def _load_page(source: str, page_path: str):
+    # Tolerate markdown-relative cross-links that kept their source extension
+    # (e.g. /page/netexec/ldap-protocol/enumerate-group-members.md) or a stray
+    # #fragment — the target page is the same slug without the .md/#anchor.
+    page_path = page_path.split("#", 1)[0]
+    page_path = re.sub(r"\.(md|markdown)$", "", page_path, flags=re.I)
     key = f"{source}/{page_path}"
     cached = _page_cache_get(key)
     if cached is not None:
