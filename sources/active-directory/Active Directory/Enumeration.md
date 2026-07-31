@@ -118,7 +118,7 @@ enum4linux-ng -P <dc-ip> -oA ilfreight
 ### ldapsearch
 
 ```bash
-ldapsearch -h <dc-ip> -x -b "DC=<DOMAIN>,DC=LOCAL" -s sub "*" | grep -m 1 -B 10 pwdHistoryLength
+ldapsearch -H ldap://<dc-ip> -x -b "DC=<DOMAIN>,DC=LOCAL" -s base "(objectClass=*)" minPwdLength pwdHistoryLength lockoutThreshold lockoutDuration maxPwdAge minPwdAge
 ```
 
 ### net accounts (Windows)
@@ -160,7 +160,7 @@ crackmapexec smb <dc-ip> --users
 ### ldapsearch
 
 ```bash
-ldapsearch -h <dc-ip> -x -b "DC=<DOMAIN>,DC=LOCAL" -s sub "(&(objectclass=user))" | grep sAMAccountName: | cut -f2 -d" "
+ldapsearch -H ldap://<dc-ip> -x -b "DC=<DOMAIN>,DC=LOCAL" "(&(objectClass=user)(objectCategory=person))" sAMAccountName | grep -i "^sAMAccountName:" | cut -d" " -f2
 ```
 
 ### windapsearch
