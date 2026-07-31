@@ -66,6 +66,42 @@ BloodHound · HackTricks · HackTricks Cloud · The Hacker Recipes · PayloadsAl
 
 ---
 
+## Updating
+
+`./update.sh` is the weekly refresh. It clones or fast-forwards every upstream
+wiki into `sources/` (gitignored — build inputs, not repo content), rebuilds
+only the sources that actually moved, refreshes the nav caches and search index,
+re-applies the local corrections, and prints the commit message to use.
+
+```bash
+./update.sh                  # pull, rebuild what changed
+./update.sh --pull-only      # refresh sources/ and report, no rebuild
+./update.sh --force          # rebuild every cloned source regardless
+./update.sh --commit --push  # ...and ship it
+```
+
+Sources that are hand-written (`active-directory`, `cheatsheet`, the BloodHound
+edge pages, `misc`, `breaking-adcs`) or scraped by a dedicated script
+(`adaptix`, `churchofmalware`) have no upstream to pull and are deliberately
+left alone — `update.sh` prints which ones it skipped rather than silently
+regenerating them from nothing.
+
+### Known issue: the rebuild is currently gated
+
+`scripts/inject_variable_tokens.py` — the build step that turns upstream's
+literal `10.10.176.246 -u frank` into `<TARGET> -u <USERNAME>`, which is what
+makes the Variables feature work — was never committed and was lost with the
+machine it lived on. What's in the repo now is a reconstruction reverse-engineered
+from the published content, and it is not equivalent: measured against "a page
+whose upstream markdown didn't change must rebuild byte-identically" it
+reproduces roughly 65% of the corpus.
+
+So `update.sh` runs `scripts/check_fidelity.py` first and **refuses to rebuild**
+while churn is that high, rather than shipping thousands of pages with their
+placeholders silently reverted to someone's lab IPs. Improve the table and rules
+in `inject_variable_tokens.py` until the check passes and the weekly update runs
+unattended again; `--skip-check` bypasses it if you know what you're doing.
+
 ## Scripts
 
 | Script | Purpose |
@@ -73,6 +109,12 @@ BloodHound · HackTricks · HackTricks Cloud · The Hacker Recipes · PayloadsAl
 | `scripts/fetch_adaptix_images.py` | Scrape GitBook CDN and download all Adaptix screenshots locally |
 | `scripts/fetch_external_images.py` | Download third-party images embedded in source docs and host locally |
 | `scripts/rebuild_sources.py` | Rebuild processed content JSON from source markdown |
+| `scripts/dump_nav_cache.py` | Freeze each source's sidebar tree into `content/nav/` — production has no `sources/` to walk |
+| `scripts/enhance_search_index.py` | Add headings and longer excerpts to the search index |
+| `scripts/local_fixes.py` | Re-apply corrections to upstream pages after a rebuild overwrites them |
+| `scripts/check_fidelity.py` | Prove the build still reproduces committed content before letting it write |
+| `scripts/inject_copy_blocks.py` | Build hook for `rebuild_sources.py`; copy buttons are attached client-side, so this is a pass-through |
+| `scripts/inject_variable_tokens.py` | Build hook that rewrites upstream example values into `<PLACEHOLDER>` tokens — see the known issue above |
 
 ---
 
