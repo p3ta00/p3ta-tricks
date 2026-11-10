@@ -1,0 +1,605 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": ".versions.json",
+      "family": ".versions.json",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 559,
+      "sha256": "b7d33c56fc0ada144529b23fcee5950944da744da6b5e154d9bf8c13dff44cbd"
+    },
+    {
+      "path": "bettercap/bettercap_linux_amd64",
+      "family": "bettercap",
+      "version": "v2.41.7",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 77244808,
+      "sha256": "c07db9028c76597e0e1baf5e50fbdeb63acbecf6b3511bb07f41feac625614ee"
+    },
+    {
+      "path": "chisel/chisel_linux_amd64",
+      "family": "chisel",
+      "version": "v1.12.0",
+      "source": "https://github.com/jpillora/chisel/releases/tag/v1.12.0",
+      "size": 11587744,
+      "sha256": "811362311f13ac4bdc42fe4e7650aca618a68e3a40f930de88536d18b14d2b52"
+    },
+    {
+      "path": "CVE-2021-1675/SharpPrintNightmare.exe",
+      "family": "CVE-2021-1675",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 13824,
+      "sha256": "2af611fe49866bf73db1db62559cd3956385c9a1732ca4f276fbc10dd187d14d"
+    },
+    {
+      "path": "dnspy/dnSpy-net-win64.zip",
+      "family": "dnspy",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 85810042,
+      "sha256": "78d855aef02d87195ddde4f4a89f16f03708e66ec8282cf8eb9ecc89dd469f6c"
+    },
+    {
+      "path": "GodPotato/GodPotato-NET2.exe",
+      "family": "GodPotato",
+      "version": "V1.20",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 57344,
+      "sha256": "3027a212272957298bf4d32505370fa63fb162d6a6a6ec091af9d7626317a858"
+    },
+    {
+      "path": "GodPotato/GodPotato-NET35.exe",
+      "family": "GodPotato",
+      "version": "V1.20",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 57344,
+      "sha256": "3027a212272957298bf4d32505370fa63fb162d6a6a6ec091af9d7626317a858"
+    },
+    {
+      "path": "GodPotato/GodPotato-NET4.exe",
+      "family": "GodPotato",
+      "version": "V1.20",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 57344,
+      "sha256": "9a8e9d587b570d4074f1c8317b163aa8d0c566efd88f294d9d85bc7776352a28"
+    },
+    {
+      "path": "GoldenGMSA/GoldenGMSA.exe",
+      "family": "GoldenGMSA",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 137728,
+      "sha256": "e815aec4b1fd00521e6eeec3c295df64b567d5e7be90ea6e3c1f0c6d2dbb73bc"
+    },
+    {
+      "path": "juicy-potato/JuicyPotato.exe",
+      "family": "juicy-potato",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 347648,
+      "sha256": "0f56c703e9b7ddeb90646927bac05a5c6d95308c8e13b88e5d4f4b572423e036"
+    },
+    {
+      "path": "kekeo/kekeo_x64.exe",
+      "family": "kekeo",
+      "version": "2.2.0-20211214",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 634768,
+      "sha256": "1debb8471c513466adaab22978c9eec9d3702344ccd1a294e6c7f7e2ee95caf0"
+    },
+    {
+      "path": "kerbrute/kerbrute_linux_amd64",
+      "family": "kerbrute",
+      "version": "v1.0.3",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 8286607,
+      "sha256": "710a9d2653c8bd3689e451778dab9daec0de4c4c75f900788ccf23ef254b122a"
+    },
+    {
+      "path": "LaZagne/LaZagne.exe",
+      "family": "LaZagne",
+      "version": "v2.4.7",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 10136093,
+      "sha256": "dc06d62ee95062e714f2566c95b8edaabfd387023b1bf98a09078b84007d5268"
+    },
+    {
+      "path": "linux-smart-enumeration/lse.sh",
+      "family": "linux-smart-enumeration",
+      "version": "4.14nw",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 55098,
+      "sha256": "ccb6a164caa590bc60615e7a4d5ecff9162b86dc8c782a15b1cccedee02ca095"
+    },
+    {
+      "path": "mimikatz-tool/mimikatz_Win32.exe",
+      "family": "mimikatz-tool",
+      "version": "2.2.0-20220919",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 1084416,
+      "sha256": "94795fd89366e01bd6ce6471ff27c3782e2e16377a848426cf0b2e6baee9449b"
+    },
+    {
+      "path": "mimikatz-tool/mimikatz_x64.exe",
+      "family": "mimikatz-tool",
+      "version": "2.2.0-20220919",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 1355264,
+      "sha256": "61c0810a23580cf492a6ba4f7654566108331e7a4134c968c2d6a05261b2d8a1"
+    },
+    {
+      "path": "nanodump/nanodump.x64.exe",
+      "family": "nanodump",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 107022,
+      "sha256": "5f38d59c0dcd578a0a8da89734b94f5c9c7e35d41bccdfd8f3155da29b64d1a1"
+    },
+    {
+      "path": "nanodump/nanodump.x86.exe",
+      "family": "nanodump",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 96782,
+      "sha256": "37482813d0009e19fcf076b72173a563d933ead7d6d6eb7d23454e3d69efc1aa"
+    },
+    {
+      "path": "PEASS-ng/linpeas.sh",
+      "family": "PEASS-ng",
+      "version": "20261109-f4fdadd7 scripts/Linux; legacy Windows executables (GitHub push-protection false positives in current upstream release)",
+      "source": "https://github.com/peass-ng/PEASS-ng/releases/tag/20261109-f4fdadd7",
+      "size": 1826158,
+      "sha256": "85759826f998c687135fc8b6e728b2828d54df0d249fd994d54838394c0ba1a1"
+    },
+    {
+      "path": "PEASS-ng/linpeas_linux_amd64",
+      "family": "PEASS-ng",
+      "version": "20261109-f4fdadd7 scripts/Linux; legacy Windows executables (GitHub push-protection false positives in current upstream release)",
+      "source": "https://github.com/peass-ng/PEASS-ng/releases/tag/20261109-f4fdadd7",
+      "size": 5000784,
+      "sha256": "56e9ee5cc40b47653e1bb5e970f6923fffe58472294d6cae11f77a914fd0961b"
+    },
+    {
+      "path": "PEASS-ng/winPEAS.bat",
+      "family": "PEASS-ng",
+      "version": "20261109-f4fdadd7 scripts/Linux; legacy Windows executables (GitHub push-protection false positives in current upstream release)",
+      "source": "https://github.com/peass-ng/PEASS-ng/releases/tag/20261109-f4fdadd7",
+      "size": 43707,
+      "sha256": "cd45a0db52a7a887e34622c0af501cfcd67b65267517fe9964bd2d5af2e9d1a2"
+    },
+    {
+      "path": "PEASS-ng/winPEASany.exe",
+      "family": "PEASS-ng",
+      "version": "legacy Windows executable",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 11131904,
+      "sha256": "73bc9c817a6c41bd7fb1d26a305f447c028246f82b88cdc360330f35eb8364db"
+    },
+    {
+      "path": "PEASS-ng/winPEASx64.exe",
+      "family": "PEASS-ng",
+      "version": "legacy Windows executable",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 11131392,
+      "sha256": "e1086c73bc35f7fd8755e4727103463d4e1d4b4a292822115cdc9e582d45acee"
+    },
+    {
+      "path": "PEASS-ng/winPEASx86.exe",
+      "family": "PEASS-ng",
+      "version": "legacy Windows executable",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 11131904,
+      "sha256": "4aa09ac585e609c705a15497f3d51ab7e6da6548ca5d413c260a3174fa78d244"
+    },
+    {
+      "path": "PetitPotam/PetitPotam.exe",
+      "family": "PetitPotam",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 109568,
+      "sha256": "441cb0576151b2e5b5127be72a5bcdf3577a596f0a4e1f2c6836248fe07eb818"
+    },
+    {
+      "path": "PrintSpoofer/PrintSpoofer32.exe",
+      "family": "PrintSpoofer",
+      "version": "v1.0",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 22016,
+      "sha256": "47c9eff8142490a2c341701aab7aaebc355eed1540eed534a8317dd1e65614b2"
+    },
+    {
+      "path": "PrintSpoofer/PrintSpoofer64.exe",
+      "family": "PrintSpoofer",
+      "version": "v1.0",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 27136,
+      "sha256": "8524fbc0d73e711e69d60c64f1f1b7bef35c986705880643dd4d5e17779e586d"
+    },
+    {
+      "path": "PrivescCheck/PrivescCheck.ps1",
+      "family": "PrivescCheck",
+      "version": "2026.10.28-1",
+      "source": "https://github.com/itm4n/PrivescCheck/releases/tag/2026.10.28-1",
+      "size": 553214,
+      "sha256": "e61ee0500dacf6b765ec153eb681c18e8eac0fa8accf15c2e7ee3aa344f3cd71"
+    },
+    {
+      "path": "pspy/pspy32",
+      "family": "pspy",
+      "version": "v1.2.1",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 2940928,
+      "sha256": "1e38ac09d7851b22e16980abc58f93cabdc4a02859c56a2810aa51930277d450"
+    },
+    {
+      "path": "pspy/pspy64",
+      "family": "pspy",
+      "version": "v1.2.1",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3104768,
+      "sha256": "c93f29a5cc1347bdb90e14a12424e6469c8cfea9a20b800bc249755f0043a3bb"
+    },
+    {
+      "path": "remote-method-guesser/rmg-5.1.0.jar",
+      "family": "remote-method-guesser",
+      "version": "v5.1.0",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3952218,
+      "sha256": "437d04da9a3af2c6148ed203192f44688f4481bf8cd385f4a6ed5590000436e4"
+    },
+    {
+      "path": "remote-method-guesser/rmg.jar",
+      "family": "remote-method-guesser",
+      "version": "v5.1.0",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3952218,
+      "sha256": "437d04da9a3af2c6148ed203192f44688f4481bf8cd385f4a6ed5590000436e4"
+    },
+    {
+      "path": "reverse-ssh/reverse-sshx64",
+      "family": "reverse-ssh",
+      "version": "v2.8.1 (x64); v1.2.0 legacy x86",
+      "source": "https://github.com/NHAS/reverse_ssh/releases/tag/v2.8.1",
+      "size": 10862754,
+      "sha256": "18c2c5b3d6318a18a0f6791ee2ad359ecfda1c39abcf5c55e1143d3e9e80d1a8"
+    },
+    {
+      "path": "reverse-ssh/reverse-sshx64.exe",
+      "family": "reverse-ssh",
+      "version": "v2.8.1 (x64); v1.2.0 legacy x86",
+      "source": "https://github.com/NHAS/reverse_ssh/releases/tag/v2.8.1",
+      "size": 18458624,
+      "sha256": "4a47e91b2bca0e3a39ef72dbb0b283794f8685955d0c611dacc5c59ca182cb99"
+    },
+    {
+      "path": "reverse-ssh/reverse-sshx86",
+      "family": "reverse-ssh",
+      "version": "v1.2.0 legacy x86",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3264512,
+      "sha256": "ad042ec9afbf29b4b962820a1e82f4d1d6a8c654c42f3c55d6e562dc7a279766"
+    },
+    {
+      "path": "reverse-ssh/reverse-sshx86.exe",
+      "family": "reverse-ssh",
+      "version": "v1.2.0 legacy x86",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3518976,
+      "sha256": "06f02a7b690087feea7f4e48b71e219c98de681cf3b1fdc3097f6264775dab62"
+    },
+    {
+      "path": "RoguePotato/RogueOxidResolver.exe",
+      "family": "RoguePotato",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 127488,
+      "sha256": "9c5d53208d324f6f14e3417fe072be9b0f29aa35299f99c30bbaf602790b7480"
+    },
+    {
+      "path": "RoguePotato/RoguePotato.exe",
+      "family": "RoguePotato",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 159232,
+      "sha256": "a4778d50307de4ab13e48de90d72b7c5e19b4f9356a611a9faf95cfda0523c46"
+    },
+    {
+      "path": "RottenPotatoNG/RottenPotato_x64.exe",
+      "family": "RottenPotatoNG",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 340480,
+      "sha256": "0fb342f94f359c9f54205a979854b7a3a3910bb7e118f0fc44cead28ebd81f0d"
+    },
+    {
+      "path": "SharpCollection/ADCSPwn.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 734720,
+      "sha256": "261ca01737445fb91c1b212a6b1e54d1cb0641b4226b0ac2281ce8e6d4515db9"
+    },
+    {
+      "path": "SharpCollection/Certify.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 984064,
+      "sha256": "1383e8bca90e4be70ff2224b7e2af465a8f3d5bede1fde60f1ece71e3b02d346"
+    },
+    {
+      "path": "SharpCollection/ForgeCert.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 12800,
+      "sha256": "5a3def9b5597381905cd69556e158bc354d8dde4b084438c2e8170342b35f1a8"
+    },
+    {
+      "path": "SharpCollection/Inveigh.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 124928,
+      "sha256": "ebf9bf76500715fe20c475140d200e76b51c400406683827eabb2ab70f9f986f"
+    },
+    {
+      "path": "SharpCollection/PassTheCert.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 30208,
+      "sha256": "449312d5f4c96b2e2b17721dd2dd57d334bde03fd6237a818fe461a68cdb3756"
+    },
+    {
+      "path": "SharpCollection/Rubeus.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 474112,
+      "sha256": "aaeb69f93cfbbcb481b50157531d1f8a38fb13723262d49fe3a945361ba5a8b1"
+    },
+    {
+      "path": "SharpCollection/SafetyKatz.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 731136,
+      "sha256": "3951c1b03367cc1dc4de8290ec9507dad9f239a53b815f09691dea5a78c00901"
+    },
+    {
+      "path": "SharpCollection/Seatbelt.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 611328,
+      "sha256": "b1aa3540d33e0d73cfb1d7f4a1f0eacd23fb111f163ac0a53fed0692297c1601"
+    },
+    {
+      "path": "SharpCollection/SharpDPAPI.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 155136,
+      "sha256": "9931e7e40cdbeb4aa86eaf0a9e601334db8f850c729a5037d484b5126cef8375"
+    },
+    {
+      "path": "SharpCollection/SharpMove.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 41472,
+      "sha256": "bd045577771a029557f3baaf20b0dca051de7e40e90c92ecfeb21a25e51841e0"
+    },
+    {
+      "path": "SharpCollection/SharpSCCM.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 1125888,
+      "sha256": "60d99cc226b87a11ad4741602e5451f6525a58a9717fc02bf1205cd97cded0d2"
+    },
+    {
+      "path": "SharpCollection/SharpUp.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 39936,
+      "sha256": "5f20217b95a128e33a5a544c6f0af5343c426e976c773eb762d87afeb2c735ab"
+    },
+    {
+      "path": "SharpCollection/SharpView.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 734208,
+      "sha256": "2de7c499d346ea2d76ea38fd26e8d0fd21d89fd3ab8626bf101e1f8b6677c156"
+    },
+    {
+      "path": "SharpCollection/Snaffler.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 475648,
+      "sha256": "bde38d20d4eb1a86cc38a81cc92861b3d366210af570ecb6fea93ac1060eaa7d"
+    },
+    {
+      "path": "SharpCollection/StandIn.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 165888,
+      "sha256": "0a06de28c3a50a4370f222b90e280db2036ce26f2d8f538d2d44bb8c10eeaaf0"
+    },
+    {
+      "path": "SharpCollection/SweetPotato.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 926208,
+      "sha256": "699c219d3e7a3978af6e948096ba7c5a796044134433227ec7c2c8791d55bb07"
+    },
+    {
+      "path": "SharpCollection/Watson.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 26112,
+      "sha256": "e2d0c91968d56142db2f565f13f66dfc9360c1833321198151980824b7467358"
+    },
+    {
+      "path": "SharpCollection/Whisker.exe",
+      "family": "SharpCollection",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 41984,
+      "sha256": "ba79ae8b463c6521428eba99cad2cbf99e37290ecac9c16b2d06b3bc954524b8"
+    },
+    {
+      "path": "sudo_inject/exploit.sh",
+      "family": "sudo_inject",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 648,
+      "sha256": "884352e118b09b5b31a6f3357a7dc3e5fe9d6b0df0789a6fbada72e27c8f0f61"
+    },
+    {
+      "path": "sudo_inject/exploit_v2.sh",
+      "family": "sudo_inject",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 493,
+      "sha256": "1b9f7a61374ba2ed7e1720dad005504155a8a711367578d79cf298f11ae9f589"
+    },
+    {
+      "path": "sudo_inject/exploit_v3.sh",
+      "family": "sudo_inject",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 562,
+      "sha256": "9a53916a83efbbdca060834b237ef9c7e10ef61ea3328e174852e640df85a633"
+    },
+    {
+      "path": "windows-kernel-exploits/CVE-2018-8120-x64.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 94208,
+      "sha256": "e4ad3187cb6b9c882b0faa38629b56115f8b79fbb397f2bff1651a8fab432610"
+    },
+    {
+      "path": "windows-kernel-exploits/CVE-2018-8120-x86.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 82432,
+      "sha256": "d6b80180b007d9209eef7e552779abbc6f538ef6ddccf79fce9be8fb8be1b3c4"
+    },
+    {
+      "path": "windows-kernel-exploits/MS09-012-pr.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 73728,
+      "sha256": "26fbdc3ffffa56377d5d9aa815a7e5fd087dbe8e2b635d3cd78337aef339e8e6"
+    },
+    {
+      "path": "windows-kernel-exploits/MS10-059.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 784384,
+      "sha256": "faacf35c919c890fd1589afde94b9778d0da4ff831a2ee788032743f51d99f9d"
+    },
+    {
+      "path": "windows-kernel-exploits/MS11-046.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 112815,
+      "sha256": "f40766229d855fd040b99b66213c4683aa327a36ae45f82eff817a613235b7a4"
+    },
+    {
+      "path": "windows-kernel-exploits/MS14-058.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3824859,
+      "sha256": "5a424dc3d25c63afffa5b67ee3777397d7294e9a8b260e3aa7bc69f16ca4c077"
+    },
+    {
+      "path": "windows-kernel-exploits/MS14-068.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 3492558,
+      "sha256": "6782c5111abd17435851432895b55cc6371d323a06d710801551cea800bf65d0"
+    },
+    {
+      "path": "windows-kernel-exploits/MS15-051-x64.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 6144,
+      "sha256": "6dec25280bf44ce12e9bf1ff6701c107a85aba486a271d34a11c024cf22c2fbd"
+    },
+    {
+      "path": "windows-kernel-exploits/MS15-051-x86.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 5632,
+      "sha256": "634739f60e6acf05d05f1dffd9a4cb16c2cb7564184e871aeaf37fc82288d34a"
+    },
+    {
+      "path": "windows-kernel-exploits/MS16-032-x64.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 136192,
+      "sha256": "9afae820c8f7ed5616a4523a45968cfdabf646c5151a9c1db1a6e36d7a9d1e11"
+    },
+    {
+      "path": "windows-kernel-exploits/MS16-032-x86.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 112640,
+      "sha256": "9f023d74cf5e16a231660805adfc829c1be24a6b1fa6cb3ed41f0e37fe95062b"
+    },
+    {
+      "path": "windows-kernel-exploits/MS16-075-potato.exe",
+      "family": "windows-kernel-exploits",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 679936,
+      "sha256": "29cc79a451f73bac43dbe9455d2184770beae69f4e6bc2d824abd2cfbedf53f1"
+    },
+    {
+      "path": "ysoserial-java/ysoserial-all.jar",
+      "family": "ysoserial-java",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 59525376,
+      "sha256": "2c9bddd6a1a4ec66c1078ea97dacb61eb66d1c41aec7b6d21e3c72214ce170f1"
+    },
+    {
+      "path": "ysoserial.net/TestConsoleApp_YSONET.exe",
+      "family": "ysoserial.net",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 4608,
+      "sha256": "7643784c9d6b1fe1171446dad9cd1d77887e3d9d229329af59bb7d6c9a553481"
+    },
+    {
+      "path": "ysoserial.net/ysoserial.exe",
+      "family": "ysoserial.net",
+      "version": "legacy/unversioned",
+      "source": "legacy bundle; upstream URL not recorded",
+      "size": 558592,
+      "sha256": "3b62ba4040d0d470521dce089c13cd8491d1463acbcc8391a49923caa02c08e9"
+    }
+  ]
+}

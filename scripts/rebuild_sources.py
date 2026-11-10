@@ -6,7 +6,7 @@ Usage:
     python3 scripts/rebuild_sources.py netexec      # rebuild one source
     python3 scripts/rebuild_sources.py netexec hacktricks  # rebuild specific sources
 """
-import json, re, sys
+import json, re, shutil, sys
 from pathlib import Path
 import markdown as md_lib
 from inject_copy_blocks import inject_copy_blocks
@@ -324,6 +324,11 @@ def build_source(source_id: str, cfg: dict) -> list[dict]:
 
     label   = SOURCE_LABELS.get(source_id, source_id)
     out_dir = PROCESSED / source_id
+    # A source rebuild is authoritative. Remove the previous generated tree so
+    # pages deleted or renamed upstream do not survive forever as stale routes
+    # and search results.
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     if cfg.get('summary') and cfg['summary'].exists():

@@ -1,7 +1,7 @@
 [
   {
     "type": "section",
-    "title": "Active Directory",
+    "title": "Reference — Reference — Reference — Reference — Active Directory",
     "items": [
       {
         "type": "link",
@@ -97,7 +97,7 @@
   },
   {
     "type": "section",
-    "title": "Windows",
+    "title": "Reference — Reference — Reference — Reference — Windows",
     "items": [
       {
         "type": "link",
@@ -139,7 +139,7 @@
   },
   {
     "type": "section",
-    "title": "Linux",
+    "title": "Reference — Reference — Reference — Reference — Linux",
     "items": [
       {
         "type": "link",
@@ -157,7 +157,7 @@
   },
   {
     "type": "section",
-    "title": "Web Attacks",
+    "title": "Reference — Reference — Reference — Reference — Web Attacks",
     "items": [
       {
         "type": "link",
@@ -373,7 +373,7 @@
   },
   {
     "type": "section",
-    "title": "Enumeration",
+    "title": "Reference — Reference — Reference — Reference — Enumeration",
     "items": [
       {
         "type": "link",
@@ -421,7 +421,7 @@
   },
   {
     "type": "section",
-    "title": "Password Attacks",
+    "title": "Reference — Reference — Reference — Reference — Password Attacks",
     "items": [
       {
         "type": "link",
@@ -439,7 +439,7 @@
   },
   {
     "type": "section",
-    "title": "Pivoting & Tunneling",
+    "title": "Reference — Reference — Reference — Reference — Pivoting & Tunneling",
     "items": [
       {
         "type": "link",
@@ -463,7 +463,7 @@
   },
   {
     "type": "section",
-    "title": "File Transfers",
+    "title": "Reference — Reference — Reference — Reference — File Transfers",
     "items": [
       {
         "type": "link",
@@ -475,7 +475,7 @@
   },
   {
     "type": "section",
-    "title": "Wireless",
+    "title": "Reference — Reference — Reference — Reference — Wireless",
     "items": [
       {
         "type": "link",
@@ -517,7 +517,7 @@
   },
   {
     "type": "section",
-    "title": "Android & Mobile",
+    "title": "Reference — Reference — Reference — Reference — Android & Mobile",
     "items": [
       {
         "type": "link",
@@ -535,7 +535,7 @@
   },
   {
     "type": "section",
-    "title": "Exploitation",
+    "title": "Reference — Reference — Reference — Reference — Exploitation",
     "items": [
       {
         "type": "link",
@@ -595,7 +595,7 @@
   },
   {
     "type": "section",
-    "title": "Forensics & Malware",
+    "title": "Reference — Reference — Reference — Reference — Forensics & Malware",
     "items": [
       {
         "type": "link",
@@ -619,7 +619,7 @@
   },
   {
     "type": "section",
-    "title": "Getting Started",
+    "title": "Reference — Reference — Reference — Reference — Getting Started",
     "items": [
       {
         "type": "link",
@@ -655,7 +655,7 @@
   },
   {
     "type": "section",
-    "title": "NVIM",
+    "title": "Reference — Reference — Reference — Reference — NVIM",
     "items": [
       {
         "type": "link",
@@ -673,7 +673,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — Enumeration",
+    "title": "Reference — Reference — Reference — Reference — Reference — Enumeration",
     "items": [
       {
         "type": "link",
@@ -721,7 +721,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — File Transfers",
+    "title": "Reference — Reference — Reference — Reference — Reference — File Transfers",
     "items": [
       {
         "type": "link",
@@ -733,7 +733,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — Linux",
+    "title": "Reference — Reference — Reference — Reference — Reference — Linux",
     "items": [
       {
         "type": "link",
@@ -751,7 +751,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — Password Attacks",
+    "title": "Reference — Reference — Reference — Reference — Reference — Password Attacks",
     "items": [
       {
         "type": "link",
@@ -769,7 +769,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — Pivoting",
+    "title": "Reference — Reference — Reference — Reference — Reference — Pivoting",
     "items": [
       {
         "type": "link",
@@ -793,7 +793,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — Web Attacks",
+    "title": "Reference — Reference — Reference — Reference — Reference — Web Attacks",
     "items": [
       {
         "type": "link",
@@ -811,7 +811,7 @@
   },
   {
     "type": "section",
-    "title": "Reference — Windows",
+    "title": "Reference — Reference — Reference — Reference — Reference — Windows",
     "items": [
       {
         "type": "link",

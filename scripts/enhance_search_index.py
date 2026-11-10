@@ -35,16 +35,17 @@ def _headings(html: str) -> str:
 
 
 def _build_page_map() -> dict:
-    """Map path → processed JSON file."""
+    """Map (source, path) → processed page data."""
     page_map = {}
     for f in PROCESSED.rglob('*.json'):
         try:
             data = json.loads(f.read_text(encoding='utf-8'))
         except Exception:
             continue
+        source = data.get('source', '')
         path = data.get('path', '')
-        if path:
-            page_map[path] = data
+        if source and path:
+            page_map[(source, path)] = data
     return page_map
 
 
@@ -52,10 +53,17 @@ def enhance():
     idx = json.loads(INDEX.read_text(encoding='utf-8'))
     page_map = _build_page_map()
 
+    # A few upstream summaries list the same route more than once. Keep the
+    # first occurrence so search results remain stable and URLs are unique.
+    seen_urls = set()
+    idx = [entry for entry in idx
+           if not (entry.get('url') in seen_urls or seen_urls.add(entry.get('url')))]
+
     updated = 0
     for entry in idx:
+        source = entry.get('source', '')
         path = entry.get('path', '')
-        page = page_map.get(path)
+        page = page_map.get((source, path))
         if not page:
             continue
         html = page.get('html', '')

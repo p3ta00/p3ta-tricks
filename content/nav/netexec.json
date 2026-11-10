@@ -40,6 +40,11 @@
         ]
       },
       {
+        "title": "NetExec MCP",
+        "url": "/page/netexec/netexec-mcp",
+        "children": []
+      },
+      {
         "title": "NetExec Lab",
         "url": "/page/netexec/netexec-lab",
         "children": []
@@ -87,6 +92,27 @@
         ]
       },
       {
+        "title": "Configuration",
+        "url": "/page/netexec/getting-started/configuration",
+        "children": [
+          {
+            "title": "BloodHound Integration",
+            "url": "/page/netexec/getting-started/configuration/bloodhound-integration",
+            "children": []
+          },
+          {
+            "title": "Audit Mode",
+            "url": "/page/netexec/getting-started/configuration/audit-mode",
+            "children": []
+          },
+          {
+            "title": "Host Exclusion",
+            "url": "/page/netexec/getting-started/configuration/config-hostexclusion",
+            "children": []
+          }
+        ]
+      },
+      {
         "title": "Selecting & Using a Protocol",
         "url": "/page/netexec/getting-started/selecting-and-using-a-protocol",
         "children": []
@@ -124,21 +150,6 @@
       {
         "title": "Database General Usage",
         "url": "/page/netexec/getting-started/database-general-usage",
-        "children": []
-      },
-      {
-        "title": "BloodHound Integration",
-        "url": "/page/netexec/getting-started/bloodhound-integration",
-        "children": []
-      },
-      {
-        "title": "Audit Mode",
-        "url": "/page/netexec/getting-started/audit-mode",
-        "children": []
-      },
-      {
-        "title": "Ignore OpSec Warnings",
-        "url": "/page/netexec/getting-started/ignore-opsec-warnings",
         "children": []
       },
       {
@@ -194,6 +205,11 @@
           {
             "title": "Enumerate Hosts with SMB Signing Not Required",
             "url": "/page/netexec/smb-protocol/enumeration/smb-signing-not-required",
+            "children": []
+          },
+          {
+            "title": "Check SMB Signing Bypass (Re-Auth Swap)",
+            "url": "/page/netexec/smb-protocol/enumeration/reauth-swap",
             "children": []
           },
           {
@@ -254,6 +270,11 @@
           {
             "title": "Enumerate Local Groups",
             "url": "/page/netexec/smb-protocol/enumeration/enumerate-local-groups",
+            "children": []
+          },
+          {
+            "title": "Enumerate DA and EA Group Users' Presence",
+            "url": "/page/netexec/smb-protocol/enumeration/presence",
             "children": []
           },
           {
@@ -439,6 +460,11 @@
             "title": "Dump Event Log Creds(4688)",
             "url": "/page/netexec/smb-protocol/obtaining-credentials/eventlog-creds",
             "children": []
+          },
+          {
+            "title": "Dump Rclone",
+            "url": "/page/netexec/smb-protocol/obtaining-credentials/dump-rclone",
+            "children": []
           }
         ]
       },
@@ -499,6 +525,11 @@
         "children": []
       },
       {
+        "title": "Enumerate Domain OUs",
+        "url": "/page/netexec/ldap-protocol/enumerate-ous",
+        "children": []
+      },
+      {
         "title": "Query LDAP",
         "url": "/page/netexec/ldap-protocol/query-ldap",
         "children": []
@@ -551,6 +582,21 @@
       {
         "title": "Pre2k Computer Account Abuse",
         "url": "/page/netexec/ldap-protocol/pre2k",
+        "children": []
+      },
+      {
+        "title": "Modify Group",
+        "url": "/page/netexec/ldap-protocol/modify-group",
+        "children": []
+      },
+      {
+        "title": "Shadow Credentials Attack",
+        "url": "/page/netexec/ldap-protocol/shadow-credentials",
+        "children": []
+      },
+      {
+        "title": "ResetNightmare",
+        "url": "/page/netexec/ldap-protocol/resetnightmare",
         "children": []
       },
       {
@@ -730,6 +776,16 @@
       {
         "title": "MSSQL Linked Servers",
         "url": "/page/netexec/mssql-protocol/mssql-linked-servers",
+        "children": []
+      },
+      {
+        "title": "Dump Database Hashes",
+        "url": "/page/netexec/mssql-protocol/mssql-db-hash",
+        "children": []
+      },
+      {
+        "title": "List Database Backup",
+        "url": "/page/netexec/mssql-protocol/mssql-list-backups",
         "children": []
       }
     ]

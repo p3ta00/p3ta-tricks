@@ -1,14 +1,14 @@
 [
   {
     "type": "link",
-    "title": "API Key Leaks",
-    "url": "/page/patt/API-Key-Leaks",
+    "title": "Account Takeover",
+    "url": "/page/patt/Account-Takeover",
     "children": []
   },
   {
     "type": "link",
-    "title": "Account Takeover",
-    "url": "/page/patt/Account-Takeover",
+    "title": "API Key Leaks",
+    "url": "/page/patt/API-Key-Leaks",
     "children": []
   },
   {
@@ -21,36 +21,6 @@
     "type": "link",
     "title": "Business Logic Errors",
     "url": "/page/patt/Business-Logic-Errors",
-    "children": []
-  },
-  {
-    "type": "link",
-    "title": "CORS Misconfiguration",
-    "url": "/page/patt/CORS-Misconfiguration",
-    "children": []
-  },
-  {
-    "type": "link",
-    "title": "CRLF Injection",
-    "url": "/page/patt/CRLF-Injection",
-    "children": []
-  },
-  {
-    "type": "link",
-    "title": "CSS Injection",
-    "url": "/page/patt/CSS-Injection",
-    "children": []
-  },
-  {
-    "type": "link",
-    "title": "CSV Injection",
-    "url": "/page/patt/CSV-Injection",
-    "children": []
-  },
-  {
-    "type": "link",
-    "title": "CVE Exploits",
-    "url": "/page/patt/CVE-Exploits",
     "children": []
   },
   {
@@ -73,20 +43,38 @@
   },
   {
     "type": "link",
+    "title": "CORS Misconfiguration",
+    "url": "/page/patt/CORS-Misconfiguration",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "CRLF Injection",
+    "url": "/page/patt/CRLF-Injection",
+    "children": []
+  },
+  {
+    "type": "link",
     "title": "Cross-Site Request Forgery",
     "url": "/page/patt/Cross-Site-Request-Forgery",
     "children": []
   },
   {
     "type": "link",
-    "title": "DNS Rebinding",
-    "url": "/page/patt/DNS-Rebinding",
+    "title": "CSS Injection",
+    "url": "/page/patt/CSS-Injection",
     "children": []
   },
   {
     "type": "link",
-    "title": "DOM Clobbering",
-    "url": "/page/patt/DOM-Clobbering",
+    "title": "CSV Injection",
+    "url": "/page/patt/CSV-Injection",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "CVE Exploits",
+    "url": "/page/patt/CVE-Exploits",
     "children": []
   },
   {
@@ -105,6 +93,18 @@
     "type": "link",
     "title": "Directory Traversal",
     "url": "/page/patt/Directory-Traversal",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "DNS Rebinding",
+    "url": "/page/patt/DNS-Rebinding",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "DOM Clobbering",
+    "url": "/page/patt/DOM-Clobbering",
     "children": []
   },
   {
@@ -139,12 +139,6 @@
   },
   {
     "type": "link",
-    "title": "HTTP Parameter Pollution",
-    "url": "/page/patt/HTTP-Parameter-Pollution",
-    "children": []
-  },
-  {
-    "type": "link",
     "title": "Headless Browser",
     "url": "/page/patt/Headless-Browser",
     "children": []
@@ -153,6 +147,12 @@
     "type": "link",
     "title": "Hidden Parameters",
     "url": "/page/patt/Hidden-Parameters",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "HTTP Parameter Pollution",
+    "url": "/page/patt/HTTP-Parameter-Pollution",
     "children": []
   },
   {
@@ -187,26 +187,26 @@
   },
   {
     "type": "link",
-    "title": "JSON Web Token",
-    "url": "/page/patt/JSON-Web-Token",
-    "children": []
-  },
-  {
-    "type": "link",
     "title": "Java RMI",
     "url": "/page/patt/Java-RMI",
     "children": []
   },
   {
     "type": "link",
-    "title": "LDAP Injection",
-    "url": "/page/patt/LDAP-Injection",
+    "title": "JSON Web Token",
+    "url": "/page/patt/JSON-Web-Token",
     "children": []
   },
   {
     "type": "link",
     "title": "LaTeX Injection",
     "url": "/page/patt/LaTeX-Injection",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "LDAP Injection",
+    "url": "/page/patt/LDAP-Injection",
     "children": []
   },
   {
@@ -229,14 +229,14 @@
   },
   {
     "type": "link",
-    "title": "ORM Leak",
-    "url": "/page/patt/ORM-Leak",
+    "title": "Open Redirect",
+    "url": "/page/patt/Open-Redirect",
     "children": []
   },
   {
     "type": "link",
-    "title": "Open Redirect",
-    "url": "/page/patt/Open-Redirect",
+    "title": "ORM Leak",
+    "url": "/page/patt/ORM-Leak",
     "children": []
   },
   {
@@ -283,12 +283,6 @@
   },
   {
     "type": "link",
-    "title": "SQL Injection",
-    "url": "/page/patt/SQL-Injection",
-    "children": []
-  },
-  {
-    "type": "link",
     "title": "Server Side Include Injection",
     "url": "/page/patt/Server-Side-Include-Injection",
     "children": []
@@ -303,6 +297,12 @@
     "type": "link",
     "title": "Server Side Template Injection",
     "url": "/page/patt/Server-Side-Template-Injection",
+    "children": []
+  },
+  {
+    "type": "link",
+    "title": "SQL Injection",
+    "url": "/page/patt/SQL-Injection",
     "children": []
   },
   {

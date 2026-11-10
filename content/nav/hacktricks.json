@@ -14,6 +14,11 @@
         "children": []
       },
       {
+        "title": "Cookies Policy",
+        "url": "/page/hacktricks/welcome/cookies-policy",
+        "children": []
+      },
+      {
         "title": "About the author",
         "url": "/page/hacktricks/welcome/about-the-author",
         "children": []
@@ -30,14 +35,29 @@
         "children": []
       },
       {
+        "title": "Post-Exploitation Collection Tools",
+        "url": "/page/hacktricks/generic-methodologies-and-resources/post-exploitation-collection-tools",
+        "children": []
+      },
+      {
         "title": "Fuzzing Methodology",
         "url": "/page/hacktricks/generic-methodologies-and-resources/fuzzing",
+        "children": []
+      },
+      {
+        "title": "Proof Assistant and Formal Verification Security",
+        "url": "/page/hacktricks/generic-methodologies-and-resources/proof-assistant-formal-verification-security",
         "children": []
       },
       {
         "title": "External Recon Methodology",
         "url": "/page/hacktricks/generic-methodologies-and-resources/external-recon-methodology",
         "children": [
+          {
+            "title": "Reconnaissance and Threat-Intelligence APIs",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/external-recon-methodology/reconnaissance-and-threat-intelligence-apis",
+            "children": []
+          },
           {
             "title": "Database Leaks",
             "url": "/page/hacktricks/generic-methodologies-and-resources/external-recon-methodology/database-leaks",
@@ -62,6 +82,11 @@
           {
             "title": "DHCPv6",
             "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-network/dhcpv6",
+            "children": []
+          },
+          {
+            "title": "DDS/RTPS Security and Service Impersonation",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-network/dds-rtps-security",
             "children": []
           },
           {
@@ -122,17 +147,162 @@
         ]
       },
       {
-        "title": "Pentesting Wifi",
+        "title": "Wi-Fi Pentesting Methodology",
         "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi",
         "children": [
           {
-            "title": "Enable Nexmon Monitor And Injection On Android",
-            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/enable-nexmon-monitor-and-injection-on-android",
+            "title": "Wi-Fi Fundamentals",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-fundamentals",
+            "children": [
+              {
+                "title": "Hardware, Drivers and Linux",
+                "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-hardware-drivers-and-linux",
+                "children": [
+                  {
+                    "title": "Nexmon Monitor and Injection on Android (formerly Enable Nexmon Monitor And Injection On Android)",
+                    "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/enable-nexmon-monitor-and-injection-on-android",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "Reconnaissance and Wardriving",
+                "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-reconnaissance-and-wardriving",
+                "children": [
+                  {
+                    "title": "Wi-Fi Reconnaissance Setups",
+                    "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-reconnaissance-setups",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "Wi-Fi Tools Reference",
+                "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-tools-reference",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "Open Wi-Fi (OPN)",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/open-wifi-opn",
             "children": []
           },
           {
-            "title": "Evil Twin EAP-TLS",
-            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/evil-twin-eap-tls",
+            "title": "WEP",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wep",
+            "children": []
+          },
+          {
+            "title": "WPS",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wps",
+            "children": []
+          },
+          {
+            "title": "WPA and TKIP",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wpa-tkip",
+            "children": []
+          },
+          {
+            "title": "WPA2-Personal and PSK",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wpa2-personal-psk",
+            "children": []
+          },
+          {
+            "title": "WPA3-Personal and SAE",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wpa3-personal-sae",
+            "children": []
+          },
+          {
+            "title": "OWE",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/owe",
+            "children": []
+          },
+          {
+            "title": "WPA-Enterprise and 802.1X",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wpa-enterprise-8021x",
+            "children": [
+              {
+                "title": "EAP Methods and Attacks",
+                "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/eap-methods",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "Passpoint, Hotspot 2.0 and OpenRoaming",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/passpoint-hotspot-2.0-and-openroaming",
+            "children": []
+          },
+          {
+            "title": "Protected Management Frames",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/protected-management-frames-pmf",
+            "children": []
+          },
+          {
+            "title": "Captive Portals",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/captive-portals",
+            "children": []
+          },
+          {
+            "title": "Wi-Fi Easy Connect and DPP",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-easy-connect-dpp",
+            "children": []
+          },
+          {
+            "title": "Wi-Fi Direct, Aware, AWDL and IoT Provisioning",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-direct-and-iot-provisioning",
+            "children": []
+          },
+          {
+            "title": "Wi-Fi Mesh and EasyMesh",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-mesh-and-easymesh",
+            "children": []
+          },
+          {
+            "title": "Modern Wi-Fi: Roaming, 6 GHz and MLO",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/modern-wifi-roaming-6ghz-and-mlo",
+            "children": []
+          },
+          {
+            "title": "Evil Twin, Rogue AP and Client Association Attacks",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/evil-twin-rogue-ap-and-client-association-attacks",
+            "children": [
+              {
+                "title": "Enterprise EAP Evil Twin (including EAP-TLS) / Evil Twin EAP-TLS",
+                "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/evil-twin-eap-tls",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "Wi-Fi DoS and Management-Frame Attacks",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-dos-and-management-frame-attacks",
+            "children": []
+          },
+          {
+            "title": "Post-Association and Client-Isolation Attacks",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-post-association-and-client-isolation-attacks",
+            "children": []
+          },
+          {
+            "title": "FragAttacks and Fragile Frames",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/fragattacks",
+            "children": []
+          },
+          {
+            "title": "Wi-Fi Privacy, Tracking and Side Channels",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-privacy-tracking-and-side-channels",
+            "children": []
+          },
+          {
+            "title": "Client and Supplicant Assessment",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-client-and-supplicant-assessment",
+            "children": []
+          },
+          {
+            "title": "Defense, Monitoring and WIDS",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/pentesting-wifi/wifi-defense-monitoring-and-wids",
             "children": []
           }
         ]
@@ -220,6 +390,11 @@
           {
             "title": "Ios Backup Forensics",
             "url": "/page/hacktricks/generic-methodologies-and-resources/basic-forensic-methodology/ios-backup-forensics",
+            "children": []
+          },
+          {
+            "title": "Android Forensics",
+            "url": "/page/hacktricks/generic-methodologies-and-resources/basic-forensic-methodology/android-forensics",
             "children": []
           },
           {
@@ -375,6 +550,11 @@
         ]
       },
       {
+        "title": "Rust Basics",
+        "url": "/page/hacktricks/generic-methodologies-and-resources/rust-basics",
+        "children": []
+      },
+      {
         "title": "Python Sandbox Escape & Pyscript",
         "url": "/page/hacktricks/generic-methodologies-and-resources/python",
         "children": [
@@ -420,18 +600,8 @@
             "children": []
           },
           {
-            "title": "venv",
-            "url": "/page/hacktricks/generic-methodologies-and-resources/python/venv",
-            "children": []
-          },
-          {
             "title": "Web Requests",
             "url": "/page/hacktricks/generic-methodologies-and-resources/python/web-requests",
-            "children": []
-          },
-          {
-            "title": "Bruteforce hash (few chars)",
-            "url": "/page/hacktricks/generic-methodologies-and-resources/python/bruteforce-hash-few-chars",
             "children": []
           },
           {
@@ -452,45 +622,121 @@
         "children": []
       },
       {
-        "title": "Blockchain & Crypto",
-        "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies",
-        "children": [
-          {
-            "title": "Defi/AMM Hook Precision",
-            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/defi-amm-hook-precision",
-            "children": []
-          },
-          {
-            "title": "Defi Amm Virtual Balance Cache Exploitation",
-            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/defi-amm-virtual-balance-cache-exploitation",
-            "children": []
-          },
-          {
-            "title": "Mutation Testing With Slither",
-            "url": "/page/hacktricks/blockchain/smart-contract-security/mutation-testing-with-slither",
-            "children": []
-          },
-          {
-            "title": "Erc 4337 Smart Account Security Pitfalls",
-            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/erc-4337-smart-account-security-pitfalls",
-            "children": []
-          },
-          {
-            "title": "Value Centric Web3 Red Teaming",
-            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/value-centric-web3-red-teaming",
-            "children": []
-          },
-          {
-            "title": "Web3 Signing Workflow Compromise Safe Delegatecall Proxy Takeover",
-            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/web3-signing-workflow-compromise-safe-delegatecall-proxy-takeover",
-            "children": []
-          }
-        ]
-      },
-      {
         "title": "Lua Sandbox Escape",
         "url": "/page/hacktricks/generic-methodologies-and-resources/lua/bypass-lua-sandboxes",
         "children": []
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "title": "PRIVACY",
+    "items": [
+      {
+        "title": "Offensive Privacy, Attribution Evasion and OPSEC",
+        "url": "/page/hacktricks/privacy",
+        "children": [
+          {
+            "title": "Anonymous Internet Access Technique Catalog",
+            "url": "/page/hacktricks/privacy/anonymous-internet-access-techniques",
+            "children": []
+          },
+          {
+            "title": "Anonymous Payment Technique Catalog",
+            "url": "/page/hacktricks/privacy/anonymous-payment-techniques",
+            "children": []
+          },
+          {
+            "title": "Capture-Resilient Authorized Field Nodes",
+            "url": "/page/hacktricks/privacy/capture-resilient-authorized-field-nodes",
+            "children": []
+          },
+          {
+            "title": "Offensive Infrastructure and Attribution Evasion",
+            "url": "/page/hacktricks/privacy/offensive-infrastructure-and-attribution-evasion",
+            "children": []
+          },
+          {
+            "title": "Covert Physical and Wireless Access",
+            "url": "/page/hacktricks/privacy/covert-physical-wireless-access",
+            "children": []
+          },
+          {
+            "title": "Government and APT Case Studies",
+            "url": "/page/hacktricks/privacy/government-and-apt-case-studies",
+            "children": []
+          },
+          {
+            "title": "Financial Obfuscation Tradecraft",
+            "url": "/page/hacktricks/privacy/financial-obfuscation-tradecraft",
+            "children": []
+          },
+          {
+            "title": "Attribution, Detection and Countermeasures",
+            "url": "/page/hacktricks/privacy/attribution-detection-and-countermeasures",
+            "children": []
+          },
+          {
+            "title": "Authorized Adversary-Emulation Labs",
+            "url": "/page/hacktricks/privacy/authorized-adversary-emulation-labs",
+            "children": []
+          },
+          {
+            "title": "Threat Modeling and Identity Separation",
+            "url": "/page/hacktricks/privacy/threat-modeling-and-identity-separation",
+            "children": []
+          },
+          {
+            "title": "Network Privacy and Anonymous Connectivity",
+            "url": "/page/hacktricks/privacy/network-privacy-and-anonymous-connectivity",
+            "children": []
+          },
+          {
+            "title": "Advanced Network Privacy Architectures",
+            "url": "/page/hacktricks/privacy/advanced-network-privacy-architectures",
+            "children": []
+          },
+          {
+            "title": "Privacy Operating Systems",
+            "url": "/page/hacktricks/privacy/privacy-operating-systems",
+            "children": []
+          },
+          {
+            "title": "Privacy-Preserving Communications and Sharing",
+            "url": "/page/hacktricks/privacy/privacy-preserving-communications-and-sharing",
+            "children": []
+          },
+          {
+            "title": "Authorized Red-Team Infrastructure",
+            "url": "/page/hacktricks/privacy/authorized-red-team-infrastructure",
+            "children": []
+          },
+          {
+            "title": "Private Digital Payments",
+            "url": "/page/hacktricks/privacy/private-digital-payments",
+            "children": []
+          },
+          {
+            "title": "Cryptocurrency Privacy",
+            "url": "/page/hacktricks/privacy/cryptocurrency-privacy",
+            "children": []
+          },
+          {
+            "title": "Privacy-Preserving Payment Protocols",
+            "url": "/page/hacktricks/privacy/privacy-preserving-payment-protocols",
+            "children": []
+          },
+          {
+            "title": "Reproducible Privacy Testing",
+            "url": "/page/hacktricks/privacy/reproducible-privacy-testing",
+            "children": []
+          },
+          {
+            "title": "Operational Privacy Playbooks",
+            "url": "/page/hacktricks/privacy/operational-privacy-playbooks",
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -506,11 +752,6 @@
       {
         "title": "Brute Force - CheatSheet",
         "url": "/page/hacktricks/generic-hacking/brute-force",
-        "children": []
-      },
-      {
-        "title": "Esim Javacard Exploitation",
-        "url": "/page/hacktricks/generic-hacking/esim-javacard-exploitation",
         "children": []
       },
       {
@@ -538,16 +779,16 @@
             "children": []
           },
           {
-            "title": "Expose local to the internet",
-            "url": "/page/hacktricks/generic-hacking/reverse-shells/expose-local-to-the-internet",
-            "children": []
-          },
-          {
             "title": "Full TTYs",
             "url": "/page/hacktricks/generic-hacking/reverse-shells/full-ttys",
             "children": []
           }
         ]
+      },
+      {
+        "title": "Expose Local Services to the Internet",
+        "url": "/page/hacktricks/generic-hacking/expose-local-to-the-internet",
+        "children": []
       },
       {
         "title": "Search Exploits",
@@ -563,182 +804,453 @@
   },
   {
     "type": "section",
-    "title": "LINUX HARDENING",
+    "title": "LINUX HARDENING / LINUX - HARDENING",
     "items": [
       {
-        "title": "Linux Basics",
+        "title": "Linux - Hardening Overview",
+        "url": "/page/hacktricks/linux-hardening",
+        "children": []
+      },
+      {
+        "title": "Linux - Basics (formerly Linux Basics)",
         "url": "/page/hacktricks/linux-hardening/linux-basics",
-        "children": []
-      },
-      {
-        "title": "Checklist - Linux Privilege Escalation",
-        "url": "/page/hacktricks/linux-hardening/linux-privilege-escalation-checklist",
-        "children": []
-      },
-      {
-        "title": "Linux Privilege Escalation",
-        "url": "/page/hacktricks/linux-hardening/privilege-escalation",
         "children": [
           {
-            "title": "Android Rooting Frameworks Manager Auth Bypass Syscall Hook",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/android-rooting-frameworks-manager-auth-bypass-syscall-hook",
+            "title": "Linux - Privilege Escalation",
+            "url": "/page/hacktricks/linux-hardening/linux-basics/linux-privilege-escalation",
             "children": []
           },
           {
-            "title": "Vmware Tools Service Discovery Untrusted Search Path Cve 2025 41244",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/vmware-tools-service-discovery-untrusted-search-path-cve-2025-41244",
+            "title": "Linux - Shell Startup, Aliases, and History",
+            "url": "/page/hacktricks/linux-hardening/linux-basics/shell-startup-aliases-and-history",
             "children": []
           },
           {
-            "title": "Arbitrary File Write to Root",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/write-to-root",
+            "title": "Linux - Useful Commands",
+            "url": "/page/hacktricks/linux-hardening/linux-basics/useful-linux-commands",
             "children": []
           },
           {
-            "title": "Cisco - vmanage",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/cisco-vmanage",
+            "title": "Linux - Environment Variables",
+            "url": "/page/hacktricks/linux-hardening/linux-basics/linux-environment-variables",
             "children": []
           },
           {
-            "title": "Containerd (ctr) Privilege Escalation",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/containerd-ctr-privilege-escalation",
-            "children": []
-          },
-          {
-            "title": "D-Bus Enumeration & Command Injection Privilege Escalation",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/d-bus-enumeration-and-command-injection-privilege-escalation",
-            "children": []
-          },
-          {
-            "title": "Container Security",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security",
+            "title": "Linux - Bypass Restrictions",
+            "url": "/page/hacktricks/linux-hardening/linux-basics/bypass-linux-restrictions",
             "children": [
               {
-                "title": "Runtimes And Engines",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/runtimes-and-engines",
-                "children": []
-              },
-              {
-                "title": "Runtime API And Daemon Exposure",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/runtime-api-and-daemon-exposure",
-                "children": []
-              },
-              {
-                "title": "Authorization Plugins",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/authorization-plugins",
-                "children": []
-              },
-              {
-                "title": "Image Security And Secrets",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/image-security-and-secrets",
-                "children": []
-              },
-              {
-                "title": "Assessment And Hardening",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/assessment-and-hardening",
-                "children": []
-              },
-              {
-                "title": "Sensitive Host Mounts",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/sensitive-host-mounts",
-                "children": []
-              },
-              {
-                "title": "Privileged Containers",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/privileged-containers",
-                "children": []
-              },
-              {
-                "title": "Distroless",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/distroless",
-                "children": []
-              },
-              {
-                "title": "Protections",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections",
+                "title": "Linux - Bypass FS protections: read-only / no-exec / Distroless",
+                "url": "/page/hacktricks/linux-hardening/linux-basics/bypass-linux-restrictions/bypass-fs-protections-read-only-no-exec-distroless",
                 "children": [
                   {
-                    "title": "AppArmor",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/apparmor",
+                    "title": "Linux - DDexec / EverythingExec",
+                    "url": "/page/hacktricks/linux-hardening/linux-basics/bypass-linux-restrictions/bypass-fs-protections-read-only-no-exec-distroless/ddexec",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Linux - Main System Information (formerly Main System Information)",
+        "url": "/page/hacktricks/linux-hardening/main-system-information",
+        "children": [
+          {
+            "title": "Linux - Kernel Vulnerability Assessment",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-vulnerability-assessment",
+            "children": []
+          },
+          {
+            "title": "Linux - Kernel Modules and modprobe Abuse",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-modules-and-modprobe",
+            "children": []
+          },
+          {
+            "title": "Linux - Sudo Command Abuse",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/sudo-command-abuse",
+            "children": []
+          },
+          {
+            "title": "Linux - SUSE Session and Disk-Service Escalation Indicators",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/suse-session-and-disk-service-escalation",
+            "children": []
+          },
+          {
+            "title": "Linux - Symlinks, Hardlinks, and File Descriptors",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/filesystem-links-and-file-descriptors",
+            "children": []
+          },
+          {
+            "title": "Linux - Filesystem, Inodes and Recovery",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/filesystem-inodes-and-recovery",
+            "children": []
+          },
+          {
+            "title": "Linux - Privilege Escalation Checklist",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/linux-privilege-escalation-checklist",
+            "children": []
+          },
+          {
+            "title": "Linux - Escaping from Jails",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/escaping-from-limited-bash",
+            "children": []
+          },
+          {
+            "title": "Linux - Kernel/LPE/CVE Material (formerly Kernel/LPE/CVE material)",
+            "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-lpe-cves",
+            "children": [
+              {
+                "title": "Linux - Vmware Tools Service Discovery Untrusted Search Path Cve 2025 41244",
+                "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-lpe-cves/vmware-tools-service-discovery-untrusted-search-path-cve-2025-41244",
+                "children": []
+              },
+              {
+                "title": "Linux - Copy Fail Af Alg Splice Page Cache Overwrite Cve 2026 31431",
+                "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-lpe-cves/copy-fail-af_alg-splice-page-cache-overwrite-cve-2026-31431",
+                "children": []
+              },
+              {
+                "title": "Open vSwitch Forwarded SKB Marker Stripping to ESP Page Cache Writes",
+                "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-lpe-cves/open-vswitch-forwarded-skb-marker-stripping-esp-page-cache-write",
+                "children": []
+              },
+              {
+                "title": "Linux - Ptrace Exit Race Pidfd Getfd Fd Theft (Linux Ptrace Exit Race Pidfd Getfd Fd Theft) / Linux - Ptrace Exit Race Pidfd Getfd Fd Theft (formerly Linux Ptrace Exit Race Pidfd Getfd Fd Theft)",
+                "url": "/page/hacktricks/linux-hardening/main-system-information/kernel-lpe-cves/linux-ptrace-exit-race-pidfd_getfd-fd-theft",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Linux - User Information (formerly User Information)",
+        "url": "/page/hacktricks/linux-hardening/user-information",
+        "children": [
+          {
+            "title": "Linux - Users, Sessions, and Credential Artifacts",
+            "url": "/page/hacktricks/linux-hardening/user-information/user-and-session-triage",
+            "children": []
+          },
+          {
+            "title": "Linux - euid, ruid, suid",
+            "url": "/page/hacktricks/linux-hardening/user-information/euid-ruid-suid",
+            "children": []
+          },
+          {
+            "title": "Linux - Interesting Groups for Privilege Escalation",
+            "url": "/page/hacktricks/linux-hardening/user-information/interesting-groups-linux-pe",
+            "children": [
+              {
+                "title": "Linux - lxd/lxc Group - Privilege escalation",
+                "url": "/page/hacktricks/linux-hardening/user-information/interesting-groups-linux-pe/lxd-privilege-escalation",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "Linux - SSH Forward Agent exploitation",
+            "url": "/page/hacktricks/linux-hardening/user-information/ssh-forward-agent-exploitation",
+            "children": []
+          },
+          {
+            "title": "Linux - Active Directory",
+            "url": "/page/hacktricks/linux-hardening/user-information/linux-active-directory",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "Linux - Interesting Files & Permissions (formerly Interesting Files & Permissions)",
+        "url": "/page/hacktricks/linux-hardening/interesting-files-permissions",
+        "children": [
+          {
+            "title": "Linux - SUID, SGID, ACLs, and Sensitive Files",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/suid-sgid-and-acl-triage",
+            "children": []
+          },
+          {
+            "title": "Linux - Arbitrary File Write to Root",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/write-to-root",
+            "children": []
+          },
+          {
+            "title": "Linux - Capabilities",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/linux-capabilities",
+            "children": []
+          },
+          {
+            "title": "Linux - SUID Shared Library and Linker Abuse",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/suid-shared-library-and-linker-abuse",
+            "children": []
+          },
+          {
+            "title": "Linux - ld.so privesc exploit example",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/ld.so.conf-example",
+            "children": []
+          },
+          {
+            "title": "Linux - NFS no_root_squash/no_all_squash misconfiguration PE",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/nfs-no_root_squash-misconfiguration-pe",
+            "children": []
+          },
+          {
+            "title": "Linux - Wildcards Spare tricks",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/wildcards-spare-tricks",
+            "children": []
+          },
+          {
+            "title": "Linux - SELinux",
+            "url": "/page/hacktricks/linux-hardening/interesting-files-permissions/selinux",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "Linux - Network Information (formerly Network Information)",
+        "url": "/page/hacktricks/linux-hardening/network-information",
+        "children": [
+          {
+            "title": "Linux - Traffic Capture, Firewall, and Egress Triage",
+            "url": "/page/hacktricks/linux-hardening/network-information/traffic-capture-and-firewall-egress",
+            "children": []
+          },
+          {
+            "title": "Linux - Local Network and Socket Triage",
+            "url": "/page/hacktricks/linux-hardening/network-information/local-network-and-socket-triage",
+            "children": []
+          },
+          {
+            "title": "Linux - Socket Command Injection",
+            "url": "/page/hacktricks/linux-hardening/network-information/socket-command-injection",
+            "children": []
+          },
+          {
+            "title": "Linux - Cisco - vmanage",
+            "url": "/page/hacktricks/linux-hardening/network-information/cisco-vmanage",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "Linux - Software Information (formerly Software Information)",
+        "url": "/page/hacktricks/linux-hardening/software-information",
+        "children": [
+          {
+            "title": "Linux - Local Web and Authentication Services",
+            "url": "/page/hacktricks/linux-hardening/software-information/local-web-and-auth-services",
+            "children": []
+          },
+          {
+            "title": "Linux - Databases and Secret Material",
+            "url": "/page/hacktricks/linux-hardening/software-information/databases-and-secret-material",
+            "children": []
+          },
+          {
+            "title": "Linux - PAM - Pluggable Authentication Modules",
+            "url": "/page/hacktricks/linux-hardening/software-information/pam-pluggable-authentication-modules",
+            "children": []
+          },
+          {
+            "title": "Linux - FreeIPA Pentesting",
+            "url": "/page/hacktricks/linux-hardening/software-information/freeipa-pentesting",
+            "children": []
+          },
+          {
+            "title": "Linux - Logstash",
+            "url": "/page/hacktricks/linux-hardening/software-information/logstash",
+            "children": []
+          },
+          {
+            "title": "Linux - Splunk LPE and Persistence",
+            "url": "/page/hacktricks/linux-hardening/software-information/splunk-lpe-and-persistence",
+            "children": []
+          },
+          {
+            "title": "Linux - Node inspector/CEF debug abuse",
+            "url": "/page/hacktricks/linux-hardening/software-information/electron-cef-chromium-debugger-abuse",
+            "children": []
+          },
+          {
+            "title": "Linux - Android Rooting Frameworks Manager Auth Bypass Syscall Hook",
+            "url": "/page/hacktricks/linux-hardening/software-information/android-rooting-frameworks-manager-auth-bypass-syscall-hook",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "Linux - Processes, Crontab, Systemd, D-Bus (formerly Processes, Crontab, Systemd, D-Bus)",
+        "url": "/page/hacktricks/linux-hardening/processes-crontab-systemd-dbus",
+        "children": [
+          {
+            "title": "Linux - Process Enumeration and Service Paths",
+            "url": "/page/hacktricks/linux-hardening/processes-crontab-systemd-dbus/process-enumeration-and-service-paths",
+            "children": []
+          },
+          {
+            "title": "Linux - Cron Jobs and Systemd Timers",
+            "url": "/page/hacktricks/linux-hardening/processes-crontab-systemd-dbus/cron-and-systemd-timers",
+            "children": []
+          },
+          {
+            "title": "Linux - D-Bus Enumeration & Command Injection Privilege Escalation",
+            "url": "/page/hacktricks/linux-hardening/processes-crontab-systemd-dbus/d-bus-enumeration-and-command-injection-privilege-escalation",
+            "children": []
+          },
+          {
+            "title": "Linux - Payloads to execute",
+            "url": "/page/hacktricks/linux-hardening/processes-crontab-systemd-dbus/payloads-to-execute",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "Linux - Containers, Namespaces (formerly Containers, Namespaces)",
+        "url": "/page/hacktricks/linux-hardening/containers-namespaces",
+        "children": [
+          {
+            "title": "Linux - Containerd (ctr) Privilege Escalation",
+            "url": "/page/hacktricks/linux-hardening/containers-namespaces/containerd-ctr-privilege-escalation",
+            "children": []
+          },
+          {
+            "title": "Linux - RunC Privilege Escalation",
+            "url": "/page/hacktricks/linux-hardening/containers-namespaces/runc-privilege-escalation",
+            "children": []
+          },
+          {
+            "title": "Linux - Container Security",
+            "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security",
+            "children": [
+              {
+                "title": "Linux - Runtimes And Engines",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/runtimes-and-engines",
+                "children": []
+              },
+              {
+                "title": "Linux - Runtime API And Daemon Exposure",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/runtime-api-and-daemon-exposure",
+                "children": []
+              },
+              {
+                "title": "Linux - Authorization Plugins",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/authorization-plugins",
+                "children": []
+              },
+              {
+                "title": "Linux - Image Security And Secrets",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/image-security-and-secrets",
+                "children": []
+              },
+              {
+                "title": "Linux - Assessment And Hardening",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/assessment-and-hardening",
+                "children": []
+              },
+              {
+                "title": "Linux - Sensitive Host Mounts",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/sensitive-host-mounts",
+                "children": []
+              },
+              {
+                "title": "Linux - Privileged Containers",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/privileged-containers",
+                "children": []
+              },
+              {
+                "title": "Linux - Distroless",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/distroless",
+                "children": []
+              },
+              {
+                "title": "Linux - Protections",
+                "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections",
+                "children": [
+                  {
+                    "title": "Linux - AppArmor",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/apparmor",
                     "children": []
                   },
                   {
-                    "title": "Capabilities",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/capabilities",
+                    "title": "Linux - Capabilities",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/capabilities",
                     "children": []
                   },
                   {
-                    "title": "CGroups",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/cgroups",
+                    "title": "Linux - CGroups",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/cgroups",
                     "children": []
                   },
                   {
-                    "title": "Masked Paths",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/masked-paths",
+                    "title": "Linux - Masked Paths",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/masked-paths",
                     "children": []
                   },
                   {
-                    "title": "No New Privileges",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/no-new-privileges",
+                    "title": "Linux - No New Privileges",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/no-new-privileges",
                     "children": []
                   },
                   {
-                    "title": "Read Only Paths",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/read-only-paths",
+                    "title": "Linux - Read Only Paths",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/read-only-paths",
                     "children": []
                   },
                   {
-                    "title": "Seccomp",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/seccomp",
+                    "title": "Linux - Seccomp",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/seccomp",
                     "children": []
                   },
                   {
-                    "title": "SELinux",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/selinux",
+                    "title": "Linux - SELinux",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/selinux",
                     "children": []
                   },
                   {
-                    "title": "Namespaces",
-                    "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces",
+                    "title": "Linux - Namespaces",
+                    "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces",
                     "children": [
                       {
-                        "title": "CGroup Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/cgroup-namespace",
+                        "title": "Linux - CGroup Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/cgroup-namespace",
                         "children": []
                       },
                       {
-                        "title": "IPC Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/ipc-namespace",
+                        "title": "Linux - IPC Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/ipc-namespace",
                         "children": []
                       },
                       {
-                        "title": "PID Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/pid-namespace",
+                        "title": "Linux - PID Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/pid-namespace",
                         "children": []
                       },
                       {
-                        "title": "Mount Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/mount-namespace",
+                        "title": "Linux - Mount Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/mount-namespace",
                         "children": []
                       },
                       {
-                        "title": "Network Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/network-namespace",
+                        "title": "Linux - Network Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/network-namespace",
                         "children": []
                       },
                       {
-                        "title": "Time Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/time-namespace",
+                        "title": "Linux - Time Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/time-namespace",
                         "children": []
                       },
                       {
-                        "title": "User Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/user-namespace",
+                        "title": "Linux - User Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/user-namespace",
                         "children": []
                       },
                       {
-                        "title": "UTS Namespace",
-                        "url": "/page/hacktricks/linux-hardening/privilege-escalation/container-security/protections/namespaces/uts-namespace",
+                        "title": "Linux - UTS Namespace",
+                        "url": "/page/hacktricks/linux-hardening/containers-namespaces/container-security/protections/namespaces/uts-namespace",
                         "children": []
                       }
                     ]
@@ -746,152 +1258,29 @@
                 ]
               }
             ]
-          },
-          {
-            "title": "Escaping from Jails",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/escaping-from-limited-bash",
-            "children": []
-          },
-          {
-            "title": "Copy Fail Af Alg Splice Page Cache Overwrite Cve 2026 31431",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-kernel-exploitation/copy-fail-af_alg-splice-page-cache-overwrite-cve-2026-31431",
-            "children": []
-          },
-          {
-            "title": "Posix Cpu Timers Toctou Cve 2025 38352",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-kernel-exploitation/posix-cpu-timers-toctou-cve-2025-38352",
-            "children": []
-          },
-          {
-            "title": "Linux Ptrace Exit Race Pidfd Getfd Fd Theft",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-kernel-exploitation/linux-ptrace-exit-race-pidfd_getfd-fd-theft",
-            "children": []
-          },
-          {
-            "title": "euid, ruid, suid",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/euid-ruid-suid",
-            "children": []
-          },
-          {
-            "title": "Interesting Groups - Linux Privesc",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/interesting-groups-linux-pe",
-            "children": [
-              {
-                "title": "lxd/lxc Group - Privilege escalation",
-                "url": "/page/hacktricks/linux-hardening/privilege-escalation/interesting-groups-linux-pe/lxd-privilege-escalation",
-                "children": []
-              }
-            ]
-          },
-          {
-            "title": "Logstash",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/logstash",
-            "children": []
-          },
-          {
-            "title": "ld.so privesc exploit example",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/ld.so.conf-example",
-            "children": []
-          },
-          {
-            "title": "Linux Active Directory",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-active-directory",
-            "children": []
-          },
-          {
-            "title": "Linux Capabilities",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/linux-capabilities",
-            "children": []
-          },
-          {
-            "title": "NFS no_root_squash/no_all_squash misconfiguration PE",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/nfs-no_root_squash-misconfiguration-pe",
-            "children": []
-          },
-          {
-            "title": "Node inspector/CEF debug abuse",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/electron-cef-chromium-debugger-abuse",
-            "children": []
-          },
-          {
-            "title": "Payloads to execute",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/payloads-to-execute",
-            "children": []
-          },
-          {
-            "title": "RunC Privilege Escalation",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/runc-privilege-escalation",
-            "children": []
-          },
-          {
-            "title": "SELinux",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/selinux",
-            "children": []
-          },
-          {
-            "title": "Socket Command Injection",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/socket-command-injection",
-            "children": []
-          },
-          {
-            "title": "Splunk LPE and Persistence",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/splunk-lpe-and-persistence",
-            "children": []
-          },
-          {
-            "title": "SSH Forward Agent exploitation",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/ssh-forward-agent-exploitation",
-            "children": []
-          },
-          {
-            "title": "Wildcards Spare tricks",
-            "url": "/page/hacktricks/linux-hardening/privilege-escalation/wildcards-spare-tricks",
-            "children": []
           }
         ]
       },
       {
-        "title": "Useful Linux Commands",
-        "url": "/page/hacktricks/linux-hardening/useful-linux-commands",
-        "children": []
-      },
-      {
-        "title": "Bypass Linux Restrictions",
-        "url": "/page/hacktricks/linux-hardening/bypass-bash-restrictions",
+        "title": "Linux - Post-Exploitation (formerly Post-Exploitation)",
+        "url": "/page/hacktricks/linux-hardening/post-exploitation",
         "children": [
           {
-            "title": "Bypass FS protections: read-only / no-exec / Distroless",
-            "url": "/page/hacktricks/linux-hardening/bypass-bash-restrictions/bypass-fs-protections-read-only-no-exec-distroless",
-            "children": [
-              {
-                "title": "DDexec / EverythingExec",
-                "url": "/page/hacktricks/linux-hardening/bypass-bash-restrictions/bypass-fs-protections-read-only-no-exec-distroless/ddexec",
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Linux Environment Variables",
-        "url": "/page/hacktricks/linux-hardening/linux-environment-variables",
-        "children": []
-      },
-      {
-        "title": "Linux Post-Exploitation",
-        "url": "/page/hacktricks/linux-hardening/linux-post-exploitation",
-        "children": [
+            "title": "Linux - Cloud Instance Metadata",
+            "url": "/page/hacktricks/linux-hardening/post-exploitation/cloud-instance-metadata",
+            "children": []
+          },
           {
-            "title": "PAM - Pluggable Authentication Modules",
-            "url": "/page/hacktricks/linux-hardening/linux-post-exploitation/pam-pluggable-authentication-modules",
+            "title": "Linux Fileless Execution",
+            "url": "/page/hacktricks/linux-hardening/post-exploitation/linux-fileless-execution",
+            "children": []
+          },
+          {
+            "title": "Linux - Trojanized System Daemons and Reverse Proxies",
+            "url": "/page/hacktricks/linux-hardening/post-exploitation/trojanized-system-daemons-and-reverse-proxies",
             "children": []
           }
         ]
-      },
-      {
-        "title": "FreeIPA Pentesting",
-        "url": "/page/hacktricks/linux-hardening/freeipa-pentesting",
-        "children": []
       }
     ]
   },
@@ -937,11 +1326,6 @@
           {
             "title": "macOS Defensive Apps",
             "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-defensive-apps",
-            "children": []
-          },
-          {
-            "title": "Macos Dyld Hijacking And Dyld Insert Libraries",
-            "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-dyld-hijacking-and-dyld_insert_libraries",
             "children": []
           },
           {
@@ -1046,6 +1430,11 @@
                 "children": []
               },
               {
+                "title": "macOS Shell Applications Injection",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-bash-applications-injection",
+                "children": []
+              },
+              {
                 "title": "macOS Electron Applications Injection",
                 "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-electron-applications-injection",
                 "children": []
@@ -1053,6 +1442,16 @@
               {
                 "title": "macOS Function Hooking",
                 "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-function-hooking",
+                "children": []
+              },
+              {
+                "title": "Reflective Mach-O Loading",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/reflective-mach-o-loading",
+                "children": []
+              },
+              {
+                "title": "ARM64/ARM64e Call-Stack Spoofing",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/arm64-arm64e-call-stack-spoofing",
                 "children": []
               },
               {
@@ -1104,6 +1503,11 @@
                 "children": []
               },
               {
+                "title": "macOS Node.js Applications Injection",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-nodejs-applications-injection",
+                "children": []
+              },
+              {
                 "title": "macOS Library Injection",
                 "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-library-injection",
                 "children": [
@@ -1120,8 +1524,18 @@
                 ]
               },
               {
+                "title": "macOS Interpreter Startup Injection (PHP, Lua, Julia, Octave, R, Ruby, Erlang/Elixir)",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-interpreter-startup-file-injection",
+                "children": []
+              },
+              {
                 "title": "macOS Perl Applications Injection",
                 "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-perl-applications-injection",
+                "children": []
+              },
+              {
+                "title": "macOS PowerShell Applications Injection",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-powershell-applications-injection",
                 "children": []
               },
               {
@@ -1130,8 +1544,8 @@
                 "children": []
               },
               {
-                "title": "macOS Ruby Applications Injection",
-                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-ruby-applications-injection",
+                "title": "macOS Vim/Neovim Applications Injection",
+                "url": "/page/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-proces-abuse/macos-vim-applications-injection",
                 "children": []
               },
               {
@@ -1343,6 +1757,21 @@
         "children": []
       },
       {
+        "title": "VS Code Extension Drop-Share Execution",
+        "url": "/page/hacktricks/windows-hardening/vscode-extension-abuse",
+        "children": []
+      },
+      {
+        "title": "Visual Studio VSIX Extension Abuse",
+        "url": "/page/hacktricks/windows-hardening/visual-studio-vsix-extension-abuse",
+        "children": []
+      },
+      {
+        "title": "Visual Studio Project Design-Time MSBuild Execution",
+        "url": "/page/hacktricks/windows-hardening/visual-studio-project-msbuild-execution",
+        "children": []
+      },
+      {
         "title": "Windows Local Privilege Escalation",
         "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation",
         "children": [
@@ -1357,8 +1786,23 @@
             "children": []
           },
           {
+            "title": "Windows Kernel Rootkits and DKOM",
+            "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/windows-kernel-rootkits-and-dkom",
+            "children": []
+          },
+          {
             "title": "Kernel Race Condition Object Manager Slowdown",
             "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/kernel-race-condition-object-manager-slowdown",
+            "children": []
+          },
+          {
+            "title": "Kernel-Mode File Access Check Bypasses",
+            "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/kernel-mode-file-access-check-bypass",
+            "children": []
+          },
+          {
+            "title": "Windows MDL-Mapped Buffer Double-Fetch",
+            "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/cloud-files-placeholder-name-toctou",
             "children": []
           },
           {
@@ -1397,16 +1841,21 @@
             "children": []
           },
           {
-            "title": "Dll Hijacking",
+            "title": "DLL Hijacking",
             "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/dll-hijacking",
             "children": [
               {
-                "title": "Advanced Html Staged Dll Sideloading",
+                "title": "Advanced Html Staged DLL Sideloading",
                 "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/dll-hijacking/advanced-html-staged-dll-sideloading",
                 "children": []
               },
               {
-                "title": "Writable Sys Path +Dll Hijacking Privesc",
+                "title": "Windows CPython Build-Landmark and sys.path Hijacking",
+                "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/dll-hijacking/windows-cpython-build-landmark-sys-path-hijacking",
+                "children": []
+              },
+              {
+                "title": "Writable Sys Path +DLL Hijacking Privesc",
                 "url": "/page/hacktricks/windows-hardening/windows-local-privilege-escalation/dll-hijacking/writable-sys-path-dll-hijacking-privesc",
                 "children": []
               }
@@ -1716,7 +2165,7 @@
             "children": []
           },
           {
-            "title": "Sccm Management Point Relay Sql Policy Secrets",
+            "title": "SCCM / MECM Abuse (formerly Sccm Management Point Relay Sql Policy Secrets) / SCCM / MECM Abuse (Sccm Management Point Relay Sql Policy Secrets)",
             "url": "/page/hacktricks/windows-hardening/active-directory-methodology/sccm-management-point-relay-sql-policy-secrets",
             "children": []
           },
@@ -1789,18 +2238,8 @@
             "children": []
           },
           {
-            "title": "PsExec/Winexec/ScExec",
+            "title": "Remote Service Execution (PsExec, SMBExec, SCMExec)",
             "url": "/page/hacktricks/windows-hardening/lateral-movement/psexec-and-winexec",
-            "children": []
-          },
-          {
-            "title": "RDPexec",
-            "url": "/page/hacktricks/windows-hardening/lateral-movement/rdpexec",
-            "children": []
-          },
-          {
-            "title": "SCMexec",
-            "url": "/page/hacktricks/windows-hardening/lateral-movement/scmexec",
             "children": []
           },
           {
@@ -1851,6 +2290,11 @@
         "url": "/page/hacktricks/windows-hardening/basic-powershell-for-pentesters",
         "children": [
           {
+            "title": "Windows Enumeration with .NET",
+            "url": "/page/hacktricks/windows-hardening/basic-powershell-for-pentesters/dotnet-enumeration",
+            "children": []
+          },
+          {
             "title": "PowerView/SharpView",
             "url": "/page/hacktricks/windows-hardening/basic-powershell-for-pentesters/powerview",
             "children": []
@@ -1860,7 +2304,13 @@
       {
         "title": "Antivirus (AV) Bypass",
         "url": "/page/hacktricks/windows-hardening/av-bypass",
-        "children": []
+        "children": [
+          {
+            "title": "Virtualized Payload Execution and Custom VM Evasion",
+            "url": "/page/hacktricks/windows-hardening/virtualized-payload-execution",
+            "children": []
+          }
+        ]
       },
       {
         "title": "Cobalt Strike",
@@ -1883,6 +2333,11 @@
     "type": "section",
     "title": "MOBILE PENTESTING",
     "items": [
+      {
+        "title": "eSIM / Java Card VM Exploitation",
+        "url": "/page/hacktricks/mobile-pentesting/esim-javacard-exploitation",
+        "children": []
+      },
       {
         "title": "Android APK Checklist",
         "url": "/page/hacktricks/mobile-pentesting/android-checklist",
@@ -1918,6 +2373,11 @@
             "children": []
           },
           {
+            "title": "Android SELinux Policy Analysis",
+            "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-selinux-policy-analysis",
+            "children": []
+          },
+          {
             "title": "Android Enterprise Work Profile Bypass",
             "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-enterprise-work-profile-bypass",
             "children": []
@@ -1930,6 +2390,11 @@
           {
             "title": "Android Physical Attacks",
             "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-physical-attacks",
+            "children": []
+          },
+          {
+            "title": "Android SELinux Domains, AVC Denials and Policy Manipulation",
+            "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/android-selinux-domains-and-policy-manipulation",
             "children": []
           },
           {
@@ -1955,6 +2420,11 @@
           {
             "title": "AVD - Android Virtual Device",
             "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/avd-android-virtual-device",
+            "children": []
+          },
+          {
+            "title": "Baseband Modem And SoC Isolation Exploitation",
+            "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/baseband-and-soc-isolation-exploitation",
             "children": []
           },
           {
@@ -2092,6 +2562,11 @@
           {
             "title": "Tapjacking",
             "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/tapjacking",
+            "children": []
+          },
+          {
+            "title": "Telegram Mini App Privacy Analysis",
+            "url": "/page/hacktricks/mobile-pentesting/android-app-pentesting/telegram-mini-app-privacy-analysis",
             "children": []
           },
           {
@@ -2239,6 +2714,16 @@
         "children": []
       },
       {
+        "title": "Pentesting Veeam Backup & Replication",
+        "url": "/page/hacktricks/network-services-pentesting/pentesting-veeam-backup-and-replication",
+        "children": []
+      },
+      {
+        "title": "3478 - WebRTC TURN Relay",
+        "url": "/page/hacktricks/network-services-pentesting/3478-pentesting-turn",
+        "children": []
+      },
+      {
         "title": "Pentesting VoIP",
         "url": "/page/hacktricks/network-services-pentesting/pentesting-voip",
         "children": [
@@ -2275,8 +2760,8 @@
             "children": []
           },
           {
-            "title": "FTP Bounce - Download 2ºFTP file",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-ftp/ftp-bounce-download-2oftp-file",
+            "title": "FTP Bounce - Cross-Protocol Relay and FTP File Retrieval",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-ftp/ftp-bounce-protocol-relay",
             "children": []
           }
         ]
@@ -2337,18 +2822,23 @@
         "url": "/page/hacktricks/network-services-pentesting/pentesting-web",
         "children": [
           {
-            "title": "403 & 401 Bypasses",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/403-and-401-bypasses",
-            "children": []
-          },
-          {
             "title": "AEM - Adobe Experience Cloud",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/aem-adobe-experience-cloud",
             "children": []
           },
           {
+            "title": "Adobe ColdFusion",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/adobe-coldfusion",
+            "children": []
+          },
+          {
             "title": "Angular",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/angular",
+            "children": []
+          },
+          {
+            "title": "Apache Tapestry",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/apache-tapestry",
             "children": []
           },
           {
@@ -2383,8 +2873,18 @@
             "children": []
           },
           {
+            "title": "Citrix NetScaler ADC and Gateway",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/citrix-netscaler",
+            "children": []
+          },
+          {
             "title": "Custom Protocols",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/custom-protocols",
+            "children": []
+          },
+          {
+            "title": "Exposed Debug, Metrics and Admin Endpoints",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/debug-and-admin-endpoints",
             "children": []
           },
           {
@@ -2450,8 +2950,8 @@
             "children": []
           },
           {
-            "title": "Golang",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/golang",
+            "title": "GeoNetwork",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/geonetwork",
             "children": []
           },
           {
@@ -2505,8 +3005,18 @@
             "children": []
           },
           {
+            "title": "Java Servlet-Filter Memory Shells",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/java-servlet-filter-memory-shells",
+            "children": []
+          },
+          {
             "title": "Laravel",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/laravel",
+            "children": []
+          },
+          {
+            "title": "MeshCentral",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/meshcentral",
             "children": []
           },
           {
@@ -2532,6 +3042,11 @@
           {
             "title": "NodeJS Express",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/nodejs-express",
+            "children": []
+          },
+          {
+            "title": "React",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/react",
             "children": []
           },
           {
@@ -2578,18 +3093,13 @@
                     "children": []
                   },
                   {
-                    "title": "disable_functions bypass - PHP <= 5.2.9 on windows",
-                    "url": "/page/hacktricks/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass/disable_functions-bypass-php-less-than-5.2.9-on-windows",
+                    "title": "Legacy PHP safe_mode bypasses (Windows command path, fopen, proc_open)",
+                    "url": "/page/hacktricks/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass/legacy-php-safe-mode-bypasses",
                     "children": []
                   },
                   {
                     "title": "disable_functions bypass - PHP 5.2.4 and 5.2.5 PHP cURL",
                     "url": "/page/hacktricks/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass/disable_functions-bypass-php-5.2.4-and-5.2.5-php-curl",
-                    "children": []
-                  },
-                  {
-                    "title": "disable_functions bypass - PHP safe_mode bypass via proc_open() and custom environment Exploit",
-                    "url": "/page/hacktricks/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass/disable_functions-bypass-php-safe_mode-bypass-via-proc_open-and-custom-environment-exploit",
                     "children": []
                   },
                   {
@@ -2600,11 +3110,6 @@
                   {
                     "title": "disable_functions bypass - PHP 5.2.3 - Win32std ext Protections Bypass",
                     "url": "/page/hacktricks/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass/disable_functions-bypass-php-5.2.3-win32std-ext-protections-bypass",
-                    "children": []
-                  },
-                  {
-                    "title": "disable_functions bypass - PHP 5.2 - FOpen Exploit",
-                    "url": "/page/hacktricks/network-services-pentesting/pentesting-web/php-tricks-esp/php-useful-functions-disable_functions-open_basedir-bypass/disable_functions-bypass-php-5.2-fopen-exploit",
                     "children": []
                   },
                   {
@@ -2647,6 +3152,11 @@
             "children": []
           },
           {
+            "title": "Proxmox VE",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/proxmox-ve",
+            "children": []
+          },
+          {
             "title": "Python",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/python",
             "children": []
@@ -2667,13 +3177,23 @@
             "children": []
           },
           {
-            "title": "Special Http Headers",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/special-http-headers",
+            "title": "Roundcube",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/roundcube",
             "children": []
           },
           {
-            "title": "Roundcube",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/roundcube",
+            "title": "Salesforce",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/salesforce",
+            "children": []
+          },
+          {
+            "title": "ServiceNow",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/servicenow",
+            "children": []
+          },
+          {
+            "title": "SSR Meta-Frameworks (Nuxt, SvelteKit, Remix / React Router, Vite)",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/ssr-meta-frameworks",
             "children": []
           },
           {
@@ -2682,8 +3202,28 @@
             "children": []
           },
           {
+            "title": "Spring Data Binding ClassLoader Manipulation",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/spring-data-binding-classloader-manipulation",
+            "children": []
+          },
+          {
+            "title": "Supabase & PostgREST",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/supabase-postgrest",
+            "children": []
+          },
+          {
+            "title": "Swagger UI and OpenAPI Docs",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/swagger-openapi-ui",
+            "children": []
+          },
+          {
             "title": "Symfony",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/symphony",
+            "children": []
+          },
+          {
+            "title": "Traefik",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/traefik",
             "children": []
           },
           {
@@ -2702,6 +3242,11 @@
             "children": []
           },
           {
+            "title": "Veeam Service Provider Console",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/veeam-service-provider-console",
+            "children": []
+          },
+          {
             "title": "Vuejs",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/vuejs",
             "children": []
@@ -2709,11 +3254,6 @@
           {
             "title": "VMWare (ESX, VCenter...)",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/vmware-esx-vcenter...",
-            "children": []
-          },
-          {
-            "title": "Web API Pentesting",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/web-api-pentesting",
             "children": []
           },
           {
@@ -2729,6 +3269,21 @@
           {
             "title": "Wordpress",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-web/wordpress",
+            "children": []
+          },
+          {
+            "title": "WSGI / uWSGI",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/wsgi",
+            "children": []
+          },
+          {
+            "title": "Zabbix",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/zabbix",
+            "children": []
+          },
+          {
+            "title": "ZoneMinder, motionEye & Motion",
+            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/zoneminder-motioneye-motion",
             "children": []
           }
         ]
@@ -2746,18 +3301,13 @@
             "title": "Harvesting tickets from Linux",
             "url": "/page/hacktricks/network-services-pentesting/pentesting-kerberos-88/harvesting-tickets-from-linux",
             "children": []
-          },
-          {
-            "title": "Wsgi",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/wsgi",
-            "children": []
-          },
-          {
-            "title": "Zabbix",
-            "url": "/page/hacktricks/network-services-pentesting/pentesting-web/zabbix",
-            "children": []
           }
         ]
+      },
+      {
+        "title": "102 - Pentesting IEC 61850 MMS",
+        "url": "/page/hacktricks/network-services-pentesting/102-pentesting-iec-61850-mms",
+        "children": []
       },
       {
         "title": "110,995 - Pentesting POP",
@@ -2857,13 +3407,8 @@
         "children": []
       },
       {
-        "title": "513 - Pentesting Rlogin",
+        "title": "513, 514 - Pentesting Rlogin and Rsh",
         "url": "/page/hacktricks/network-services-pentesting/pentesting-rlogin",
-        "children": []
-      },
-      {
-        "title": "514 - Pentesting Rsh",
-        "url": "/page/hacktricks/network-services-pentesting/pentesting-rsh",
         "children": []
       },
       {
@@ -2968,6 +3513,11 @@
         "children": []
       },
       {
+        "title": "2404 - Pentesting IEC 60870-5-104",
+        "url": "/page/hacktricks/network-services-pentesting/2404-pentesting-iec-60870-5-104",
+        "children": []
+      },
+      {
         "title": "3128 - Pentesting Squid",
         "url": "/page/hacktricks/network-services-pentesting/3128-pentesting-squid",
         "children": []
@@ -3005,6 +3555,11 @@
       {
         "title": "3702/UDP - Pentesting WS-Discovery",
         "url": "/page/hacktricks/network-services-pentesting/3702-udp-pentesting-ws-discovery",
+        "children": []
+      },
+      {
+        "title": "4000,10080 - Pentesting TiDB",
+        "url": "/page/hacktricks/network-services-pentesting/4000-10080-pentesting-tidb",
         "children": []
       },
       {
@@ -3098,7 +3653,7 @@
         "children": []
       },
       {
-        "title": "8089 - Pentesting Splunkd",
+        "title": "8000, 8089 - Pentesting Splunk (8089 - Pentesting Splunkd) / 8000, 8089 - Pentesting Splunk (formerly 8089 - Pentesting Splunkd)",
         "url": "/page/hacktricks/network-services-pentesting/8089-splunkd",
         "children": []
       },
@@ -3159,6 +3714,11 @@
         "children": []
       },
       {
+        "title": "20000 - Pentesting DNP3",
+        "url": "/page/hacktricks/network-services-pentesting/20000-pentesting-dnp3",
+        "children": []
+      },
+      {
         "title": "24007,24008,24009,49152 - Pentesting GlusterFS",
         "url": "/page/hacktricks/network-services-pentesting/24007-24008-24009-49152-pentesting-glusterfs",
         "children": []
@@ -3189,8 +3749,29 @@
         "children": []
       },
       {
+        "title": "PROFINET - Pentesting PROFINET IO",
+        "url": "/page/hacktricks/network-services-pentesting/pentesting-profinet",
+        "children": []
+      },
+      {
         "title": "50030,50060,50070,50075,50090 - Pentesting Hadoop",
         "url": "/page/hacktricks/network-services-pentesting/50030-50060-50070-50075-50090-pentesting-hadoop",
+        "children": []
+      },
+      {
+        "title": "55555 - Pentesting SolarWinds Access Rights Manager gRPC",
+        "url": "/page/hacktricks/network-services-pentesting/55555-pentesting-solarwinds-arm",
+        "children": []
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "title": "INDUSTRIAL CONTROL SYSTEMS / OT",
+    "items": [
+      {
+        "title": "OT/ICS Assessment and Safety",
+        "url": "/page/hacktricks/industrial-control-systems",
         "children": []
       }
     ]
@@ -3202,6 +3783,36 @@
       {
         "title": "Web Vulnerabilities Methodology",
         "url": "/page/hacktricks/pentesting-web/web-vulnerabilities-methodology",
+        "children": []
+      },
+      {
+        "title": "Web API Pentesting",
+        "url": "/page/hacktricks/pentesting-web/web-api-pentesting",
+        "children": []
+      },
+      {
+        "title": "HTTP 401/403 Authorization Bypasses",
+        "url": "/page/hacktricks/pentesting-web/403-and-401-bypasses",
+        "children": []
+      },
+      {
+        "title": "Special HTTP Headers",
+        "url": "/page/hacktricks/pentesting-web/special-http-headers",
+        "children": []
+      },
+      {
+        "title": "Sensitive Information Exfiltration from a Web Page",
+        "url": "/page/hacktricks/pentesting-web/sensitive-information-exfiltration",
+        "children": []
+      },
+      {
+        "title": "Referer Header and Referrer Policy Leakage",
+        "url": "/page/hacktricks/pentesting-web/referer-header-and-referrer-policy",
+        "children": []
+      },
+      {
+        "title": "Burp Suite: Intruder and Session Testing",
+        "url": "/page/hacktricks/pentesting-web/burp-suite",
         "children": []
       },
       {
@@ -3223,6 +3834,11 @@
       {
         "title": "Account Takeover",
         "url": "/page/hacktricks/pentesting-web/account-takeover",
+        "children": []
+      },
+      {
+        "title": "Application-Layer DoS (Unrestricted Resource Consumption)",
+        "url": "/page/hacktricks/pentesting-web/application-layer-dos",
         "children": []
       },
       {
@@ -3254,6 +3870,11 @@
       {
         "title": "Bypass Payment Process",
         "url": "/page/hacktricks/pentesting-web/bypass-payment-process",
+        "children": []
+      },
+      {
+        "title": "Business Logic Vulnerabilities",
+        "url": "/page/hacktricks/pentesting-web/business-logic-vulnerabilities",
         "children": []
       },
       {
@@ -3298,6 +3919,11 @@
         "children": []
       },
       {
+        "title": "Apache Commons Text String Interpolation Injection",
+        "url": "/page/hacktricks/pentesting-web/commons-text-string-interpolation",
+        "children": []
+      },
+      {
         "title": "Content Security Policy (CSP) Bypass",
         "url": "/page/hacktricks/pentesting-web/content-security-policy-csp-bypass",
         "children": [
@@ -3307,6 +3933,11 @@
             "children": []
           }
         ]
+      },
+      {
+        "title": "Content Spoofing (Text and HTML Injection)",
+        "url": "/page/hacktricks/pentesting-web/content-spoofing-text-injection",
+        "children": []
       },
       {
         "title": "Cookies Hacking",
@@ -3347,13 +3978,7 @@
       {
         "title": "Dangling Markup - HTML scriptless injection",
         "url": "/page/hacktricks/pentesting-web/dangling-markup-html-scriptless-injection",
-        "children": [
-          {
-            "title": "SS-Leaks",
-            "url": "/page/hacktricks/pentesting-web/dangling-markup-html-scriptless-injection/ss-leaks",
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "title": "DApps - Decentralized Applications",
@@ -3403,6 +4028,16 @@
           {
             "title": "Basic Java Deserialization (ObjectInputStream, readObject)",
             "url": "/page/hacktricks/pentesting-web/deserialization/basic-java-deserialization-objectinputstream-readobject",
+            "children": []
+          },
+          {
+            "title": "Apache Shiro rememberMe Cookie Deserialization",
+            "url": "/page/hacktricks/pentesting-web/deserialization/java-apache-shiro-rememberme",
+            "children": []
+          },
+          {
+            "title": "Java Hessian, Burlap and AMF Deserialization",
+            "url": "/page/hacktricks/pentesting-web/deserialization/java-hessian-burlap-amf-deserialization",
             "children": []
           },
           {
@@ -3497,11 +4132,6 @@
             "children": []
           },
           {
-            "title": "LFI2RCE via Segmentation Fault",
-            "url": "/page/hacktricks/pentesting-web/file-inclusion/lfi2rce-via-segmentation-fault",
-            "children": []
-          },
-          {
             "title": "LFI2RCE via phpinfo()",
             "url": "/page/hacktricks/pentesting-web/file-inclusion/lfi2rce-via-phpinfo",
             "children": []
@@ -3526,13 +4156,7 @@
       {
         "title": "File Upload",
         "url": "/page/hacktricks/pentesting-web/file-upload",
-        "children": [
-          {
-            "title": "PDF Upload - XXE and CORS bypass",
-            "url": "/page/hacktricks/pentesting-web/file-upload/pdf-upload-xxe-and-cors-bypass",
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "title": "Formula/CSV/Doc/LaTeX/GhostScript Injection",
@@ -3569,6 +4193,11 @@
             "children": []
           }
         ]
+      },
+      {
+        "title": "HTTP/2 Protocol-Level DoS (CONTINUATION Flood, MadeYouReset)",
+        "url": "/page/hacktricks/pentesting-web/http2-protocol-dos",
+        "children": []
       },
       {
         "title": "HTTP Response Smuggling / Desync",
@@ -3693,6 +4322,11 @@
         "children": []
       },
       {
+        "title": "Reflected File Download (RFD)",
+        "url": "/page/hacktricks/pentesting-web/reflected-file-download",
+        "children": []
+      },
+      {
         "title": "Registration & Takeover Vulnerabilities",
         "url": "/page/hacktricks/pentesting-web/registration-vulnerabilities",
         "children": []
@@ -3731,6 +4365,11 @@
       {
         "title": "Server Side Inclusion/Edge Side Inclusion Injection",
         "url": "/page/hacktricks/pentesting-web/server-side-inclusion-edge-side-inclusion-injection",
+        "children": []
+      },
+      {
+        "title": "Server-Side JavaScript Injection (Node.js eval, Function, vm)",
+        "url": "/page/hacktricks/pentesting-web/server-side-javascript-injection",
         "children": []
       },
       {
@@ -3774,6 +4413,16 @@
             "children": []
           },
           {
+            "title": "HQL Injection (Hibernate)",
+            "url": "/page/hacktricks/pentesting-web/sql-injection/hql-jpql-injection",
+            "children": []
+          },
+          {
+            "title": "SQLite Injection",
+            "url": "/page/hacktricks/pentesting-web/sql-injection/sqlite-injection",
+            "children": []
+          },
+          {
             "title": "Sqlmap",
             "url": "/page/hacktricks/pentesting-web/sql-injection/sqlmap",
             "children": []
@@ -3782,11 +4431,6 @@
             "title": "PostgreSQL injection",
             "url": "/page/hacktricks/pentesting-web/sql-injection/postgresql-injection",
             "children": [
-              {
-                "title": "dblink/lo_import data exfiltration",
-                "url": "/page/hacktricks/pentesting-web/sql-injection/postgresql-injection/dblink-lo_import-data-exfiltration",
-                "children": []
-              },
               {
                 "title": "PL/pgSQL Password Bruteforce",
                 "url": "/page/hacktricks/pentesting-web/sql-injection/postgresql-injection/pl-pgsql-password-bruteforce",
@@ -3886,6 +4530,11 @@
         "children": []
       },
       {
+        "title": "Webhook Security (Inbound Webhook Forgery)",
+        "url": "/page/hacktricks/pentesting-web/webhook-security",
+        "children": []
+      },
+      {
         "title": "WebSocket Attacks",
         "url": "/page/hacktricks/pentesting-web/websocket-attacks",
         "children": []
@@ -3901,11 +4550,6 @@
         "children": []
       },
       {
-        "title": "XS Search",
-        "url": "/page/hacktricks/pentesting-web/xs-search",
-        "children": []
-      },
-      {
         "title": "XSLT Server Side Injection (Extensible Stylesheet Language Transformations)",
         "url": "/page/hacktricks/pentesting-web/xslt-server-side-injection-extensible-stylesheet-language-transformations",
         "children": []
@@ -3913,6 +4557,11 @@
       {
         "title": "XXE - XEE - XML External Entity",
         "url": "/page/hacktricks/pentesting-web/xxe-xee-xml-external-entity",
+        "children": []
+      },
+      {
+        "title": "XML Injection (Tag Injection)",
+        "url": "/page/hacktricks/pentesting-web/xml-injection",
         "children": []
       },
       {
@@ -3990,13 +4639,8 @@
             "children": []
           },
           {
-            "title": "Sniff Leak",
-            "url": "/page/hacktricks/pentesting-web/xss-cross-site-scripting/sniff-leak",
-            "children": []
-          },
-          {
-            "title": "Steal Info JS",
-            "url": "/page/hacktricks/pentesting-web/xss-cross-site-scripting/steal-info-js",
+            "title": "XSS Information Exfiltration Payload",
+            "url": "/page/hacktricks/pentesting-web/xss-cross-site-scripting/xss-information-exfiltration-payload",
             "children": []
           },
           {
@@ -4065,11 +4709,6 @@
             "url": "/page/hacktricks/pentesting-web/xs-search/css-injection",
             "children": [
               {
-                "title": "CSS Injection Code",
-                "url": "/page/hacktricks/pentesting-web/xs-search/css-injection/css-injection-code",
-                "children": []
-              },
-              {
                 "title": "LESS Code Injection",
                 "url": "/page/hacktricks/pentesting-web/xs-search/css-injection/less-code-injection",
                 "children": []
@@ -4087,12 +4726,197 @@
   },
   {
     "type": "section",
+    "title": "BLOCKCHAIN & SMART CONTRACT SECURITY",
+    "items": [
+      {
+        "title": "Blockchain Concepts and Web3 Security",
+        "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies",
+        "children": [
+          {
+            "title": "Investment Terms",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/investment-terms",
+            "children": []
+          },
+          {
+            "title": "DeFi/AMM Hook Precision",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/defi-amm-hook-precision",
+            "children": []
+          },
+          {
+            "title": "DeFi AMM Virtual Balance Cache Exploitation",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/defi-amm-virtual-balance-cache-exploitation",
+            "children": []
+          },
+          {
+            "title": "Mutation Testing With Slither",
+            "url": "/page/hacktricks/blockchain/smart-contract-security/mutation-testing-with-slither",
+            "children": []
+          },
+          {
+            "title": "ERC-4337 Smart Account Security Pitfalls",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/erc-4337-smart-account-security-pitfalls",
+            "children": []
+          },
+          {
+            "title": "State Divergence Default Value Authorization Bypasses",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/state-divergence-default-value-authorization-bypasses",
+            "children": []
+          },
+          {
+            "title": "Value-Centric Web3 Red Teaming",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/value-centric-web3-red-teaming",
+            "children": []
+          },
+          {
+            "title": "Web3 Signing Workflow Compromise: Safe Delegatecall Proxy Takeover",
+            "url": "/page/hacktricks/blockchain/blockchain-and-crypto-currencies/web3-signing-workflow-compromise-safe-delegatecall-proxy-takeover",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
     "title": "HARDWARE/PHYSICAL ACCESS",
     "items": [
       {
         "title": "Physical Attacks",
         "url": "/page/hacktricks/hardware-physical-access/physical-attacks",
         "children": []
+      },
+      {
+        "title": "Hardware Hacking",
+        "url": "/page/hacktricks/hardware-physical-access/hardware-hacking",
+        "children": [
+          {
+            "title": "Fault Injection Attacks",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/fault_injection_attacks",
+            "children": []
+          },
+          {
+            "title": "I2C",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/i2c",
+            "children": []
+          },
+          {
+            "title": "Side Channel Analysis",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/side_channel_analysis",
+            "children": []
+          },
+          {
+            "title": "UART",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/uart",
+            "children": []
+          },
+          {
+            "title": "Radio",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/radio",
+            "children": []
+          },
+          {
+            "title": "JTAG",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/jtag",
+            "children": []
+          },
+          {
+            "title": "ARM CoreSight Instruction Tracing over SWO",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/arm-coresight-instruction-tracing",
+            "children": []
+          },
+          {
+            "title": "SPI",
+            "url": "/page/hacktricks/hardware-physical-access/hardware-hacking/spi",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "Radio Hacking",
+        "url": "/page/hacktricks/hardware-physical-access/radio-hacking",
+        "children": [
+          {
+            "title": "Maxiprox Mobile Cloner",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/maxiprox-mobile-cloner",
+            "children": []
+          },
+          {
+            "title": "Pentesting RFID",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/pentesting-rfid",
+            "children": []
+          },
+          {
+            "title": "Infrared",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/infrared",
+            "children": []
+          },
+          {
+            "title": "Sub-GHz RF",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/sub-ghz-rf",
+            "children": []
+          },
+          {
+            "title": "VSAT Forward-Link Signal Injection",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/vsat-forward-link-injection",
+            "children": []
+          },
+          {
+            "title": "iButton",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/ibutton",
+            "children": []
+          },
+          {
+            "title": "Flipper Zero",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/flipper-zero",
+            "children": [
+              {
+                "title": "FZ - NFC",
+                "url": "/page/hacktricks/hardware-physical-access/radio-hacking/flipper-zero/fz-nfc",
+                "children": []
+              },
+              {
+                "title": "FZ - Sub-GHz",
+                "url": "/page/hacktricks/hardware-physical-access/radio-hacking/flipper-zero/fz-sub-ghz",
+                "children": []
+              },
+              {
+                "title": "FZ - Infrared",
+                "url": "/page/hacktricks/hardware-physical-access/radio-hacking/flipper-zero/fz-infrared",
+                "children": []
+              },
+              {
+                "title": "FZ - iButton",
+                "url": "/page/hacktricks/hardware-physical-access/radio-hacking/flipper-zero/fz-ibutton",
+                "children": []
+              },
+              {
+                "title": "FZ - 125kHz RFID",
+                "url": "/page/hacktricks/hardware-physical-access/radio-hacking/flipper-zero/fz-125khz-rfid",
+                "children": []
+              }
+            ]
+          },
+          {
+            "title": "Proxmark 3",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/proxmark-3",
+            "children": []
+          },
+          {
+            "title": "FISSURE - The RF Framework",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/fissure-the-rf-framework",
+            "children": []
+          },
+          {
+            "title": "Low-Power Wide Area Network",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/low-power-wide-area-network",
+            "children": []
+          },
+          {
+            "title": "Pentesting BLE - Bluetooth Low Energy",
+            "url": "/page/hacktricks/hardware-physical-access/radio-hacking/pentesting-ble-bluetooth-low-energy",
+            "children": []
+          }
+        ]
       },
       {
         "title": "Escaping from KIOSKs",
@@ -4103,6 +4927,11 @@
         "title": "Firmware Analysis",
         "url": "/page/hacktricks/hardware-physical-access/firmware-analysis",
         "children": [
+          {
+            "title": "UEFI IFR and NVRAM Security-Setting Patching",
+            "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/uefi-ifr-nvram-security-setting-patching",
+            "children": []
+          },
           {
             "title": "Android Mediatek Secure Boot Bl2 Ext Bypass El3",
             "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/android-mediatek-secure-boot-bl2_ext-bypass-el3",
@@ -4116,6 +4945,16 @@
           {
             "title": "Firmware Integrity",
             "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/firmware-integrity",
+            "children": []
+          },
+          {
+            "title": "MediaTek XFlash Carbonara DA2 Hash Bypass",
+            "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/mediatek-xflash-carbonara-da2-hash-bypass",
+            "children": []
+          },
+          {
+            "title": "Synology PAT/SPK Encrypted Archive Decryption",
+            "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/synology-encrypted-archive-decryption",
             "children": []
           }
         ]
@@ -4269,16 +5108,6 @@
             ]
           },
           {
-            "title": "Mediatek Xflash Carbonara Da2 Hash Bypass",
-            "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/mediatek-xflash-carbonara-da2-hash-bypass",
-            "children": []
-          },
-          {
-            "title": "Synology Encrypted Archive Decryption",
-            "url": "/page/hacktricks/hardware-physical-access/firmware-analysis/synology-encrypted-archive-decryption",
-            "children": []
-          },
-          {
             "title": "Windows SEH Overflow",
             "url": "/page/hacktricks/binary-exploitation/stack-overflow/windows-seh-overflow",
             "children": []
@@ -4288,6 +5117,11 @@
       {
         "title": "Array Indexing",
         "url": "/page/hacktricks/binary-exploitation/array-indexing",
+        "children": []
+      },
+      {
+        "title": "PHP Request OOM Bailout and Stale State",
+        "url": "/page/hacktricks/binary-exploitation/php-request-oom-bailout-and-stale-state",
         "children": []
       },
       {
@@ -4312,11 +5146,6 @@
           {
             "title": "Format Strings - Arbitrary Read Example",
             "url": "/page/hacktricks/binary-exploitation/format-strings/format-strings-arbitrary-read-example",
-            "children": []
-          },
-          {
-            "title": "Format Strings Template",
-            "url": "/page/hacktricks/binary-exploitation/format-strings/format-strings-template",
             "children": []
           }
         ]
@@ -4561,11 +5390,6 @@
             "title": "WWW2Exec - \\_\\_printf_arginfo_table",
             "url": "/page/hacktricks/binary-exploitation/arbitrary-write-2-exec/aw2exec-__printf_arginfo_table",
             "children": []
-          },
-          {
-            "title": "Virtualbox Slirp Nat Packet Heap Exploitation",
-            "url": "/page/hacktricks/binary-exploitation/libc-heap/virtualbox-slirp-nat-packet-heap-exploitation",
-            "children": []
           }
         ]
       },
@@ -4575,8 +5399,55 @@
         "children": []
       },
       {
+        "title": "Brotli Block-Switch Decoder State Corruption",
+        "url": "/page/hacktricks/binary-exploitation/brotli-block-switch-decoder-state-corruption",
+        "children": [
+          {
+            "title": "FreeBSD Kernel Exploitation and VNET Jail Escape",
+            "url": "/page/hacktricks/binary-exploitation/freebsd-kernel-exploitation-vnet-jail-escape",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "VM Escape and Hypervisor Exploitation",
+        "url": "/page/hacktricks/binary-exploitation/vm-escape-and-hypervisor-exploitation",
+        "children": [
+          {
+            "title": "QEMU/KVM VM Escape Chains",
+            "url": "/page/hacktricks/binary-exploitation/qemu-kvm-vm-escape-chains",
+            "children": []
+          },
+          {
+            "title": "VirtualBox Slirp NAT Packet Heap Exploitation",
+            "url": "/page/hacktricks/binary-exploitation/libc-heap/virtualbox-slirp-nat-packet-heap-exploitation",
+            "children": []
+          },
+          {
+            "title": "VirtualBox VMSVGA COTable UAF Escape",
+            "url": "/page/hacktricks/binary-exploitation/virtualbox-vmsvga-cotable-uaf-escape",
+            "children": []
+          },
+          {
+            "title": "VMware HGFS OOB Read to VMX ASLR Bypass",
+            "url": "/page/hacktricks/binary-exploitation/vmware-hgfs-oob-read-aslr-bypass",
+            "children": []
+          },
+          {
+            "title": "VMware Workstation PVSCSI LFH Escape",
+            "url": "/page/hacktricks/binary-exploitation/vmware-workstation-pvscsi-lfh-escape",
+            "children": []
+          }
+        ]
+      },
+      {
         "title": "Adreno A7xx Sds Rb Priv Bypass Gpu Smmu Kernel Rw",
         "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/adreno-a7xx-sds-rb-priv-bypass-gpu-smmu-kernel-rw",
+        "children": []
+      },
+      {
+        "title": "Android Kernel SELinux Bypass After Arbitrary R/W",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/android-kernel-selinux-bypass",
         "children": []
       },
       {
@@ -4585,8 +5456,34 @@
         "children": []
       },
       {
+        "title": "AF_ALG concurrent-writer scatterlist underflow",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/af-alg-concurrent-writer-scatterlist-oob",
+        "children": []
+      },
+      {
+        "title": "Android Binder IPC Internals and Kernel Vulnerability Research",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/android-binder-ipc-internals-kernel-vulnerability-research",
+        "children": [
+          {
+            "title": "Android Binder Transaction Cleanup UAF Exploitation",
+            "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/android-binder-transaction-cleanup-uaf",
+            "children": []
+          }
+        ]
+      },
+      {
         "title": "Arm64 Static Linear Map Kaslr Bypass",
         "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/arm64-static-linear-map-kaslr-bypass",
+        "children": []
+      },
+      {
+        "title": "Linux USB Audio Descriptor OOB Reads to KASLR Leaks",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/usb-audio-descriptor-oob-kaslr-leak",
+        "children": []
+      },
+      {
+        "title": "Futex PI UAF to Pipe Physical R/W and Workqueue Execution",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/futex-pi-uaf-pipe-buffer-workqueue-usermodehelper",
         "children": []
       },
       {
@@ -4595,13 +5492,28 @@
         "children": []
       },
       {
+        "title": "nftables Catchall Rollback UAF",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/nftables-catchall-rollback-uaf",
+        "children": []
+      },
+      {
+        "title": "net/sched action-IDR UAF exploitation (CVE-2026-53264)",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/net-sched-action-idr-uaf-cve-2026-53264",
+        "children": []
+      },
+      {
         "title": "Pixel Bigwave Bigo Job Timeout Uaf Kernel Write",
         "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/pixel-bigwave-bigo-job-timeout-uaf-kernel-write",
         "children": []
       },
       {
-        "title": "Linux kernel exploitation - toctou",
+        "title": "POSIX CPU timers TOCTOU race and exploitation (CVE-2025-38352)",
         "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/posix-cpu-timers-toctou-cve-2025-38352",
+        "children": []
+      },
+      {
+        "title": "Qualcomm KGSL VBO bind race to physical-page UAF",
+        "url": "/page/hacktricks/binary-exploitation/linux-kernel-exploitation/qualcomm-kgsl-vbo-bind-race-physical-uaf",
         "children": []
       },
       {
@@ -4610,14 +5522,45 @@
         "children": []
       },
       {
-        "title": "Vmware Workstation Pvscsi Lfh Escape",
-        "url": "/page/hacktricks/binary-exploitation/vmware-workstation-pvscsi-lfh-escape",
+        "title": "Windows RIO registered-buffer UAF to kernel R/W",
+        "url": "/page/hacktricks/binary-exploitation/windows-kernel-exploitation/afd-rio-buffer-uaf",
+        "children": []
+      },
+      {
+        "title": "Windows File Handle-Table Object Redirection",
+        "url": "/page/hacktricks/binary-exploitation/windows-kernel-exploitation/file-handle-table-object-redirection",
+        "children": []
+      },
+      {
+        "title": "Windows UAS REPORT LUNS cached-table OOB write",
+        "url": "/page/hacktricks/binary-exploitation/windows-kernel-exploitation/uasp-report-luns-cache-size-oob-write",
+        "children": []
+      },
+      {
+        "title": "Windows USB MIDI packet-size pool overflow",
+        "url": "/page/hacktricks/binary-exploitation/windows-kernel-exploitation/usb-midi-packet-size-pool-overflow",
+        "children": []
+      },
+      {
+        "title": "Windows Userland Heap Grooming (x86 NT Heap)",
+        "url": "/page/hacktricks/binary-exploitation/windows-userland-heap-grooming",
+        "children": []
+      },
+      {
+        "title": "Windows VBS Enclave Pointer Validation and VTL1 Code Reuse",
+        "url": "/page/hacktricks/binary-exploitation/windows-vbs-enclave-exploitation",
         "children": []
       },
       {
         "title": "Windows Exploiting (Basic Guide - OSCP lvl)",
         "url": "/page/hacktricks/binary-exploitation/windows-exploiting-basic-guide-oscp-lvl",
-        "children": []
+        "children": [
+          {
+            "title": "Windows Kernel Type Confusion to NPFS Arbitrary R/W",
+            "url": "/page/hacktricks/binary-exploitation/windows-kernel-type-confusion-to-npfs-arbitrary-rw",
+            "children": []
+          }
+        ]
       },
       {
         "title": "Windows Vectored Overloading",
@@ -4636,6 +5579,11 @@
           {
             "title": "ios CVE-2021-30807-IOMobileFrameBuffer",
             "url": "/page/hacktricks/binary-exploitation/ios-exploiting/CVE-2021-30807-IOMobileFrameBuffer",
+            "children": []
+          },
+          {
+            "title": "CoreGraphics PDF/TrueType Glyph Rasterizer OOB Write",
+            "url": "/page/hacktricks/binary-exploitation/ios-exploiting/coregraphics-pdf-truetype-glyph-rasterizer-oob-write",
             "children": []
           },
           {
@@ -4659,8 +5607,23 @@
             "children": []
           },
           {
+            "title": "iOS Driver Embedded Queue-Node UAF",
+            "url": "/page/hacktricks/binary-exploitation/ios-exploiting/ios-driver-embedded-queue-node-uaf",
+            "children": []
+          },
+          {
             "title": "Webkit Dfg Store Barrier Uaf Angle Oob",
             "url": "/page/hacktricks/binary-exploitation/ios-exploiting/webkit-dfg-store-barrier-uaf-angle-oob",
+            "children": []
+          },
+          {
+            "title": "Webkit Jsc Dfg Slow Path Register Spill",
+            "url": "/page/hacktricks/binary-exploitation/ios-exploiting/webkit-jsc-dfg-slow-path-register-spill",
+            "children": []
+          },
+          {
+            "title": "XNU vm_map COW Aliasing and Vnode TOCTOU",
+            "url": "/page/hacktricks/binary-exploitation/ios-exploiting/xnu-vm-map-cow-vnode-toctou",
             "children": []
           }
         ]
@@ -4681,8 +5644,33 @@
             "children": []
           },
           {
-            "title": "AI Security Methodology",
+            "title": "AI-Assisted Source Review and Vulnerability Validation",
+            "url": "/page/hacktricks/AI/AI-Assisted-Source-Review-and-Vulnerability-Validation",
+            "children": []
+          },
+          {
+            "title": "Web Black-Box AI Pentester Bots",
+            "url": "/page/hacktricks/AI/Web-Black-Box-AI-Pentester-Bots",
+            "children": []
+          },
+          {
+            "title": "LLM Gateway Trust Boundaries",
+            "url": "/page/hacktricks/AI/AI-LLM-Gateway-Security",
+            "children": []
+          },
+          {
+            "title": "AI Agent Security Methodology",
+            "url": "/page/hacktricks/AI/AI-Agent-Security-Methodology",
+            "children": []
+          },
+          {
+            "title": "AI Deep Learning (AI Security Methodology) / AI Deep Learning / AI Security Methodology",
             "url": "/page/hacktricks/AI/AI-Deep-Learning",
+            "children": []
+          },
+          {
+            "title": "Mechanistic-Interpretability-Guided Adversarial Attacks",
+            "url": "/page/hacktricks/AI/AI-Mechanistic-Interpretability-Adversarial-Attacks",
             "children": []
           },
           {
@@ -4696,13 +5684,33 @@
             "children": []
           },
           {
+            "title": "A2A Protocol Security",
+            "url": "/page/hacktricks/AI/AI-A2A-Protocol",
+            "children": []
+          },
+          {
             "title": "AI Model Data Preparation",
             "url": "/page/hacktricks/AI/AI-Model-Data-Preparation-and-Evaluation",
             "children": []
           },
           {
+            "title": "AI Model Tools and Platforms",
+            "url": "/page/hacktricks/AI/AI-Model-Tools-and-Platforms",
+            "children": []
+          },
+          {
+            "title": "Exposed Self-Hosted AI Services",
+            "url": "/page/hacktricks/AI/AI-Exposed-Self-Hosted-AI-Services",
+            "children": []
+          },
+          {
             "title": "AI Models RCE",
             "url": "/page/hacktricks/AI/AI-Models-RCE",
+            "children": []
+          },
+          {
+            "title": "KYC Bypass Using AI",
+            "url": "/page/hacktricks/AI/KYC-Bypass-Using-AI",
             "children": []
           },
           {
@@ -4799,6 +5807,11 @@
         "url": "/page/hacktricks/reversing/reversing-tools-basic-methods",
         "children": [
           {
+            "title": "Static Deobfuscation of Node.js/V8 Cached Bytecode",
+            "url": "/page/hacktricks/reversing/reversing-tools-basic-methods/nodejs-v8-cached-bytecode",
+            "children": []
+          },
+          {
             "title": "Angr",
             "url": "/page/hacktricks/reversing/reversing-tools-basic-methods/angr",
             "children": [
@@ -4823,8 +5836,23 @@
             "title": "Blobrunner",
             "url": "/page/hacktricks/reversing/reversing-tools-basic-methods/blobrunner",
             "children": []
+          },
+          {
+            "title": "WinDbg Automation",
+            "url": "/page/hacktricks/reversing/reversing-tools-basic-methods/windbg-automation",
+            "children": []
+          },
+          {
+            "title": "Windows Kernel Debugging with KernelFlirt",
+            "url": "/page/hacktricks/reversing/reversing-tools-basic-methods/windows-kernel-debugging-kernelflirt",
+            "children": []
           }
         ]
+      },
+      {
+        "title": "Windows Exception-Driven Control Flow and Anti-Debugging",
+        "url": "/page/hacktricks/reversing/windows-exception-driven-control-flow",
+        "children": []
       },
       {
         "title": "Common API used in Malware",
@@ -4936,197 +5964,8 @@
     "title": "TODO",
     "items": [
       {
-        "title": "Interesting Http",
-        "url": "/page/hacktricks/todo/interesting-http",
-        "children": []
-      },
-      {
-        "title": "Rust Basics",
-        "url": "/page/hacktricks/todo/rust-basics",
-        "children": []
-      },
-      {
         "title": "More Tools",
         "url": "/page/hacktricks/todo/more-tools",
-        "children": []
-      },
-      {
-        "title": "Hardware Hacking",
-        "url": "/page/hacktricks/todo/hardware-hacking",
-        "children": [
-          {
-            "title": "Fault Injection Attacks",
-            "url": "/page/hacktricks/todo/hardware-hacking/fault_injection_attacks",
-            "children": []
-          },
-          {
-            "title": "I2C",
-            "url": "/page/hacktricks/todo/hardware-hacking/i2c",
-            "children": []
-          },
-          {
-            "title": "Side Channel Analysis",
-            "url": "/page/hacktricks/todo/hardware-hacking/side_channel_analysis",
-            "children": []
-          },
-          {
-            "title": "UART",
-            "url": "/page/hacktricks/todo/hardware-hacking/uart",
-            "children": []
-          },
-          {
-            "title": "Radio",
-            "url": "/page/hacktricks/todo/hardware-hacking/radio",
-            "children": []
-          },
-          {
-            "title": "JTAG",
-            "url": "/page/hacktricks/todo/hardware-hacking/jtag",
-            "children": []
-          },
-          {
-            "title": "SPI",
-            "url": "/page/hacktricks/todo/hardware-hacking/spi",
-            "children": []
-          }
-        ]
-      },
-      {
-        "title": "Industrial Control Systems Hacking",
-        "url": "/page/hacktricks/todo/industrial-control-systems-hacking",
-        "children": [
-          {
-            "title": "Modbus Protocol",
-            "url": "/page/hacktricks/todo/industrial-control-systems-hacking/modbus",
-            "children": []
-          }
-        ]
-      },
-      {
-        "title": "Radio Hacking",
-        "url": "/page/hacktricks/todo/radio-hacking",
-        "children": [
-          {
-            "title": "Maxiprox Mobile Cloner",
-            "url": "/page/hacktricks/todo/radio-hacking/maxiprox-mobile-cloner",
-            "children": []
-          },
-          {
-            "title": "Pentesting RFID",
-            "url": "/page/hacktricks/todo/radio-hacking/pentesting-rfid",
-            "children": []
-          },
-          {
-            "title": "Infrared",
-            "url": "/page/hacktricks/todo/radio-hacking/infrared",
-            "children": []
-          },
-          {
-            "title": "Sub-GHz RF",
-            "url": "/page/hacktricks/todo/radio-hacking/sub-ghz-rf",
-            "children": []
-          },
-          {
-            "title": "iButton",
-            "url": "/page/hacktricks/todo/radio-hacking/ibutton",
-            "children": []
-          },
-          {
-            "title": "Flipper Zero",
-            "url": "/page/hacktricks/todo/radio-hacking/flipper-zero",
-            "children": [
-              {
-                "title": "FZ - NFC",
-                "url": "/page/hacktricks/todo/radio-hacking/flipper-zero/fz-nfc",
-                "children": []
-              },
-              {
-                "title": "FZ - Sub-GHz",
-                "url": "/page/hacktricks/todo/radio-hacking/flipper-zero/fz-sub-ghz",
-                "children": []
-              },
-              {
-                "title": "FZ - Infrared",
-                "url": "/page/hacktricks/todo/radio-hacking/flipper-zero/fz-infrared",
-                "children": []
-              },
-              {
-                "title": "FZ - iButton",
-                "url": "/page/hacktricks/todo/radio-hacking/flipper-zero/fz-ibutton",
-                "children": []
-              },
-              {
-                "title": "FZ - 125kHz RFID",
-                "url": "/page/hacktricks/todo/radio-hacking/flipper-zero/fz-125khz-rfid",
-                "children": []
-              }
-            ]
-          },
-          {
-            "title": "Proxmark 3",
-            "url": "/page/hacktricks/todo/radio-hacking/proxmark-3",
-            "children": []
-          },
-          {
-            "title": "FISSURE - The RF Framework",
-            "url": "/page/hacktricks/todo/radio-hacking/fissure-the-rf-framework",
-            "children": []
-          },
-          {
-            "title": "Low-Power Wide Area Network",
-            "url": "/page/hacktricks/todo/radio-hacking/low-power-wide-area-network",
-            "children": []
-          },
-          {
-            "title": "Pentesting BLE - Bluetooth Low Energy",
-            "url": "/page/hacktricks/todo/radio-hacking/pentesting-ble-bluetooth-low-energy",
-            "children": []
-          }
-        ]
-      },
-      {
-        "title": "Test LLMs",
-        "url": "/page/hacktricks/todo/test-llms",
-        "children": []
-      },
-      {
-        "title": "Burp Suite",
-        "url": "/page/hacktricks/todo/burp-suite",
-        "children": []
-      },
-      {
-        "title": "Other Web Tricks",
-        "url": "/page/hacktricks/todo/other-web-tricks",
-        "children": []
-      },
-      {
-        "title": "Android Forensics",
-        "url": "/page/hacktricks/todo/android-forensics",
-        "children": []
-      },
-      {
-        "title": "Online Platforms with API",
-        "url": "/page/hacktricks/todo/online-platforms-with-api",
-        "children": []
-      },
-      {
-        "title": "Stealing Sensitive Information Disclosure from a Web",
-        "url": "/page/hacktricks/todo/stealing-sensitive-information-disclosure-from-a-web",
-        "children": []
-      },
-      {
-        "title": "Post Exploitation",
-        "url": "/page/hacktricks/todo/post-exploitation",
-        "children": []
-      },
-      {
-        "title": "Investment Terms",
-        "url": "/page/hacktricks/todo/investment-terms",
-        "children": []
-      },
-      {
-        "title": "Cookies Policy",
-        "url": "/page/hacktricks/todo/cookies-policy",
         "children": []
       }
     ]
