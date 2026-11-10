@@ -162,6 +162,11 @@
         "title": "**ESC16: Security Extension Disabled on CA (Globally)**",
         "url": "/page/certipy/06-‐-Privilege-Escalation#esc16-security-extension-disabled-on-ca-globally",
         "children": []
+      },
+      {
+        "title": "**ESC17 Enrollee-Supplied Subject for Server Authentication**",
+        "url": "/page/certipy/06-‐-Privilege-Escalation#esc17-enrollee-supplied-subject-for-server-authentication",
+        "children": []
       }
     ]
   },

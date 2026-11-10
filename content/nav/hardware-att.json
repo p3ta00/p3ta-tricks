@@ -233,11 +233,6 @@
         "url": "/page/hardware-att/protocols/mqtt",
         "children": [
           {
-            "title": "Readme",
-            "url": "/page/hardware-att/protocols/rfid-nfc",
-            "children": []
-          },
-          {
             "title": "Hf Mifare Classic",
             "url": "/page/hardware-att/protocols/rfid-nfc/hf-mifare-classic",
             "children": []
@@ -265,6 +260,11 @@
           {
             "title": "Ntag215 Amiibo",
             "url": "/page/hardware-att/protocols/rfid-nfc/ntag215-amiibo",
+            "children": []
+          },
+          {
+            "title": "Readme",
+            "url": "/page/hardware-att/protocols/rfid-nfc",
             "children": []
           }
         ]

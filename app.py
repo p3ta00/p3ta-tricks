@@ -45,8 +45,8 @@ SOURCE_GH_RAW = {
     "hacktricks":       "https://raw.githubusercontent.com/HackTricks-wiki/hacktricks/master/src",
     "hacktricks-cloud": "https://raw.githubusercontent.com/HackTricks-wiki/hacktricks-cloud/master/src",
     "hacker-recipes":   "https://raw.githubusercontent.com/ShutdownRepo/The-Hacker-Recipes/main/docs/src",
-    "hardware-att":     "https://raw.githubusercontent.com/swisskyrepo/HardwareAllTheThings/master/docs",
-    "sliver":           "https://raw.githubusercontent.com/BishopFox/sliver/master/docs/sliver-docs/public",
+    "hardware-att":     "https://raw.githubusercontent.com/swisskyrepo/HardwareAllTheThings/main/docs",
+    "sliver":           "https://raw.githubusercontent.com/BishopFox/sliver/master/docs/sliver-docs/pages/docs/md",
     "patt":             "https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master",
 }
 
@@ -939,8 +939,8 @@ def _load_wadcoms() -> list:
     if wad_dir.exists():
         entries = []
         for md_file in sorted(wad_dir.glob("*.md")):
-            text = md_file.read_text(encoding="utf-8", errors="ignore")
-            m    = _WADCOMS_FM_RE.search(text)
+            text = md_file.read_text(encoding="utf-8", errors="replace").lstrip("\ufeff\r\n ")
+            m = _WADCOMS_FM_RE.search(text)
             if not m:
                 continue
             try:

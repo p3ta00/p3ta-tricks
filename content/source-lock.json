@@ -1,0 +1,123 @@
+{
+  "hacktricks": {
+    "url": "https://github.com/HackTricks-wiki/hacktricks.git",
+    "branch": "master",
+    "commit": "18f4517f4d376883231f0edc0f77acc8bbf33e45",
+    "commit_time": "2026-11-10T23:07:07+01:00",
+    "processed_count": 1141
+  },
+  "hacktricks-cloud": {
+    "url": "https://github.com/HackTricks-wiki/hacktricks-cloud.git",
+    "branch": "master",
+    "commit": "df289b5e462100570e1d354b7e0483a296248423",
+    "commit_time": "2026-11-10T00:38:51+01:00",
+    "processed_count": 1810
+  },
+  "hacker-recipes": {
+    "url": "https://github.com/ShutdownRepo/The-Hacker-Recipes.git",
+    "branch": "main",
+    "commit": "9d434febecaaef24afb0abfdf15693933fe84663",
+    "commit_time": "2026-10-03T23:14:01+02:00",
+    "processed_count": 239
+  },
+  "netexec": {
+    "url": "https://github.com/Pennyw0rth/NetExec-Wiki.git",
+    "branch": "main",
+    "commit": "1814fff6116413f41f643ffd1c338e5595586440",
+    "commit_time": "2026-11-07T18:42:24+01:00",
+    "processed_count": 170
+  },
+  "patt": {
+    "url": "https://github.com/swisskyrepo/PayloadsAllTheThings.git",
+    "branch": "master",
+    "commit": "08ea40e77db3f42ef8f20c65196f3936a19b6c86",
+    "commit_time": "2026-10-30T16:56:43+01:00",
+    "processed_count": 63
+  },
+  "internal-att": {
+    "url": "https://github.com/swisskyrepo/InternalAllTheThings.git",
+    "branch": "main",
+    "commit": "203bb0c0b290bf7c9158c32d43523b8d66f292c1",
+    "commit_time": "2026-08-16T15:58:05+02:00",
+    "processed_count": 169
+  },
+  "hardware-att": {
+    "url": "https://github.com/swisskyrepo/HardwareAllTheThings.git",
+    "branch": "main",
+    "commit": "2d65b53731ed87f76c122f972341d73d30b106d6",
+    "commit_time": "2026-08-09T13:46:43+02:00",
+    "processed_count": 63
+  },
+  "bloodyad": {
+    "url": "https://github.com/CravateRouge/bloodyAD.wiki.git",
+    "branch": "master",
+    "commit": "7e8d54b70782a3d229d8d4353534b20644b385e3",
+    "commit_time": "2025-10-29T03:18:02Z",
+    "processed_count": 7
+  },
+  "certipy": {
+    "url": "https://github.com/ly4k/Certipy.wiki.git",
+    "branch": "master",
+    "commit": "46d2e699cec578b7053d5db7fea8a00300a9e675",
+    "commit_time": "2026-07-14T22:14:47+02:00",
+    "processed_count": 9
+  },
+  "ligolo-ng": {
+    "url": "https://github.com/nicocha30/ligolo-ng.wiki.git",
+    "branch": "master",
+    "commit": "a816f5fd8e885aa144399b7b0117755f98a114ed",
+    "commit_time": "2025-01-08T10:21:20+01:00",
+    "processed_count": 8
+  },
+  "goexec": {
+    "url": "https://github.com/FalconOpsLLC/goexec.git",
+    "branch": "main",
+    "commit": "21c8f9599140c39d6fb56951539f8e7e317be686",
+    "commit_time": "2026-03-25T23:31:36-05:00",
+    "processed_count": 1
+  },
+  "lolbas": {
+    "url": "https://github.com/LOLBAS-Project/LOLBAS.git",
+    "branch": "master",
+    "commit": "2056cb7662509dc998fc6ce79636aec4e6c0397f",
+    "commit_time": "2026-09-26T09:13:22+01:00",
+    "processed_count": 248
+  },
+  "wadcoms": {
+    "url": "https://github.com/WADComs/WADComs.github.io.git",
+    "branch": "master",
+    "commit": "0c4609d7dffa7c12a378863a360636c9f275b240",
+    "commit_time": "2026-11-03T17:22:57+11:00",
+    "processed_count": 104
+  },
+  "sliver": {
+    "url": "https://github.com/BishopFox/sliver.git",
+    "branch": "master",
+    "commit": "6ccfd6a257b76780873314d6107f3f1d6c7430b7",
+    "commit_time": "2026-11-08T09:31:01-08:00",
+    "processed_count": 52
+  },
+  "exploitdb": {
+    "url": "https://gitlab.com/exploit-database/exploitdb.git",
+    "branch": "main",
+    "commit": "f08907b131f851c2ec3c052906f82ca83703ebef",
+    "commit_time": "2026-10-27T00:16:21Z",
+    "processed_count": 47181
+  },
+  "adaptix": {
+    "url": "https://adaptix-framework.gitbook.io/adaptix-framework/llms.txt",
+    "branch": "GitBook public export",
+    "commit": "sha256:2655c30726f89b517705ebb53ead3233dcf87b1e1526366771974318574ba28e",
+    "commit_time": "2026-11-10T23:23:27.678774+00:00",
+    "page_count": 70,
+    "processed_count": 68
+  },
+  "churchofmalware": {
+    "url": "https://churchofmalware.org",
+    "branch": "live website snapshot",
+    "commit": "sha256:0cc85c83bca82b1ac6491123489c584dc8867602339194017f86305176131b25",
+    "commit_time": "2026-11-10T23:49:00.969471+00:00",
+    "processed_count": 24
+  },
+  "generated_at": "2026-11-10T23:50:09.522477+00:00"
+}

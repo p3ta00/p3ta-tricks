@@ -164,9 +164,10 @@ echo "[*] Re-applying local fixes..."
 "$PY" scripts/local_fixes.py
 
 # ── report ───────────────────────────────────────────────────────────────────
-# paste -sd', ' would cycle through the delimiter's characters ("a,b c,d"),
-# so join on a single comma and space it out afterwards
-PULLED=$(printf '%s\n' "${CHANGED[@]}" | sort | paste -sd, - | sed 's/,/, /g')
+# Avoid `paste`: some security toolsets install an executable with that name,
+# shadowing the POSIX utility in Git Bash. Python is already a prerequisite.
+PULLED=$(printf '%s\n' "${CHANGED[@]}" | sort | "$PY" -c \
+  'import sys; print(", ".join(line.strip() for line in sys.stdin if line.strip()))')
 MSG="Weekly site update [$(date +%F)] pulled: $PULLED"
 
 echo
