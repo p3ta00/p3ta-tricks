@@ -6,9 +6,9 @@ This audit covers the online `p3ta-tricks` release independently from the air-ga
 
 ## Current corpus
 
-- **5,095** searchable documentation pages across **32 indexed page sources**.
-- **37** source families exposed by the application, including special tools such as Exploit-DB and CyberChef.
-- **1,520** committed source-relative documentation assets.
+- **4,975** searchable documentation pages across **31 indexed page sources**.
+- **36** source families exposed by the application, including special tools such as Exploit-DB and CyberChef.
+- **1,519** committed source-relative documentation assets.
 - **1,668** committed recovered third-party images.
 - **223** current Church of Malware pages: 20 scripture posts and 203 public repositories.
 
@@ -47,11 +47,17 @@ Dedicated fail-closed transforms now cover:
 - the complete search index reconstructed from committed processed pages;
 - recoverable third-party image localization, with blocked/deleted decorative image tags removed rather than left broken.
 
+The later ghost-content cleanup removed the obsolete private HTB/HTB Academy
+import pipeline, its 120 generated pages, navigation cache, source registration,
+homepage credit, dedicated CSS, hidden-source filters, and its final unreferenced
+named asset. Legitimate upstream documentation citations remain part of their
+respective public source pages.
+
 ## Full application crawl
 
-- Navigation URLs: **5,425**
-- Application URLs crawled: **5,742**
-- Internal links checked: **5,175**
+- Navigation URLs: **5,305**
+- Application URLs crawled: **5,501**
+- Internal links checked: **5,054**
 - Rendered local assets checked: **514**
 - Broken/non-200 references: **0**
 - Automatically loaded remote assets: **0**

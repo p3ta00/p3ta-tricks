@@ -1,21 +1,21 @@
 {
   "audit_version": 1,
-  "generated_at": "2026-11-17T03:30:57Z",
+  "generated_at": "2026-11-17T06:17:43Z",
   "repository": "https://github.com/p3ta00/p3ta-tricks",
   "scope": "online release",
   "corpus": {
-    "search_pages": 5095,
+    "search_pages": 4975,
     "exploitdb_raw_rows": 47182,
     "exploitdb_unique_records": 46710,
     "exploitdb_newest_id": 52705,
-    "indexed_page_sources": 32,
-    "application_source_families": 37
+    "indexed_page_sources": 31,
+    "application_source_families": 36
   },
   "crawl": {
-    "nav_urls": 5425,
-    "seed_urls": 5742,
-    "pages_checked": 5742,
-    "internal_links_checked": 5175,
+    "nav_urls": 5305,
+    "seed_urls": 5501,
+    "pages_checked": 5501,
+    "internal_links_checked": 5054,
     "assets_checked": 514,
     "bad_count": 0,
     "external_asset_count": 0,
@@ -40,5 +40,16 @@
       "/source/exploitdb"
     ],
     "headless_exploitdb_visible_newest_id": 52705
+  },
+  "ghost_content_cleanup": {
+    "removed_source": "cheatsheet",
+    "removed_generated_pages": 120,
+    "removed_nav_cache": true,
+    "removed_import_scripts": [
+      "scripts/import_htb_obsidian.py",
+      "scripts/rebuild_nav.py"
+    ],
+    "tracked_htb_named_paths_remaining": 0,
+    "first_party_htb_references_remaining": 0
   }
 }

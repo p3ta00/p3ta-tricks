@@ -17,7 +17,7 @@ A fast, searchable pentest reference that pulls attack techniques, tool syntax, 
 The online repository commits all rendered documentation, navigation data, search
 indexes, and recoverable documentation media. Current media inventory:
 
-- **`static/source-assets/`** — 1,520 source-relative documentation assets.
+- **`static/source-assets/`** — 1,519 source-relative documentation assets.
 - **`static/img/external/`** — 1,668 recovered third-party images.
 - Automatically loaded remote documentation images: **0**.
 
@@ -48,7 +48,7 @@ and documentation assets are already committed; installation does not rebuild th
 
 BloodHound · HackTricks · HackTricks Cloud · The Hacker Recipes · PayloadsAllTheThings · InternalAllTheThings · HardwareAllTheThings · GTFOBins · LOLBAS · WADComs · NetExec · Impacket · Certipy · bloodyAD · Rubeus · Mimikatz · Ligolo-ng · Sliver · Adaptix C2 · goexec · Metasploit · All About Bug Bounty · Exploit-DB · Church of Malware · Misc Cheatsheets
 
-**5,095 pages · 37 sources**
+**4,975 pages · 36 sources**
 
 Exploit-DB is pinned separately from the page search corpus: **47,182 raw upstream
 CSV rows**, normalized to **46,710 unique locally addressable records**. The current

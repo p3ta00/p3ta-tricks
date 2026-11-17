@@ -260,14 +260,7 @@ SOURCE_META = {
     "windows-privesc": {"label": "Windows PrivEsc",         "color": "var(--blue)",    "icon": "🪟"},
     "misc":            {"label": "Misc Cheatsheets",        "color": "var(--cyan)",    "icon": "📋"},
     "churchofmalware": {"label": "Church of Malware",         "color": "var(--red)",     "icon": "⛧"},
-    "cheatsheet":      {"label": "Cheat Sheets",               "color": "var(--green)",   "icon": "📋"},
 }
-
-# Sources excluded from global search results (e.g. HackTheBox Academy content
-# that otherwise pollutes cheat-sheet searches). They remain directly browsable
-# via /source/<id> and are still returned when the search is explicitly scoped
-# to that source.
-SEARCH_HIDDEN_SOURCES = {"htb", "htb-academy"}
 
 _NAV_SOURCES = {
     "breaking-adcs": {
@@ -565,9 +558,7 @@ def _load_page(source: str, page_path: str):
     # #fragment — the target page is the same slug without the .md/#anchor.
     page_path = page_path.split("#", 1)[0]
     page_path = re.sub(r"\.(md|markdown)$", "", page_path, flags=re.I)
-    # Some bundled sources historically stored paths with their source prefix
-    # (for example cheatsheet/cheatsheet/foo). Accept those indexed URLs while
-    # resolving against the source directory only once.
+    # Normalize legacy URLs that repeat their source prefix before resolving.
     source_prefix = source.rstrip("/") + "/"
     if page_path.lower().startswith(source_prefix.lower()):
         page_path = page_path[len(source_prefix):]
@@ -1024,10 +1015,6 @@ def search():
     if not OFFLINE_MODE:
         _hidden = {sid for sid, m in SOURCE_META.items() if m.get("offline_only")}
         results = [r for r in results if r.get("source") not in _hidden]
-    # Always exclude HTB-style sources from global search unless the user has
-    # explicitly scoped the search to one of them.
-    if source not in SEARCH_HIDDEN_SOURCES:
-        results = [r for r in results if r.get("source") not in SEARCH_HIDDEN_SOURCES]
     if source:
         results = [r for r in results if r.get("source") == source]
     if fmt == "json" or request.accept_mimetypes.best == "application/json":

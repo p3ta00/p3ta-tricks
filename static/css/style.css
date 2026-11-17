@@ -1454,51 +1454,6 @@ pre code { background: none; padding: 0; color: inherit; }
 .admonition-success { border-color: var(--green);  }
 .admonition-success .admonition-title { color: var(--green); }
 
-/* ---------- HTB Academy cheatsheet table ---------- */
-.cheatsheet-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0 20px;
-  font-size: .85rem;
-}
-.cheatsheet-table thead th {
-  background: var(--bg2);
-  color: var(--fg-dim);
-  font-size: .7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  padding: 6px 10px;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-}
-.cheatsheet-table tbody tr:nth-child(even) { background: var(--bg2); }
-.cheatsheet-table tbody tr:hover { background: var(--bg3); }
-.cheatsheet-table td {
-  padding: 4px 8px;
-  vertical-align: top;
-  border-bottom: 1px solid var(--border);
-}
-.cheatsheet-table td:first-child { width: 52%; }
-.cheatsheet-table td pre {
-  margin: 4px 0;
-  padding: 6px 10px;
-  font-size: .78rem;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-.cheatsheet-table td pre code { font-size: .78rem; }
-.cmd-desc {
-  color: var(--fg-dim);
-  line-height: 1.55;
-  padding-top: 8px !important;
-}
-.cmd-desc code {
-  font-size: .8rem;
-  background: var(--bg3);
-  padding: 1px 4px;
-  border-radius: 3px;
-}
 
 /* ---------- Stub page notice ---------- */
 .stub-notice {
