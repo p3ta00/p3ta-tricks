@@ -996,6 +996,12 @@ def _load_wadcoms() -> list:
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
+@app.route("/favicon.ico")
+def favicon():
+    """Satisfy the browser's implicit favicon request with the bundled logo."""
+    return send_from_directory(ROOT / "static" / "img", "logo.jpg", mimetype="image/jpeg")
+
+
 @app.route("/")
 def index():
     idx = _load_index()
