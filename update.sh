@@ -44,7 +44,7 @@ MANIFEST=(
 
 # Sources with processed content but no reproducible build input on this box.
 # Listed so their absence from the weekly diff is visible rather than silent.
-NOT_AUTOMATED="gtfobins lolbas wadcoms exploitdb adaptix churchofmalware sliver"
+NOT_AUTOMATED="gtfobins lolbas wadcoms adaptix sliver"
 
 FORCE=0; PULL_ONLY=0; DO_COMMIT=0; DO_PUSH=0; SKIP_CHECK=0; MAX_CHURN=15
 while [ $# -gt 0 ]; do
@@ -110,6 +110,28 @@ for row in "${MANIFEST[@]}"; do
   fi
 done
 
+# Exploit-DB has a dedicated CSV transform rather than Markdown pages.
+EDB_CHANGED=0
+EDB_PATH="sources/exploitdb"
+EDB_URL="https://gitlab.com/exploit-database/exploitdb.git"
+if [ ! -d "$EDB_PATH/.git" ]; then
+  echo "    exploitdb — cloning"
+  git "${GIT_OPTS[@]}" clone --quiet --depth 1 "$EDB_URL" "$EDB_PATH"
+  EDB_CHANGED=1
+else
+  before=$(git -C "$EDB_PATH" rev-parse HEAD)
+  branch=$(git -C "$EDB_PATH" rev-parse --abbrev-ref HEAD)
+  git "${GIT_OPTS[@]}" -C "$EDB_PATH" fetch --quiet --depth 1 origin "$branch"
+  git "${GIT_OPTS[@]}" -C "$EDB_PATH" reset --quiet --hard "origin/$branch"
+  after=$(git -C "$EDB_PATH" rev-parse HEAD)
+  if [ "$before" != "$after" ]; then
+    echo "    exploitdb — updated ${before:0:7}..${after:0:7}"
+    EDB_CHANGED=1
+  else
+    echo "    exploitdb — up to date"
+  fi
+fi
+
 if [ "$FORCE" = 1 ]; then
   CHANGED=()
   for row in "${MANIFEST[@]}"; do
@@ -119,6 +141,7 @@ if [ "$FORCE" = 1 ]; then
     fi
   done
   echo "[*] --force: rebuilding all ${#CHANGED[@]} cloned sources"
+  EDB_CHANGED=1
 fi
 
 echo "[i] not covered by this script (no build input in repo): $NOT_AUTOMATED"
@@ -128,7 +151,15 @@ if [ "$PULL_ONLY" = 1 ]; then
   exit 0
 fi
 
-if [ ${#CHANGED[@]} -eq 0 ]; then
+echo "[*] Refreshing Church of Malware canonical feed..."
+"$PY" scripts/fetch_churchofmalware.py
+
+if [ "$EDB_CHANGED" = 1 ]; then
+  echo "[*] Rebuilding Exploit-DB index..."
+  "$PY" scripts/rebuild_exploitdb_index.py "$EDB_PATH"
+fi
+
+if [ ${#CHANGED[@]} -eq 0 ] && git diff --quiet -- content static; then
   echo "[+] Nothing changed upstream. Site is current."
   exit 0
 fi
@@ -138,7 +169,9 @@ fi
 # prove the pipeline still reproduces committed content before letting it write
 # over content/. Without this a rebuild silently strips the <TARGET>/<USERNAME>
 # placeholders from pages upstream never touched.
-if [ "$SKIP_CHECK" = 1 ]; then
+if [ ${#CHANGED[@]} -eq 0 ]; then
+  echo "[+] No cloned Markdown source changed."
+elif [ "$SKIP_CHECK" = 1 ]; then
   echo "[!] --skip-check: rebuilding without verifying pipeline fidelity"
 else
   echo "[*] Checking pipeline fidelity..."
@@ -149,19 +182,25 @@ else
 fi
 
 # ── rebuild ──────────────────────────────────────────────────────────────────
-echo "[*] Rebuilding content for: ${CHANGED[*]}"
-"$PY" scripts/rebuild_sources.py "${CHANGED[@]}"
+if [ ${#CHANGED[@]} -gt 0 ]; then
+  echo "[*] Rebuilding content for: ${CHANGED[*]}"
+  "$PY" scripts/rebuild_sources.py "${CHANGED[@]}"
 
-echo "[*] Refreshing nav caches..."
-"$PY" scripts/dump_nav_cache.py "${CHANGED[@]}"
-
-echo "[*] Enhancing search index..."
-"$PY" scripts/enhance_search_index.py
+  echo "[*] Refreshing nav caches..."
+  "$PY" scripts/dump_nav_cache.py "${CHANGED[@]}"
+fi
 
 # Must run last: rebuild_sources.py regenerates upstream pages from scratch and
 # would otherwise reintroduce every upstream bug we have already corrected.
 echo "[*] Re-applying local fixes..."
 "$PY" scripts/local_fixes.py
+
+echo "[*] Localizing recoverable documentation images..."
+"$PY" scripts/fetch_external_images.py
+
+echo "[*] Rebuilding the complete search index..."
+"$PY" scripts/rebuild_search_index.py
+"$PY" scripts/enhance_search_index.py
 
 # ── report ───────────────────────────────────────────────────────────────────
 # paste -sd', ' would cycle through the delimiter's characters ("a,b c,d"),

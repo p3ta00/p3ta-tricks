@@ -4,31 +4,6 @@
     "title": "ACTIVE DIRECTORY",
     "items": [
       {
-        "title": "Ms14 068",
-        "url": "/page/internal-att/active-directory/CVE/MS14-068",
-        "children": []
-      },
-      {
-        "title": "No Pac",
-        "url": "/page/internal-att/active-directory/CVE/NoPAC",
-        "children": []
-      },
-      {
-        "title": "Print Nightmare",
-        "url": "/page/internal-att/active-directory/CVE/PrintNightmare",
-        "children": []
-      },
-      {
-        "title": "Priv Exchange",
-        "url": "/page/internal-att/active-directory/CVE/PrivExchange",
-        "children": []
-      },
-      {
-        "title": "Zero Logon",
-        "url": "/page/internal-att/active-directory/CVE/ZeroLogon",
-        "children": []
-      },
-      {
         "title": "Ad Adcs Certificate Services",
         "url": "/page/internal-att/active-directory/ad-adcs-certificate-services",
         "children": []
@@ -191,7 +166,38 @@
       {
         "title": "Ad Tricks",
         "url": "/page/internal-att/active-directory/ad-tricks",
-        "children": []
+        "children": [
+          {
+            "title": "Ms14 068",
+            "url": "/page/internal-att/active-directory/CVE/MS14-068",
+            "children": []
+          },
+          {
+            "title": "Nopac",
+            "url": "/page/internal-att/active-directory/CVE/NoPAC",
+            "children": []
+          },
+          {
+            "title": "Printnightmare",
+            "url": "/page/internal-att/active-directory/CVE/PrintNightmare",
+            "children": []
+          },
+          {
+            "title": "Privexchange",
+            "url": "/page/internal-att/active-directory/CVE/PrivExchange",
+            "children": []
+          },
+          {
+            "title": "Resetnightmare",
+            "url": "/page/internal-att/active-directory/CVE/ResetNightmare",
+            "children": []
+          },
+          {
+            "title": "Zerologon",
+            "url": "/page/internal-att/active-directory/CVE/ZeroLogon",
+            "children": []
+          }
+        ]
       },
       {
         "title": "Deployment Mdt",
@@ -690,11 +696,6 @@
     "title": "DEVOPS",
     "items": [
       {
-        "title": "Readme",
-        "url": "/page/internal-att/devops",
-        "children": []
-      },
-      {
         "title": "Cicd Azure Devops",
         "url": "/page/internal-att/devops/cicd-azure-devops",
         "children": []
@@ -727,6 +728,11 @@
       {
         "title": "Package Managers",
         "url": "/page/internal-att/devops/package-managers",
+        "children": []
+      },
+      {
+        "title": "Readme",
+        "url": "/page/internal-att/devops",
         "children": []
       },
       {

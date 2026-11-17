@@ -193,6 +193,19 @@ def process_json(fpath: Path, stats: dict, url_cache: dict) -> bool:
             url_cache[url] = None
             print(f"  ERR ({type(e).__name__}): {url[:80]}")
 
+    # Never leave a broken or tracking image as a live remote subresource. If
+    # an image was decorative, blocked, or no longer recoverable, remove the
+    # complete tag after all recoverable images have been localized.
+    cleaned = re.sub(
+        r'<img\b[^>]*\bsrc=(["\'])https?://[^"\']+\1[^>]*>',
+        '', new_html, flags=re.I,
+    )
+    if cleaned != new_html:
+        new_html = cleaned
+        changed = True
+        stats.setdefault("removed_unrecoverable", 0)
+        stats["removed_unrecoverable"] += 1
+
     if changed and not DRY_RUN:
         data["html"] = new_html
         fpath.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
@@ -231,6 +244,7 @@ def main():
     print(f"Skipped (badge): {stats['skipped_badge']}")
     print(f"Not an image:    {stats['not_image']}")
     print(f"Errors:          {stats['errors']}")
+    print(f"Cleaned files:   {stats.get('removed_unrecoverable', 0)}")
     if DRY_RUN:
         print(f"Would download:  {stats['would_download']}")
     print(f"Files patched:   {stats['files_patched']}")

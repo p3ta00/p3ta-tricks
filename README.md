@@ -12,16 +12,19 @@ A fast, searchable pentest reference that pulls attack techniques, tool syntax, 
 
 ---
 
-## Offline Mode
+## Local development
 
-This repo ships fully air-gapped. Every image that can be locally hosted is included:
+The online repository commits all rendered documentation, navigation data, search
+indexes, and recoverable documentation media. Current media inventory:
 
-- **`static/img/adaptix/`** — 194 Adaptix C2 screenshots scraped from GitBook CDN
-- **`static/img/external/`** — 190 third-party images (blogspot, Medium, GitHub user-attachments, OWASP, CyberArk, Palo Alto, PortSwigger, etc.) downloaded and locally hosted
-- **`sources/sliver-docs/images/`** — Sliver C2 diagrams
-- GitHub-raw images (HackTricks, Hacker Recipes, PATT, etc.) are served via `_rewrite_images()` at request time — requires internet in online mode, served from `sources/` locally in offline mode
+- **`static/source-assets/`** — 1,520 source-relative documentation assets.
+- **`static/img/external/`** — 1,668 recovered third-party images.
+- Automatically loaded remote documentation images: **0**.
 
-17 images remain external (Google Slides auth-gated or deleted from origin servers) — noted in the home page disclaimer.
+The separately published
+[`p3ta-tricks-offline`](https://github.com/p3ta00/p3ta-tricks-offline)
+release additionally vendors Python packages, compiled tools, and the complete
+Exploit-DB source corpus for a machine that will never have internet access.
 
 ### Quick start
 
@@ -36,7 +39,8 @@ Custom port / host:
 PORT=8080 HOST=0.0.0.0 ./start-offline.sh
 ```
 
-The installer handles Python venv, dependencies, asset verification, and external image download (idempotent — skips already-cached images).
+The installer handles the Python environment and dependencies. Generated content
+and documentation assets are already committed; installation does not rebuild them.
 
 ---
 
@@ -44,7 +48,12 @@ The installer handles Python venv, dependencies, asset verification, and externa
 
 BloodHound · HackTricks · HackTricks Cloud · The Hacker Recipes · PayloadsAllTheThings · InternalAllTheThings · HardwareAllTheThings · GTFOBins · LOLBAS · WADComs · NetExec · Impacket · Certipy · bloodyAD · Rubeus · Mimikatz · Ligolo-ng · Sliver · Adaptix C2 · goexec · Metasploit · All About Bug Bounty · Exploit-DB · Church of Malware · Misc Cheatsheets
 
-**3,383 pages · 31 sources**
+**5,095 pages · 37 sources**
+
+Exploit-DB is pinned separately from the page search corpus: **47,182 raw upstream
+CSV rows**, normalized to **46,710 unique locally addressable records**. The current
+snapshot is database revision **2026-11-12**, commit
+`70bbef3f18b835b0d8bacb978f2bc7b751a7cec9`, newest EDB-ID **52705**.
 
 ---
 
@@ -81,10 +90,10 @@ re-applies the local corrections, and prints the commit message to use.
 ```
 
 Sources that are hand-written (`active-directory`, `cheatsheet`, the BloodHound
-edge pages, `misc`, `breaking-adcs`) or scraped by a dedicated script
-(`adaptix`, `churchofmalware`) have no upstream to pull and are deliberately
-left alone — `update.sh` prints which ones it skipped rather than silently
-regenerating them from nothing.
+edge pages, `misc`, `breaking-adcs`) are deliberately left alone. The updater
+refreshes the canonical Church of Malware feed and Exploit-DB CSV through their
+dedicated fail-closed transforms; remaining non-automated families are printed
+explicitly rather than silently treated as current.
 
 ### Known issue: the rebuild is currently gated
 
@@ -108,7 +117,10 @@ unattended again; `--skip-check` bypasses it if you know what you're doing.
 |---|---|
 | `scripts/fetch_adaptix_images.py` | Scrape GitBook CDN and download all Adaptix screenshots locally |
 | `scripts/fetch_external_images.py` | Download third-party images embedded in source docs and host locally |
+| `scripts/fetch_churchofmalware.py` | Rebuild every current Church of Malware post/repository from its canonical JSON feed |
 | `scripts/rebuild_sources.py` | Rebuild processed content JSON from source markdown |
+| `scripts/rebuild_exploitdb_index.py` | Normalize Exploit-DB CSV rows into unique local source-path records with provenance |
+| `scripts/rebuild_search_index.py` | Rebuild the complete search index from every committed processed page |
 | `scripts/dump_nav_cache.py` | Freeze each source's sidebar tree into `content/nav/` — production has no `sources/` to walk |
 | `scripts/enhance_search_index.py` | Add headings and longer excerpts to the search index |
 | `scripts/local_fixes.py` | Re-apply corrections to upstream pages after a rebuild overwrites them |

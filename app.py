@@ -2,6 +2,7 @@
 """p3ta-tricks Flask app — unified offline pentest reference."""
 import json, re, os, shutil, yaml
 import urllib.request as _ur
+
 from collections import OrderedDict
 from pathlib import Path
 from urllib.parse import quote as _url_quote
@@ -22,33 +23,30 @@ except Exception:
     _ver = str(int(_time.time()))
 STATIC_VER = _ver
 
-# Offline mode — set OFFLINE_MODE=1 and TOOLS_DIR=/path/to/tools
+# The online project may proxy missing Exploit-DB source files. Local checked-out
+# files still take priority, and all documentation media is served from Git.
 OFFLINE_MODE = os.environ.get("OFFLINE_MODE", "0") == "1"
 TOOLS_DIR    = Path(os.environ.get("TOOLS_DIR", ROOT.parent / "p3ta-tricks-offline" / "tools"))
 BINARIES_DIR = ROOT / "binaries"  # compiled binaries served on online mode too
 SITE_URL     = os.environ.get("SITE_URL", "https://p3ta-tricks.com")
 
-# Source image base directories — served via /source-assets/<source_id>/<path>
+# Source images are vendored under static/source-assets so requests never need
+# upstream wiki clones or GitHub raw URLs.
+SOURCE_ASSETS = ROOT / "static" / "source-assets"
 SOURCE_IMG_DIRS = {
-    "netexec":          SOURCES / "netexec-wiki",
-    "hacktricks":       SOURCES / "hacktricks" / "src",
-    "hacktricks-cloud": SOURCES / "hacktricks-cloud" / "src",
-    "hacker-recipes":   SOURCES / "hacker-recipes" / "docs" / "src",
-    "hardware-att":     SOURCES / "hardwareallthethings" / "docs",
-    "sliver":           SOURCES / "sliver-docs",
-    "patt":             SOURCES / "payloadsallthethings",
+    "netexec":          SOURCE_ASSETS / "netexec",
+    "hacktricks":       SOURCE_ASSETS / "hacktricks",
+    "hacktricks-cloud": SOURCE_ASSETS / "hacktricks-cloud",
+    "hacker-recipes":   SOURCE_ASSETS / "hacker-recipes",
+    "hardware-att":     SOURCE_ASSETS / "hardware-att",
+    "internal-att":     SOURCE_ASSETS / "internal-att",
+    "sliver":           SOURCE_ASSETS / "sliver",
+    "patt":             SOURCE_ASSETS / "patt",
+    "churchofmalware":  SOURCE_ASSETS / "churchofmalware",
 }
 
-# GitHub raw fallback URLs (used when sources/ not present on deployment)
-SOURCE_GH_RAW = {
-    "netexec":          "https://raw.githubusercontent.com/Pennyw0rth/NetExec-Wiki/main",
-    "hacktricks":       "https://raw.githubusercontent.com/HackTricks-wiki/hacktricks/master/src",
-    "hacktricks-cloud": "https://raw.githubusercontent.com/HackTricks-wiki/hacktricks-cloud/master/src",
-    "hacker-recipes":   "https://raw.githubusercontent.com/ShutdownRepo/The-Hacker-Recipes/main/docs/src",
-    "hardware-att":     "https://raw.githubusercontent.com/swisskyrepo/HardwareAllTheThings/master/docs",
-    "sliver":           "https://raw.githubusercontent.com/BishopFox/sliver/master/docs/sliver-docs/public",
-    "patt":             "https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master",
-}
+# Deliberately empty: source images must resolve from bundled local assets.
+SOURCE_GH_RAW = {}
 
 # GitHub URL prefix → local tool directory name (for badge injection)
 TOOL_MAP = {
@@ -190,8 +188,21 @@ app = Flask(__name__)
 def _security_headers(response):
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Referrer-Policy'] = 'no-referrer'
     response.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=()'
+    # The offline build must never load a subresource or call an API on the
+    # internet, even if imported documentation contains an overlooked URL.
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline'; "
+        "style-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data: blob:; "
+        "font-src 'self' data:; "
+        "media-src 'self' blob:; "
+        "connect-src 'self'; "
+        "worker-src 'self' blob:; "
+        "frame-src 'self'; object-src 'none'; base-uri 'self'"
+    )
     return response
 
 
@@ -554,6 +565,12 @@ def _load_page(source: str, page_path: str):
     # #fragment — the target page is the same slug without the .md/#anchor.
     page_path = page_path.split("#", 1)[0]
     page_path = re.sub(r"\.(md|markdown)$", "", page_path, flags=re.I)
+    # Some bundled sources historically stored paths with their source prefix
+    # (for example cheatsheet/cheatsheet/foo). Accept those indexed URLs while
+    # resolving against the source directory only once.
+    source_prefix = source.rstrip("/") + "/"
+    if page_path.lower().startswith(source_prefix.lower()):
+        page_path = page_path[len(source_prefix):]
     key = f"{source}/{page_path}"
     cached = _page_cache_get(key)
     if cached is not None:
@@ -1066,6 +1083,52 @@ def source_index(source_id):
                            entries=entries, source_meta=SOURCE_META)
 
 
+@app.route("/adaptix-framework/<path:legacy_path>")
+def legacy_adaptix_link(legacy_path):
+    """Resolve links preserved from the archived Adaptix GitBook export."""
+    path = re.sub(r"\.md$", "", legacy_path, flags=re.I)
+    if path.lower() == "blogs":
+        return redirect("/source/adaptix", code=302)
+    return redirect(f"/page/adaptix/{path}", code=302)
+
+
+@app.route("/docs")
+def legacy_sliver_docs_link():
+    """Resolve the old sliver.sh /docs?name=... link format locally."""
+    name = request.args.get("name", "").strip()
+    if not name:
+        return redirect("/source/sliver", code=302)
+    return redirect(f"/page/sliver/{name.replace(' ', '-')}", code=302)
+
+
+@app.route("/scripture/")
+def legacy_church_link():
+    """Resolve archived Church of Malware post links locally."""
+    post = request.args.get("post", "").strip()
+    if post.isdigit():
+        return redirect(f"/page/churchofmalware/scripture-{post}", code=302)
+    return redirect("/source/churchofmalware", code=302)
+
+
+@app.route("/minisign.pub")
+def sliver_minisign_key():
+    return Response(
+        "untrusted comment: minisign public key for Sliver Authors\n"
+        "RWTZPg959v3b7tLG7VzKHRB1/QT+d3c71Uzetfa44qAoX5rH7mGoQTTR\n",
+        mimetype="text/plain",
+    )
+
+
+@app.route("/enumeration/jtag/")
+def legacy_jtag_link():
+    return redirect("/page/hardware-att/debug-interfaces/jtag", code=302)
+
+
+@app.route("/generic-hacking/reverse-shells/full-ttys.md")
+def legacy_tty_link():
+    return redirect("/page/hacktricks/generic-hacking/reverse-shells/full-ttys", code=302)
+
+
 @app.route("/page/<source_id>/<path:page_path>")
 def page(source_id, page_path):
     if source_id not in SOURCE_META:
@@ -1140,7 +1203,13 @@ def api_exploitdb_code(exploit_id):
         except Exception:
             return jsonify({"error": "Failed to load code"}), 500
 
-    # Online fallback: proxy raw file from exploit-db.com
+    if OFFLINE_MODE:
+        return jsonify({
+            "error": "Not in the local corpus.",
+            "offline": True,
+        }), 404
+
+    # Online fallback: proxy the official Exploit-DB download endpoint.
     try:
         url = f"https://www.exploit-db.com/download/{exploit_id}"
         req = _ur.Request(url, headers={"User-Agent": "p3ta-tricks/1.0"})
@@ -1150,8 +1219,9 @@ def api_exploitdb_code(exploit_id):
         truncated = full_size > _MAX_CODE
         if truncated:
             code = code[:_MAX_CODE] + f"\n\n# ... [truncated — file is {full_size // 1024} KB; use Download for full file]"
-        return jsonify({"id": exploit_id, "path": entry["path"], "code": code, "source": "online",
-                        "truncated": truncated, "full_size": full_size})
+        return jsonify({"id": exploit_id, "path": entry["path"], "code": code,
+                        "source": "online", "truncated": truncated,
+                        "full_size": full_size})
     except Exception as exc:
         return jsonify({"error": f"Could not fetch from exploit-db.com: {exc}"}), 503
 
@@ -1184,7 +1254,8 @@ def api_exploitdb_download(exploit_id):
         except Exception as exc:
             abort(500)
 
-    # Online fallback: redirect to exploit-db.com download
+    if OFFLINE_MODE:
+        abort(404, description="Not in the local corpus")
     return redirect(f"https://www.exploit-db.com/download/{exploit_id}")
 
 
@@ -1217,9 +1288,7 @@ def not_found(e):
 
 @app.route("/source-assets/<source_id>/<path:filepath>")
 def source_assets(source_id, filepath):
-    """Offline mode only — serve images from local sources/ directories."""
-    if not OFFLINE_MODE:
-        abort(404)
+    """Serve committed documentation media in both online and offline modes."""
     base = SOURCE_IMG_DIRS.get(source_id)
     if not base:
         abort(404)

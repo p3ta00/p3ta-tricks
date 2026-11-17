@@ -331,6 +331,44 @@ def build_source(source_id: str, cfg: dict) -> list[dict]:
     else:
         items = _collect_from_dir(cfg)
 
+    # Preserve colliding source files instead of silently overwriting one. A
+    # common upstream pattern is both topic.md and topic/README.md; README keeps
+    # the canonical route while the standalone file gets a stable suffix.
+    by_key = {}
+    for item in items:
+        by_key.setdefault(item[1].replace('/', '__'), []).append(item)
+    resolved = []
+    disambiguated = []
+    for group in by_key.values():
+        if len(group) == 1:
+            resolved.extend(group)
+            continue
+        readmes = [item for item in group if item[2].name.lower() == 'readme.md']
+        canonical = readmes[0] if len(readmes) == 1 else group[0]
+        resolved.append(canonical)
+        suffix_no = 0
+        for item in group:
+            if item == canonical:
+                continue
+            suffix_no += 1
+            title, page_path, fpath = item
+            suffix = '--standalone' if suffix_no == 1 else f'--standalone-{suffix_no}'
+            new_path = page_path + suffix
+            resolved.append((title, new_path, fpath))
+            disambiguated.append((str(fpath), new_path))
+    items = resolved
+
+    safe_keys = [page_path.replace('/', '__') for _, page_path, _ in items]
+    if len(safe_keys) != len(set(safe_keys)):
+        raise RuntimeError(f"{source_id}: unresolved duplicate output slugs")
+    if disambiguated:
+        print(f"  [{source_id}] disambiguated {len(disambiguated)} colliding source files")
+
+    # A source rebuild is authoritative. Remove prior generated pages first so
+    # upstream deletions and moves cannot survive indefinitely as stale content.
+    for old_file in out_dir.glob("*.json"):
+        old_file.unlink()
+
     # Sources where CLI placeholder injection is applied
     _VAR_SOURCES = {
         'netexec', 'bloodyad', 'certipy', 'hacker-recipes', 'internal-att',

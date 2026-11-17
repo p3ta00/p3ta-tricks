@@ -293,12 +293,12 @@
             "children": [
               {
                 "title": "Web API",
-                "url": "/page/adaptix/development/teamserver-interface/web-api",
+                "url": "/page/adaptix/development/teamserver-interface/server-web-api",
                 "children": []
               },
               {
                 "title": "TS API",
-                "url": "/page/adaptix/development/teamserver-interface/ts-api",
+                "url": "/page/adaptix/development/teamserver-interface/teamserver-interface-api-ts-api",
                 "children": []
               },
               {
@@ -314,32 +314,32 @@
             "children": [
               {
                 "title": "Register new extenders",
-                "url": "/page/adaptix/development/extenders/register-new-extenders",
+                "url": "/page/adaptix/development/extenders/new-extenders",
                 "children": []
               },
               {
                 "title": "Listener extender",
-                "url": "/page/adaptix/development/extenders/listener-extender",
+                "url": "/page/adaptix/development/extenders/listener-plugin-in-dev",
                 "children": [
                   {
                     "title": "Internal listener",
-                    "url": "/page/adaptix/development/extenders/listener-extender/internal-listener",
+                    "url": "/page/adaptix/development/extenders/listener-plugin-in-dev/internal-listener",
                     "children": []
                   }
                 ]
               },
               {
                 "title": "Agent plugin",
-                "url": "/page/adaptix/development/extenders/agent-plugin",
+                "url": "/page/adaptix/development/extenders/agent-plugin-in-dev",
                 "children": [
                   {
                     "title": "Tunnels",
-                    "url": "/page/adaptix/development/extenders/agent-plugin/tunnels",
+                    "url": "/page/adaptix/development/extenders/agent-plugin-in-dev/tunnels",
                     "children": []
                   },
                   {
                     "title": "Terminals",
-                    "url": "/page/adaptix/development/extenders/agent-plugin/terminals",
+                    "url": "/page/adaptix/development/extenders/agent-plugin-in-dev/terminals",
                     "children": []
                   }
                 ]
@@ -360,7 +360,7 @@
       },
       {
         "title": "Extenders",
-        "url": "/page/adaptix/extenders",
+        "url": "/page/adaptix/development/extenders",
         "children": []
       },
       {

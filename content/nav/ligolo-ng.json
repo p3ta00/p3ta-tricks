@@ -113,42 +113,6 @@
   },
   {
     "type": "section",
-    "title": "PIVOTING CHEATSHEET",
-    "items": [
-      {
-        "title": "Initial Setup (Attacker C2)",
-        "url": "/page/ligolo-ng/Pivoting-Cheatsheet#initial-setup-attacker-c2",
-        "children": []
-      },
-      {
-        "title": "Pivot 1 — Initial Foothold",
-        "url": "/page/ligolo-ng/Pivoting-Cheatsheet#pivot-1-initial-foothold",
-        "children": []
-      },
-      {
-        "title": "Pivot 2 — Double Pivot",
-        "url": "/page/ligolo-ng/Pivoting-Cheatsheet#pivot-2-double-pivot",
-        "children": []
-      },
-      {
-        "title": "Pivot 3 — Triple Pivot",
-        "url": "/page/ligolo-ng/Pivoting-Cheatsheet#pivot-3-triple-pivot",
-        "children": []
-      },
-      {
-        "title": "Port Forwarding Local Ports",
-        "url": "/page/ligolo-ng/Pivoting-Cheatsheet#port-forwarding-local-ports",
-        "children": []
-      },
-      {
-        "title": "Quick Reference",
-        "url": "/page/ligolo-ng/Pivoting-Cheatsheet#quick-reference",
-        "children": []
-      }
-    ]
-  },
-  {
-    "type": "section",
     "title": "QUICKSTART",
     "items": [
       {

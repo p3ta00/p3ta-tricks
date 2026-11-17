@@ -1,0 +1,44 @@
+{
+  "audit_version": 1,
+  "generated_at": "2026-11-17T03:30:57Z",
+  "repository": "https://github.com/p3ta00/p3ta-tricks",
+  "scope": "online release",
+  "corpus": {
+    "search_pages": 5095,
+    "exploitdb_raw_rows": 47182,
+    "exploitdb_unique_records": 46710,
+    "exploitdb_newest_id": 52705,
+    "indexed_page_sources": 32,
+    "application_source_families": 37
+  },
+  "crawl": {
+    "nav_urls": 5425,
+    "seed_urls": 5742,
+    "pages_checked": 5742,
+    "internal_links_checked": 5175,
+    "assets_checked": 514,
+    "bad_count": 0,
+    "external_asset_count": 0,
+    "placeholder_page_count": 0,
+    "dead_content_count": 0
+  },
+  "freshness": {
+    "exploitdb_commit": "70bbef3f18b835b0d8bacb978f2bc7b751a7cec9",
+    "hacktricks_commit": "c457a24e9012eca0a33562a587827f700182c799",
+    "hacktricks_cloud_commit": "81d5fcd59b54f03a5786abd94fa6037af462da62",
+    "sliver_commit": "aa787bf0e1c4a19a340c38227ebf5e0715c69d56",
+    "churchofmalware_inventory": "sha256:c176c40510c972b322b58c7b4ae2110183ca239efc615da07e07e530aa7d66ce",
+    "adaptix_inventory": "sha256:2655c30726f89b517705ebb53ead3233dcf87b1e1526366771974318574ba28e"
+  },
+  "validation": {
+    "search_urls_unique": true,
+    "exploitdb_paths_unique": true,
+    "exploitdb_route_52705": "HTTP 200; 5727-byte online source response",
+    "headless_visual_pages": [
+      "/",
+      "/source/churchofmalware",
+      "/source/exploitdb"
+    ],
+    "headless_exploitdb_visible_newest_id": 52705
+  }
+}
